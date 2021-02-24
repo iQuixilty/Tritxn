@@ -109,3 +109,14 @@
     - [x] Changed atig workings
     - [x] Change autorole workings 
     - [x] File and files command
+
+# 2/22/2021
+
+    - [x] Created website dashboard
+
+# 2/23/2021
+
+    - [x] Uploaded dashboard and bot to github
+    - [x] Fixed mobile glitches on dashboard
+    - [x] Added more variable support to welcome/leave
+    - [x] sim(join/leave) command to simulate joins and leaves

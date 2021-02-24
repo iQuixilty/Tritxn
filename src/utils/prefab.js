@@ -18,9 +18,10 @@ module.exports = {
     clientPerms: [],
     devOnly: false,
     someServersOnly: false,
+    someServers: [],
     serverOwnerOnly: false,
     arguments: [],
-    
+
     execute: async function(client, message, args) {
 
     }
@@ -69,7 +70,7 @@ Attributes:
       [ - set it to 'true', if you don't want this command to be displayed in the help command ]
     > perms [Array of Strings, optional]
         - the perms the user needs to use this command
-        - default: no permissions needed to use this 
+        - default: no permissions needed to use this
     > clientPerms [Array of Strings, optional]
         - the perms your bot needs to use this command
         - default: no permissions needed
@@ -79,8 +80,11 @@ Attributes:
         - check out `src/utils/utils.md` for more information
     > someServersOnly [Boolean, optional]
         - whether this command can only be used in some specific servers
-        - default: false
+        - default: every server permissions needed
         - check out `src/utils/utils.md` for more information
+    > someServers [Array of strings, optional]
+        - whether this command can only be used in some specific servers
+        - default: every server
     > serverOwnerOnly [Boolean, optional]
         - whether only the guild owner can use this command
         - default: false

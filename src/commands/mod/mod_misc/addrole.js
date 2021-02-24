@@ -1,8 +1,11 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
 const emoji = require('../../../../config/emoji.json')
+
+/** 
+ * @type {import('../../../typings.d').Command}
+*/
 
 module.exports = {
     name: "addrole",
@@ -21,7 +24,7 @@ module.exports = {
         if (!user) {
             message.channel.send(are
                 .setColor('RED')
-                .setDescription(`**${emoji.downvote} ${message.author} please mention who to add a role too**`))
+                .setDescription(`**${message.author} please mention who to add a role too**`))
             return;
         }
 
@@ -30,9 +33,16 @@ module.exports = {
         if (!roleId) {
             return message.channel.send(are
                 .setColor('RED')
-                .setDescription(`**${emoji.downvote} ${message.author} please add what role you want to add to the user**`))
+                .setDescription(`**${message.author} please add what role you want to add to the user**`))
         }
 
+        
+        let botHighestRole = message.guild.me.roles.highest;
+        if (roleId.position >= botHighestRole.position) {
+            return message.channel.send(are
+                .setColor('RED')
+                .setDescription(`**${message.author} that role is higher than my own**`));
+        }
         
 
         let highestRole = message.member.roles.highest;

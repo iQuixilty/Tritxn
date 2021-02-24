@@ -1,20 +1,25 @@
 const { MessageEmbed, Message, Collection, DiscordAPIError } = require("discord.js");
 
+/**
+ * @type {import('../../typings.d').Command}
+ */
+
 module.exports = {
     name: "schedule",
     category: "Misc",
     aliases: ["school"],
-    description: "School Schedule",
-    usage: "",
-    examples: "\`PREFIXscedhule [day]\`",
+    description: "School schedule",
+    usage: "\`PREFIXschedule [day]\`",
+    someServers: [`751210412904677466`, `796125520961994764`],
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
-    execute: async function (client, message, args) {
+    execute: async function(client, message, args) {
         let day = args[0]
+
+        if (!day) return;
 
         const dayEmbed = new MessageEmbed()
 
-        if (message.guild.id !== '796125520961994764') return;
 
         if (day.toLowerCase() === 'monday' || day.toLowerCase() === 'thursday') {
             return message.channel.send(dayEmbed

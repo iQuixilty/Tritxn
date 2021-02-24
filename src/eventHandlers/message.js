@@ -1,7 +1,7 @@
 const { processArguments, msToTime, missingPermissions, log, getCooldown } = require("../utils/utils")
 const { Collection } = require("discord.js")
 
-const { devs, someServers } = require('../../config/config.json')
+const { devs, someServersOnly } = require('../../config/config.json')
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const afkSchema = require('../../schemas/afkschema')
@@ -48,11 +48,13 @@ module.exports = async (client, message) => {
             if (guildInfo.disabledWords === undefined) return;
 
             if (guildInfo.disabledWords.some((a) => message.content.toLowerCase().includes(a))) {
-                message.delete().catch((e) => { return })
+
                 message.channel.send(new Discord.MessageEmbed()
                     .setColor(message.guild.me.displayColor)
                     .setDescription(`**That word is blacklisted here**`))
                     .then(msg => { msg.delete({ timeout: 5000 }) });
+
+                message.delete().catch((e) => { return })
             }
         }
 
@@ -161,7 +163,8 @@ module.exports = async (client, message) => {
         if (!command) return;
 
         if (command.devOnly && !devs.includes(message.author.id)) return;
-        if (command.someServersOnly && !someServers.includes(message.guild.id)) return;
+        if (command.someServersOnly && !someServersOnly.includes(message.guild.id)) return;
+        if (command.someServers && !command.someServers.includes(message.guild.id)) return;
         if (command.serverOwnerOnly && message.guild.ownerID !== message.author.id) return;
 
         if (guildInfo.disabledCommands.includes(command.name)) return;

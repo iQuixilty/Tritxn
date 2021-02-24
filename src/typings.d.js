@@ -57,7 +57,7 @@ class myClient extends Client {
          */
         this.guildInfoCache;
 
-         /**
+        /**
          * A collection containing all cached guildSettings
          * @type {Collection<Snowflake, guildInfo>}
          */
@@ -104,7 +104,7 @@ class myClient extends Client {
          * @type {Model<>}
          */
         this.DBSettings;
-        
+
         /**
          * 
          * /**
@@ -112,7 +112,7 @@ class myClient extends Client {
          * @type {Model<>}
          */
         this.DBAudit;
-        
+
         /**
         
         /**
@@ -157,6 +157,7 @@ class myClient extends Client {
  * @property {PermissionResolvable} [clientPerms=[]] - Permissions that the client needs to run this command
  * @property {boolean} [devOnly=false] - Whether or not this command can only be used by a developer
  * @property {boolean} [someServersOnly=false] - Whether or not this command can only be used in specific servers
+ * @property {string[]} [someServers=[]] - Specific custom servers that the command only works for
  * @property {boolean} [serverOwnerOnly=false] - Whether or not this command can only be used by the server owner
  * @property {Arguments} [arguments=[]] - Arguments that the user should provide
  * @property {ExecuteFunction} execute - The function that will be ran when someone successfully uses a command

@@ -29,12 +29,12 @@ module.exports = {
 
         let guildSettings = client.guildSettingsCache.get(message.guild.id)
 
-        let ghostPingSetting = guildSettings.ghostPingSetting
-        let decancerSetting = guildSettings.decancerSetting
+        let ghostPingSetting = guildSettings.ghostPing
+        let decancerSetting = guildSettings.decancer
 
         let autoRoleSetting = guildSettings.autoRoleId
-        let welcomeChannelSetting = guildSettings.welcomeChannelSetting
-        let leaveChannelSetting = guildSettings.leaveChannelSetting
+        let welcomeChannelSetting = guildSettings.welcomeChannelId
+        let leaveChannelSetting = guildSettings.leaveChannelId
         let ignoredChannelSetting = guildSettings.ignoreChannelId
         let auditLogChannel = guildSettings.auditLogChannelId
 

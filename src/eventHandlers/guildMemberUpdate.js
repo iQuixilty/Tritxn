@@ -12,13 +12,9 @@ module.exports = async (client, oldMember, newMember) => {
     if (auditLogChannel === undefined) return;
     if (guildAudit.guildMemberUpdate === undefined || guildAudit.guildMemberUpdate === 'Disabled') return;
 
-    // console.log(oldMember._roles)
-    // console.log(newMember._roles)
-
-
     if (oldMember.user.discriminator !== newMember.user.discriminator || oldMember.user.avatar !== newMember.user.avatar) return;
 
-    const Channel = client.channels.cache.get(auditLogChannel)
+    const Channel = oldMember.client.channels.cache.get(auditLogChannel)
     const auditE = new MessageEmbed()
         .setColor('BLACK')
         .setAuthor(`Member Was Updated`, newMember.guild.iconURL())

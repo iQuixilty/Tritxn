@@ -5,7 +5,7 @@ const Discord = require('discord.js')
 module.exports = {
     name: "avatar",
     category: "Misc",
-    aliases: ["a"],
+    aliases: ["a", "av"],
     description: "Displays a users avatar",
     usage: "\`PREFIXavatar\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],

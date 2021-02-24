@@ -23,15 +23,6 @@ module.exports = {
         // console.log(results)
         // message.channel.send(results.displayAvatarURL({dynamic: true}))
 
-        if (message.author.id !== '751606134938402866') return;
-
-        const x = `\`\`\``
-        let directory = `src\\commands`
-
-        let files = fs.readdirSync(directory)
-
-        console.log(files)
-
         // message.inlineReply('testing')
     }
 }

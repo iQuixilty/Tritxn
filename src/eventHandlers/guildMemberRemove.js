@@ -1,8 +1,7 @@
 const { Guild, Client, MessageEmbed } = require('discord.js')
 const PREFIX = require('../../config/config.json').PREFIX;
 
-const mongo = require('../../schemas/mongo')
-
+const moment = require('moment')
 
 module.exports = async (client, member) => {
     const onLeave = async member => {
@@ -24,7 +23,13 @@ module.exports = async (client, member) => {
             .setTitle(`${member.user.username} Left`)
             .setColor(member.guild.me.displayColor)
             .setThumbnail(member.guild.iconURL())
-            .setDescription(text.replace(/<@>/g, `<@${member.id}>`)))
+            .setDescription(text
+                .replace(/{user}/g, `<@${member.id}>`)
+                .replace(/{username}/g, `${member.user.username}`)
+                .replace(/{usertag}/g, `${member.user.tag}`)
+                .replace(/{membercount}/g, `${member.guild.memberCount}`)
+                .replace(/{guild}/g, `${member.guild.name}`)
+                .replace(/{creation}/g, `${moment(new Date(member.guild.createdAt).toUTCString()).format('MM/DDD/YY')}`)))
 
     }
 
