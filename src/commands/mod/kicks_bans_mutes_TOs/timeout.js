@@ -20,8 +20,6 @@ module.exports = {
     execute: async function (client, message, args) {
         const timeout = new Discord.MessageEmbed()
 
-
-
         let guildInfo = client.guildInfoCache.get(message.guild.id)
         let timeoutRole = guildInfo.timeoutRole
 

@@ -120,3 +120,4 @@
     - [x] Fixed mobile glitches on dashboard
     - [x] Added more variable support to welcome/leave
     - [x] sim(join/leave) command to simulate joins and leaves
+    - [x] Fixed unmute/to command

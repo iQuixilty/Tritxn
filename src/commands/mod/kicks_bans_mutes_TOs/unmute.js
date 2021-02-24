@@ -21,25 +21,30 @@ module.exports = {
 
         const unmute = new Discord.MessageEmbed()
 
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+        let guildInfo = client.guildInfoCache.get(message.guild.id)
+        let mutedRole = guildInfo.mutedRole
 
-        if (!member) return message.channel.send(unmute.setColor('RED').setDescription(`**${emoji.downvote} ${message.author} provide someone to unmute**`))
-
-        let role = message.guild.roles.cache.find(role => role.name === "Muted");
-
-        if (!role) {
-            return message.channel.send(unmute.setColor('RED').setDescription(`**${emoji.downvote} ${message.author} I couldn't find the \`muted\` role**`))
+        if (mutedRole === undefined) {
+            return message.channel.send(unmute.setColor(message.guild.me.displayColor).setDescription(`**You have not set a muted role for this server yet!**`))
         }
 
+        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+
+        if (!member) return message.channel.send(unmute.setColor('RED').setDescription(`**${message.author} provide someone to unmute**`))
+
+        let role = message.guild.roles.cache.get(mutedRole);
+
         if (!member.roles.cache.has(role.id)) {
-            return message.channel.send(unmute.setColor('RED').setDescription(`**${emoji.downvote} ${message.author} this user is not muted right now**`))
+            return message.channel.send(unmute.setColor('RED').setDescription(`**${message.author} this user is not muted right now**`))
         }
 
         member.roles.remove(role.id);
         client.muted.delete(member.user.id)
 
 
-        message.channel.send(unmute.setColor('GREEN').setDescription(`**${emoji.upvote} ${member} has now been unmuted**. \n\n**Moderator:** ${message.author}`))
+        message.channel.send(unmute.setColor('GREEN')
+            .setDescription(`**${member} has now been unmuted**`)
+            .setFooter(`Moderator: ${message.author.tag}`))
 
         const unmutE = new Discord.MessageEmbed()
         member.send(unmutE.setColor(message.guild.me.displayColor).setDescription(`**You have been unmuted in ${message.guild.name}**`))

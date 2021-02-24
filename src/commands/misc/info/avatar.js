@@ -1,31 +1,44 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
+const { setCooldown } = require('../../../utils/utils')
+
+/** 
+ * @type {import('../../../typings.d').Command}
+*/
 
 module.exports = {
     name: "avatar",
     category: "Misc",
     aliases: ["a", "av"],
+    cooldown: 1,
     description: "Displays a users avatar",
     usage: "\`PREFIXavatar\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-        let targetMember;
+        setCooldown(client, this, message)
 
-        if (!message.mentions.members.first()) {
-            targetMember = message.guild.members.cache.get(message.author.id);
+        let user = args[0]
+
+          if (!user) {
+            user = message.guild.members.cache.get(message.author.id);
         } else {
-            targetMember = message.mentions.members.first()
+            user = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         }
 
-        let avatar = targetMember.user.displayAvatarURL({ size: 4096, dynamic: true });
+        let png = user.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 })
+        let jpg = user.user.displayAvatarURL({ format: 'jpg', dynamic: true, size: 1024 })
+        let webp = user.user.displayAvatarURL({ format: 'webp', dynamic: true, size: 1024 })
 
-        const aEmbed = new Discord.MessageEmbed()
+        let avatarembed = new Discord.MessageEmbed()
+            .setTitle(`${user.user.username}'s Avatar`)
             .setColor(message.guild.me.displayColor)
-            .setAuthor(`${targetMember.user.username}`, targetMember.user.displayAvatarURL())
-            .setTitle(`${targetMember.user.username}'s avatar`)
-            .setImage(avatar)
-        message.channel.send(aEmbed)
+            .setDescription(`\n**Link as:**\n[png](${png}) **|** [jpg](${jpg}) **|** [webp](${webp})`)
+
+            .setImage(user.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }))
+            .setFooter(`Requested By: ${message.author.tag}`, `${message.author.displayAvatarURL()}`)
+            .setTimestamp()
+
+        return message.channel.send(avatarembed)
     }
 }
