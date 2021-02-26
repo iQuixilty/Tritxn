@@ -1,0 +1,2680 @@
+[
+    {
+        "name": "connect4",
+        "category": "Games",
+        "aliases": [
+            "connectfour",
+            "cn4"
+        ],
+        "description": "Starts a game of connect 4, you can play by yourself or with someone else",
+        "usage": "`PREFIXconnect4`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "gcreate",
+        "category": "Giveaways",
+        "aliases": [
+            "gcre",
+            "creategaw",
+            "gstart"
+        ],
+        "description": "Starts a giveaway",
+        "usage": "To start a giveaway use: `PREFIXgcreate [duration] [winners] [prize]` Giveways will be deleted from the database after 60 minutes",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "examples": "`PREFIXgcreate 10s 2 My Respect`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "ftyper",
+        "category": "Games",
+        "aliases": [
+            "fasttyper",
+            "ft"
+        ],
+        "description": "Starts a game to see who types the fastest",
+        "usage": "`PREFIXftyper`",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "recipes",
+        "category": "Economy",
+        "aliases": [
+            "recipe",
+            "rec"
+        ],
+        "description": "Gives a list of recipes",
+        "usage": "`PREFIXrecipes [item]`",
+        "cooldown": 5,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "add",
+        "aliases": [
+            "addbal",
+            "addbalance"
+        ],
+        "category": "Economy",
+        "serverOwnerOnly": true,
+        "canNotSetCooldown": true,
+        "description": "Allows the server owner to add coins to a users wallet",
+        "usage": "`PREFIXadd [user] [type of coin] [amount]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "gdelete",
+        "category": "Giveaways",
+        "aliases": [
+            "gdel",
+            "delgaw"
+        ],
+        "description": "Deletes a existing giveaway",
+        "usage": "To delete a giveaway use: `PREFIXgdelete [giveaway ID]` Giveways will be deleted from the database after 60 minutes",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "examples": "`PREFIXgdelete 791130961475141642`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "affect",
+        "category": "Images",
+        "aliases": [
+            "aff"
+        ],
+        "description": "Does it affect my baby",
+        "usage": "`PREFIXaffect [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "ftyper2",
+        "category": "Games",
+        "aliases": [
+            "fasttyper2",
+            "ft2"
+        ],
+        "description": "Start a game of a much harder fast typer",
+        "usage": "`PREFIXftyper2`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "shop",
+        "category": "Economy",
+        "aliases": [
+            "store",
+            "item"
+        ],
+        "description": "Displays items you can buy from the store",
+        "usage": "`PREFIXshop`",
+        "cooldown": 5,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "buy",
+        "category": "Economy",
+        "aliases": [
+            "purchase"
+        ],
+        "description": "Buy something from the shop",
+        "usage": "`PREFIXbuy [item]`",
+        "cooldown": 5,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "balance",
+        "category": "Economy",
+        "aliases": [
+            "bal",
+            "money"
+        ],
+        "description": "Displays the amount of coins a user has",
+        "usage": "`PREFIXbal [user]`",
+        "cooldown": 5,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "gedit",
+        "category": "Giveaways",
+        "aliases": [
+            "ged",
+            "editgaw"
+        ],
+        "description": "Edits a existing giveaway",
+        "usage": "To edit a giveaway use: `PREFIXgdelete [messageid] [time] [winners] [prize]` Giveways will be deleted from the database after 60 minutes",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "examples": "`PREFIXgedit 791130961475141642 20s 4 More of my respect`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "america",
+        "category": "Images",
+        "aliases": [
+            "amer",
+            "murica"
+        ],
+        "description": "Show your pride for america!",
+        "usage": "`PREFIXamerica [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "hangman",
+        "category": "Games",
+        "aliases": [
+            "hm"
+        ],
+        "description": "Starts a game of hangman",
+        "usage": "`PREFIXhangman`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "craft",
+        "category": "Economy",
+        "aliases": [
+            "make"
+        ],
+        "description": "Allows you to craft items",
+        "usage": "`PREFIXcraft [item]`",
+        "cooldown": 75,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "daily",
+        "category": "Economy",
+        "description": "Adds your daily amount of coins",
+        "cooldown": 86400,
+        "canNotSetCooldown": true,
+        "usage": "`PREFIXdaily`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "greroll",
+        "category": "Giveaways",
+        "aliases": [
+            "reroll",
+            "rerollgaw",
+            "gre"
+        ],
+        "description": "Rerolls a existing giveaway for new winners",
+        "usage": "To reroll a giveaway use: `PREFIXgreroll [giveaway ID]` Giveways will be deleted from the database after 60 minutes",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "examples": "`PREFIXgreroll 791130961475141642`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "beautify",
+        "category": "Images",
+        "aliases": [
+            "beautiful",
+            "beau"
+        ],
+        "description": "Beautifies someone",
+        "usage": "`PREFIXbeautify [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "rps",
+        "category": "Games",
+        "description": "Starts a game of rock, paper, scissors",
+        "usage": "`PREFIXrps`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "inventory",
+        "category": "Economy",
+        "aliases": [
+            "backpack",
+            "pack",
+            "inv"
+        ],
+        "description": "Displays what you have in your inventory",
+        "usage": "`PREFIXinventory [user]`",
+        "cooldown": 5,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "pay",
+        "category": "Economy",
+        "aliases": [
+            "give",
+            "share"
+        ],
+        "description": "Gives coins to a user (within your wallet)",
+        "usage": "`PREFIXpay [user] [type of coin] [amount]`",
+        "cooldown": 5,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "help",
+        "category": "Misc",
+        "aliases": [
+            "h"
+        ],
+        "description": "Get help on commands.",
+        "usage": "To get help on a specific command, use `PREFIXhelp [command name]` (without the [ ]).\nFor a full list of all commands, simply use `PREFIXhelp`.",
+        "examples": "`PREFIXhelp ping`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "bed",
+        "category": "Images",
+        "description": "A scary monster is under your bed!",
+        "usage": "`PREFIXbed [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "tictactoe",
+        "category": "Games",
+        "aliases": [
+            "ttt"
+        ],
+        "description": "Starts a game of tictactoe against a user",
+        "usage": "`PREFIXtictactoe [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "blackjack",
+        "category": "Economy",
+        "aliases": [
+            "bj"
+        ],
+        "description": "Starts a game of blackjack for money (using reactions)",
+        "cooldown": 15,
+        "canNotSetCooldown": true,
+        "usage": "`PREFIXblackjack [type of coin] [amount]`",
+        "examples": "`PREFIXblackjack bcoins 500`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "leaderboard",
+        "category": "Economy",
+        "aliases": [
+            "lb"
+        ],
+        "cooldown": 5,
+        "canNotSetCooldown": true,
+        "description": "Displays a list of richest users",
+        "usage": "`PREFIXlb`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "subtract",
+        "aliases": [
+            "sub",
+            "subbalance",
+            "subbal"
+        ],
+        "category": "Economy",
+        "description": "Allows the server owner to subtract coins from a users wallet",
+        "usage": "`PREFIXsubtract [user] [type of coin] [amount]`",
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "loop",
+        "category": "Music",
+        "aliases": [
+            "l"
+        ],
+        "cooldown": 5,
+        "description": "Loops a queue",
+        "usage": "`PREFIXloop`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "akinator",
+        "category": "Misc",
+        "aliases": [
+            "aki"
+        ],
+        "description": "Let akinator read your mind",
+        "usage": "`PREFIXakinator`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "blur",
+        "category": "Images",
+        "description": "Blurs your profile picture",
+        "usage": "`PREFIXblur [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "dropper",
+        "category": "Games",
+        "aliases": [
+            "waterdrop",
+            "drop"
+        ],
+        "description": "Starts a game of dropper",
+        "usage": "`PREFIXdropper`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "diceroll",
+        "category": "Economy",
+        "aliases": [
+            "roll",
+            "bet"
+        ],
+        "description": "Rolls 2 die, 2 each for player and bot, higher one wins the bet",
+        "cooldown": 5,
+        "examples": "`PREFIXbet bcoins 500`",
+        "canNotSetCooldown": true,
+        "usage": "`PREFIXdiceroll [type of coin] [amount]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "levels",
+        "category": "Economy",
+        "aliases": [
+            "lvl",
+            "xp",
+            "profile",
+            "prof"
+        ],
+        "description": "Displays the amount of XP a user has and what level they are",
+        "usage": "`PREFIXbal [user]`",
+        "cooldown": 3,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "tradein",
+        "category": "Economy",
+        "aliases": [
+            "tradei",
+            "switch",
+            "swi"
+        ],
+        "description": "Gives the ability to trade in coins for a higher value",
+        "usage": "-`PREFIXtradein` to see the conversion rates\n    -`PREFIXtradein [type of coin you have] [amount you want to trade in]` to choose what type to trade in and how many of it",
+        "examples": "-`PREFIXtradein bcoins 2000`",
+        "cooldown": 10,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "afk",
+        "category": "Utility",
+        "ignoreDisabledChannels": true,
+        "description": "Set a afk message",
+        "usage": "`PREFIXafk [message]`",
+        "cooldown": 5,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "lyrics",
+        "category": "Music",
+        "aliases": [
+            "ly"
+        ],
+        "cooldown": 5,
+        "description": "Fetches the lyrics of a song",
+        "usage": "`PREFIXlyrics`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "addtoignored",
+        "category": "Moderation",
+        "aliases": [
+            "atig",
+            "addtig"
+        ],
+        "description": "Adds the channel to a ignored set where if a server lock is in place, permissions for those channels will not be touched.",
+        "usage": "- `PREFIXaddtoignored` to display all currently ignored channels\n- `PREFIXaddtoignored [#channel] [set/remove]` to set/remove channels.",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "coinflip",
+        "category": "Misc",
+        "aliases": [
+            "cf"
+        ],
+        "description": "Flips a coin for you",
+        "usage": "`PREFIXcoinflip`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "schedule",
+        "category": "Misc",
+        "aliases": [
+            "school"
+        ],
+        "description": "School schedule",
+        "usage": "`PREFIXschedule [day]`",
+        "someServers": [
+            "751210412904677466",
+            "796125520961994764"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "brightness",
+        "category": "Images",
+        "aliases": [
+            "brs"
+        ],
+        "description": "Changes the brightness of a profile picture",
+        "usage": "`PREFIXbrightness [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "duel",
+        "category": "Economy",
+        "aliases": [
+            "fight"
+        ],
+        "description": "Allows you to fight a user for a random amount money",
+        "usage": "`PREFIXfight [user] [type of coin] [amount]`",
+        "examples": "`PREFIXfight @Qzxy bcoins 500`",
+        "cooldown": 60,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "prestige",
+        "category": "Economy",
+        "aliases": [
+            "pres"
+        ],
+        "cooldown": 259200000,
+        "canNotSetCooldown": true,
+        "description": "Allows you to prestige to the next level",
+        "usage": "`PREFIXprestige [level]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "work",
+        "category": "Economy",
+        "description": "Work to gain some money",
+        "cooldown": 3600,
+        "canNotSetCooldown": true,
+        "usage": "`PREFIXwork`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "blacklist",
+        "category": "Misc",
+        "aliases": [
+            "bl"
+        ],
+        "ignoreDisabledChannels": true,
+        "canNotDisable": true,
+        "hideCommand": true,
+        "description": "Blacklists a user from the bot",
+        "usage": "`PREFIXblacklist`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "nowplaying",
+        "category": "Music",
+        "aliases": [
+            "np"
+        ],
+        "cooldown": 5,
+        "description": "Displays the current song that is playing",
+        "usage": "`PREFIXnowplaying`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "ban",
+        "category": "Moderation",
+        "aliases": [
+            "b"
+        ],
+        "ignoreDisabledChannels": true,
+        "description": "Bans a user",
+        "usage": "`PREFIXban [user]`",
+        "perms": [
+            "BAN_MEMBERS"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "BAN_MEMBERS"
+        ]
+    },
+    {
+        "name": "channellock",
+        "category": "Moderation",
+        "aliases": [
+            "cl"
+        ],
+        "description": "Locks down a channel with the given role. Use true to put the channel in lockdown and false to remove it from lockdown.  If no channel is specified, it will default to the channel the message was sent in",
+        "ignoreDisabledChannels": true,
+        "usage": "`PREFIXchannellock | [role] | [true | false | null] | #channel | [reason]`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "ADMINISTRATOR"
+        ]
+    },
+    {
+        "name": "covid",
+        "category": "Misc",
+        "description": "Finds some statistics about COVID in your country",
+        "usage": "`PREFIXcovid [country]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "test",
+        "category": "Misc",
+        "description": "Testing Command",
+        "usage": "`PREFIXtest`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "avatar",
+        "category": "Misc",
+        "aliases": [
+            "a",
+            "av"
+        ],
+        "cooldown": 1,
+        "description": "Displays a users avatar",
+        "usage": "`PREFIXavatar`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "changemymind",
+        "category": "Images",
+        "aliases": [
+            "cmm"
+        ],
+        "description": "Lets everyone know to change your mind",
+        "usage": "`PREFIXchangemymind [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "fish",
+        "category": "Economy",
+        "description": "Allows you to catch fish",
+        "usage": "`PREFIXfish`",
+        "cooldown": 300,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "sell",
+        "category": "Economy",
+        "description": "Sells an item from your inventory",
+        "usage": "`PREFIXsell [item]`",
+        "cooldown": 10,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "credits",
+        "category": "Utility",
+        "aliases": [
+            "cred",
+            "thanks"
+        ],
+        "description": "Thank you to everyone who helped create this bot",
+        "usage": "`PREFIXcredits`",
+        "cooldown": 5,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "pause",
+        "category": "Music",
+        "description": "Pauses the music player",
+        "usage": "`PREFIXpause`",
+        "cooldown": 5,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "addrole",
+        "category": "Moderation",
+        "aliases": [
+            "ar"
+        ],
+        "description": "Adds a role to the mentioned user; The role must be lower than the bots role to be added successfully",
+        "usage": "`PREFIXaddrole [user] [role]`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_ROLES"
+        ]
+    },
+    {
+        "name": "kick",
+        "category": "Moderation",
+        "aliases": [
+            "k"
+        ],
+        "ignoreDisabledChannels": true,
+        "description": "Kicks a users",
+        "usage": "`PREFIXkick [user]`",
+        "perms": [
+            "KICK_MEMBERS"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "KICK_MEMBERS"
+        ]
+    },
+    {
+        "name": "clear",
+        "category": "Moderation",
+        "aliases": [
+            "purge"
+        ],
+        "ignoreDisabledChannels": true,
+        "cooldown": 5,
+        "description": "Purges a number of messages",
+        "usage": "`PREFIXclear [amount]`",
+        "perms": [
+            "MANAGE_MESSAGES"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "emoji",
+        "category": "Misc",
+        "description": "Gets a picture of an emoji",
+        "usage": "`PREFIXemoji [emoji]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "botinfo",
+        "category": "Misc",
+        "aliases": [
+            "bi"
+        ],
+        "description": "Displays information about the bot",
+        "usage": "`PREFIXbotinfo`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "clyde",
+        "category": "Images",
+        "aliases": [
+            "cly"
+        ],
+        "description": "Sends a message through Clyde",
+        "usage": "`PREFIXclyde [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "hunt",
+        "category": "Economy",
+        "aliases": [
+            "shoot",
+            "catch"
+        ],
+        "description": "Allows you to catch animals",
+        "usage": "`PREFIXhunt`",
+        "cooldown": 300,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "trade",
+        "category": "Economy",
+        "aliases": [
+            "tr",
+            "gift"
+        ],
+        "description": "Allows you to trade items with a user",
+        "usage": "`PREFIXtrade [user] [item] [amount]`",
+        "cooldown": 15,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "embed",
+        "category": "Misc",
+        "aliases": [
+            "em"
+        ],
+        "description": "Generates a custom embed for you to use",
+        "usage": "`PREFIXembed`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "play",
+        "category": "Music",
+        "aliases": [
+            "p"
+        ],
+        "cooldown": 5,
+        "description": "Plays audio from youtube",
+        "usage": "`PREFIXplay [Youtube Link URL | Video Name]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "announce",
+        "category": "Moderation",
+        "aliases": [
+            "ann"
+        ],
+        "description": "Annouce something to a server",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "usage": "`PREFIXannounce #channel [annoucement <-everyone || -here || nothing>]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "clearwarn",
+        "category": "Moderation",
+        "description": "Clears the warnings of a user",
+        "aliases": [
+            "clearw",
+            "rmwarn",
+            "clw"
+        ],
+        "usage": "`PREFIXclearwarn [user]`",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "mute",
+        "category": "Moderation",
+        "description": "Mute any user in the server that has a role lower than the bots. The bot will need to be able to manage roles for the command to be run. (If the mute doesnt work, go to settings then roles and move the muted role above every role)",
+        "usage": "`PREFIXmute [user] [time] [reason]`",
+        "perms": [
+            "MANAGE_ROLES"
+        ],
+        "ignoreDisabledChannels": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_ROLES"
+        ]
+    },
+    {
+        "name": "lock",
+        "ignoreDisabledChannels": true,
+        "category": "Moderation",
+        "description": "Locks the server down",
+        "usage": "`PREFIXlock [roleID] [true | false | null]` Use true to put the server in lockdown and false to remove it from lockdown.",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_CHANNELS"
+        ]
+    },
+    {
+        "name": "emojify",
+        "category": "Misc",
+        "aliases": [
+            "efy"
+        ],
+        "description": "Emojifies a string of text",
+        "usage": "`PREFIXemojify [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "bug",
+        "category": "Misc",
+        "description": "Report a bug to me",
+        "usage": "`PREFIXbug [bug]`",
+        "cooldown": 60,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "crap",
+        "category": "Images",
+        "aliases": [
+            "shit",
+            "poop"
+        ],
+        "description": "Someone stepped on you",
+        "usage": "`PREFIXcrap [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "mine",
+        "category": "Economy",
+        "aliases": [
+            "dig"
+        ],
+        "description": "Allows you to mine for ores",
+        "usage": "`PREFIXmine`",
+        "cooldown": 300,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "use",
+        "category": "Economy",
+        "description": "Uses an item in your inventory",
+        "usage": "`PREFIXuse [item]`",
+        "cooldown": 5,
+        "canNotSetCooldown": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "docs",
+        "category": "Utility",
+        "description": "Fetches documentation of a string",
+        "usage": "`PREFIXdocs`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "playlist",
+        "category": "Music",
+        "aliases": [
+            "pl"
+        ],
+        "cooldown": 5,
+        "description": "Plays a playlist from youtube",
+        "usage": "`PREFIXplaylist [Youtube Playlist URL | Playlist Name]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "deleterole",
+        "category": "Moderation",
+        "aliases": [
+            "dr",
+            "removerole"
+        ],
+        "description": "Deletes a role from the mentioned user; The role must be lower than the bots role to be removed successfully",
+        "usage": "`PREFIXdeleterole [user] [role]`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_ROLES"
+        ]
+    },
+    {
+        "name": "warn",
+        "category": "Moderation",
+        "description": "Warns a user and stores the warning",
+        "usage": "`PREFIXwarn [user] [reason]`",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "set",
+        "category": "Moderation",
+        "description": "Set a muted/timeout role for this server ",
+        "usage": "-`PREFIXset` to view the current muted role \n-`PREFIXset [option] [role] [set/remove]` to set the muted role",
+        "perms": [
+            "MANAGE_ROLES"
+        ],
+        "examples": "`PREFIXset mute @Muted set`",
+        "ignoreDisabledChannels": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_ROLES"
+        ]
+    },
+    {
+        "name": "nuke",
+        "category": "Moderation",
+        "description": "Deletes and creates a channel with the same permissions",
+        "usage": "`PREFIXnuke`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "fetchbrain",
+        "category": "Misc",
+        "aliases": [
+            "fb"
+        ],
+        "description": "Fetches your brain",
+        "usage": "`PREFIXfetchbrain`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "color",
+        "category": "Misc",
+        "aliases": [
+            "col"
+        ],
+        "description": "Displays some info on a color",
+        "usage": "`PREFIXcolor [hex color]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "darkness",
+        "category": "Images",
+        "aliases": [
+            "drs"
+        ],
+        "description": "Changes the darkness of a profile picture",
+        "usage": "`PREFIXdarkness [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "slots",
+        "category": "Economy",
+        "aliases": [
+            "slot"
+        ],
+        "description": "Take your chances in slots",
+        "cooldown": 5,
+        "canNotSetCooldown": true,
+        "usage": "`PREFIXslots [type of coin] [amount]`",
+        "examples": "`PREFIXslots bcoins 500`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "file",
+        "category": "Utility",
+        "description": "Only for bot owner",
+        "usage": "`PREFIXfile [path]`",
+        "hideCommand": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "pruning",
+        "category": "Music",
+        "aliases": [
+            "prune"
+        ],
+        "description": "Prunes the bots messages",
+        "usage": "`PREFIXpruning`",
+        "perms": [
+            "ADMINSTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "esnipe",
+        "category": "Moderation",
+        "description": "Finds a recently edited message",
+        "usage": "`PREFIXesnipe [number]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "warnings",
+        "category": "Moderation",
+        "description": "Displays the warnings of a user",
+        "aliases": [
+            "lw",
+            "listwarns",
+            "listwarnings"
+        ],
+        "usage": "`PREFIXwarnings [user]`",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "timeout",
+        "category": "Moderation",
+        "aliases": [
+            "to"
+        ],
+        "ignoreDisabledChannels": true,
+        "description": "Gives a timeout role to a user",
+        "usage": "`PREFIXtimeout [user] [time] [reason]`",
+        "perms": [
+            "MANAGE_MESSAGES"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_ROLES",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "slowmode",
+        "category": "Moderation",
+        "aliases": [
+            "sm"
+        ],
+        "description": "Sets slowmode to a channel",
+        "usage": "`PREFIXslowmode [time]` This time is in seconds.",
+        "perms": [
+            "MANAGE_CHANNELS"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_CHANNELS"
+        ]
+    },
+    {
+        "name": "freevbucks",
+        "category": "Misc",
+        "description": "Gives you free vbucks",
+        "usage": "`PREFIXfreevbucks`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "emojiinfo",
+        "category": "Misc",
+        "aliases": [
+            "ei"
+        ],
+        "description": "Displays info about an emoji",
+        "usage": "`PREFIXemojiinfo [emoji]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "fry",
+        "aliases": [
+            "deepfry",
+            "df"
+        ],
+        "category": "Images",
+        "description": "Fries a users profile picture",
+        "usage": "`PREFIXfry [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "files",
+        "category": "Utility",
+        "description": "Only for bot owner",
+        "usage": "`PREFIXfiles [path]`",
+        "hideCommand": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "queue",
+        "category": "Music",
+        "aliases": [
+            "q"
+        ],
+        "cooldown": 5,
+        "description": "Shows the music queue and now playing",
+        "usage": "`PREFIXqueue`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "modlog",
+        "category": "Moderation",
+        "description": "Displays the mod log of a user",
+        "aliases": [
+            "modlogs",
+            "mls",
+            "ml"
+        ],
+        "usage": "`PREFIXmodlog [user]`",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "ignoreDisabledChannels": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "unban",
+        "category": "Moderation",
+        "aliases": [
+            "unb"
+        ],
+        "description": "Unbans a user with their id",
+        "usage": "`PREFIXunban [user id]`",
+        "perms": [
+            "BAN_MEMBERS"
+        ],
+        "ignoreDisabledChannels": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "BAN_MEMBERS"
+        ]
+    },
+    {
+        "name": "ticket",
+        "category": "Moderation",
+        "description": "Opens up a ticket",
+        "usage": "`PREFIXticket`",
+        "cooldown": 300,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_CHANNELS"
+        ]
+    },
+    {
+        "name": "gamerrate",
+        "category": "Misc",
+        "aliases": [
+            "grate",
+            "gamerate"
+        ],
+        "description": "Rates you or a user on how much of a gamer they are",
+        "usage": "`PREFIXgamerrate [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "ping",
+        "category": "Misc",
+        "aliases": [
+            "pong"
+        ],
+        "description": "Get the bots and API ping",
+        "usage": "`PREFIXping`",
+        "clientPerms": [
+            "SEND_MESSAGES"
+        ]
+    },
+    {
+        "name": "deletetrash",
+        "category": "Images",
+        "aliases": [
+            "del",
+            "delt"
+        ],
+        "description": "Deletes some trash from your computer",
+        "usage": "`PREFIXdeletetrash [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "highlight",
+        "category": "Utility",
+        "aliases": [
+            "hl",
+            "highlights"
+        ],
+        "description": "Allows you to highlight words so that when are are said, it will DM you",
+        "usage": "- `PREFIXhighlight` to display the words you have highlighted\n- `PREFIXhighlight [set/remove] [word/phrase]` to set/remove words.",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true
+    },
+    {
+        "name": "remove",
+        "category": "Music",
+        "aliases": [
+            "rm"
+        ],
+        "cooldown": 5,
+        "description": "Remove a song from the queue",
+        "usage": "`PREFIXremove [Queue Number]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "nick",
+        "aliases": [
+            "nickname",
+            "setnick"
+        ],
+        "category": "Moderation",
+        "description": "Nickname any users in your server that doesn't have a role higher than the bots.  The bot will need to be able to change nicknames for this command to be run.",
+        "usage": "`PREFIXnick [user] [new name]`",
+        "perms": [
+            "MANAGE_NICKNAMES"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "MANAGE_NICKNAMES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "unmute",
+        "category": "Moderation",
+        "aliases": [
+            "unm"
+        ],
+        "ignoreDisabledChannels": true,
+        "description": "Unmutes a muted user",
+        "usage": "`PREFIXunmute [user]`",
+        "perms": [
+            "MANAGE_MESSAGES"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_ROLES",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "ticketinfo",
+        "category": "Moderation",
+        "aliases": [
+            "ti"
+        ],
+        "description": "Shows some info about a ticket",
+        "usage": "`PREFIXticketinfo`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_CHANNELS"
+        ]
+    },
+    {
+        "name": "insult",
+        "category": "Misc",
+        "aliases": [
+            "ins"
+        ],
+        "description": "Insults a user",
+        "usage": "`PREFIXinsult [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "say",
+        "category": "Misc",
+        "description": "I will say whatever you want",
+        "usage": "`PREFIXsay`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "distracted",
+        "category": "Images",
+        "aliases": [
+            "dis"
+        ],
+        "description": "You are distracted by someone",
+        "usage": "`PREFIXdistracted [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "invite",
+        "category": "Utility",
+        "description": "Generates a link for you to invite the bot to your server",
+        "usage": "`PREFIXinvite`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "resume",
+        "category": "Music",
+        "aliases": [
+            "r",
+            "res"
+        ],
+        "cooldown": 5,
+        "description": "Resumes currently playing music",
+        "usage": "`PREFIXresume`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "poll",
+        "category": "Moderation",
+        "description": "Generates a poll and sends to the specified channel",
+        "usage": "`PREFIXpoll <#channel> [poll description]`",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "untimeout",
+        "category": "Moderation",
+        "aliases": [
+            "unTO",
+            "unto"
+        ],
+        "description": "Removes a user from a timeout role",
+        "usage": "`PREFIXuntimeout [user]`",
+        "perms": [
+            "MANAGE_MESSAGES"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_ROLES",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "iq",
+        "category": "Misc",
+        "aliases": [
+            "IQ"
+        ],
+        "description": "Calculates a users IQ",
+        "usage": "`PREFIXiq [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "selfharm",
+        "category": "Misc",
+        "aliases": [
+            "sf"
+        ],
+        "description": "Don't do it",
+        "usage": "`PREFIXselfharm`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "drake",
+        "category": "Images",
+        "aliases": [
+            "drakeyes",
+            "drakeno",
+            "nah"
+        ],
+        "description": "Drake meme template",
+        "usage": "`PREFIXdrake [top text]/[bottom text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "searchyt",
+        "category": "Music",
+        "aliases": [
+            "syt"
+        ],
+        "cooldown": 5,
+        "description": "Search and select videos to play",
+        "usage": "`PREFIXsearchyt [Video Name]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "snipe",
+        "category": "Moderation",
+        "description": "Finds a recently deleted message",
+        "usage": "`PREFIXsnipe [number]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "kill",
+        "category": "Misc",
+        "description": "Kills a user",
+        "usage": "`PREFIXkill [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "serverinfo",
+        "category": "Misc",
+        "aliases": [
+            "si"
+        ],
+        "description": "Displays some info on the server",
+        "usage": "`PREFIXservinfo`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "facepalm",
+        "category": "Images",
+        "aliases": [
+            "fp"
+        ],
+        "description": "Makes your profile picture facepalm",
+        "usage": "`PREFIXfacepalm [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "shuffle",
+        "category": "Music",
+        "aliases": [
+            "shuf"
+        ],
+        "cooldown": 5,
+        "description": "Shuffles the queue",
+        "usage": "`PREFIXshuffle`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "calculate",
+        "category": "Misc",
+        "aliases": [
+            "calc"
+        ],
+        "description": "Calculates some simple arithmetic",
+        "usage": "- `PREFIXcalculate [num1] + [num2]` to add two numbers\n            - `PREFIXcalculate [num1] - [num2]` to subtract two numbers\n            - `PREFIXcalculate [num1] * [num2]` to multiply two numbers\n            - `PREFIXcalculate [num1] / [num2]` to divide two numbers",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "serverstats",
+        "category": "Misc",
+        "aliases": [
+            "sstats"
+        ],
+        "description": "Displays user information about the server",
+        "usage": "`PREFIXserverstats`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "fuse",
+        "category": "Images",
+        "description": "Fuses two images together!",
+        "usage": "`PREFIXfuse [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "whitelist",
+        "category": "Utility",
+        "aliases": [
+            "wl"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "hideCommand": true,
+        "description": "Whitelists a user from the bot",
+        "usage": "`PREFIXwhitelist`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "skip",
+        "category": "Music",
+        "aliases": [
+            "s"
+        ],
+        "cooldown": 5,
+        "description": "Skips the current song",
+        "usage": "`PREFIXskip`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "meme",
+        "category": "Misc",
+        "cooldown": 3,
+        "description": "Sends a meme from reddit",
+        "usage": "`PREFIXmeme`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "shorten",
+        "category": "Misc",
+        "aliases": [
+            "short",
+            "linkshorten",
+            "ls"
+        ],
+        "description": "Shortens a link (no spaces in the title)",
+        "usage": "`PREFIXshorten [link] [title]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "invert",
+        "category": "Images",
+        "description": "Invers the colors in a users profile picture",
+        "usage": "`PREFIXinvert [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "alias",
+        "category": "Utility",
+        "aliases": [
+            "ali"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ],
+        "description": "Allows the server owner to add custom aliases to your server",
+        "usage": "- `PREFIXalias` to display all custom aliases\n- `PREFIXalias [set/remove] [new alias] [command name]` to set/remove aliases.",
+        "serverOwnerOnly": true
+    },
+    {
+        "name": "skipto",
+        "category": "Music",
+        "aliases": [
+            "st"
+        ],
+        "cooldown": 5,
+        "description": "Skip to the selected queue number",
+        "usage": "`PREFIXskipto [Queue Number]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "pp",
+        "category": "Misc",
+        "aliases": [
+            "peepee"
+        ],
+        "description": "Measures your pp lmao",
+        "usage": "`PREFIXpp [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "status",
+        "category": "Misc",
+        "description": "Sets the status of me",
+        "usage": "`PREFIXstatus [status]` This command is only for developers.",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "jail",
+        "category": "Images",
+        "description": "Sends you to jail",
+        "usage": "`PREFIXjail [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "log",
+        "category": "Utility",
+        "aliases": [
+            "auditlog",
+            "logging",
+            "audit"
+        ],
+        "description": "Allows you to set an audit log channel",
+        "usage": "- `PREFIXlog` to display the server audit log channel\n- `PREFIXlog [#channel] [set/remove]` to set/remove the audit log channel",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true
+    },
+    {
+        "name": "stop",
+        "category": "Music",
+        "cooldown": 5,
+        "description": "Stops the music player",
+        "usage": "`PREFIXstop`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "roles",
+        "category": "Misc",
+        "description": "Roles Command",
+        "usage": "`PREFIXroles`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "suggest",
+        "category": "Misc",
+        "cooldown": 86400,
+        "description": "Suggest a feature to me",
+        "usage": "`PREFIXsuggest [suggestion]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "jokeoverhead",
+        "category": "Images",
+        "aliases": [
+            "joh"
+        ],
+        "description": "Shows what happens to jokes that arent funny",
+        "usage": "`PREFIXjokeoverhead [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "logsettings",
+        "category": "Utility",
+        "aliases": [
+            "auditlogsettings",
+            "alsettings",
+            "als"
+        ],
+        "description": "Allows you to customize audit log settings",
+        "usage": "- `PREFIXlogsettings` to display the server audit log settings\n- `PREFIXlogsettings [setting] [disable/enable]` to disable/enable audit log settings.",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true
+    },
+    {
+        "name": "volume",
+        "category": "Music",
+        "aliases": [
+            "v"
+        ],
+        "cooldown": 5,
+        "description": "Changes the volume of the music",
+        "usage": "`PREFIXvolume`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "SPEAK",
+            "CONNECT",
+            "ADD_REACTIONS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "rate",
+        "category": "Misc",
+        "description": "Rates something",
+        "usage": "`PREFIXrate [thing]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "uptime",
+        "category": "Misc",
+        "description": "Displays the amount of time the bot has been online.",
+        "usage": "`PREFIXuptime`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "note",
+        "category": "Images",
+        "description": "Thats a bad note",
+        "usage": "`PREFIXnote [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "autorole",
+        "category": "Utility",
+        "aliases": [
+            "autor",
+            "joinrole"
+        ],
+        "description": "Sets a auto role for your server when a member joins",
+        "usage": "- `PREFIXautorole` to display the current autorole\n- `PREFIXautorole [role] [set/remove]` to set/remove the autorole.",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "remind",
+        "category": "Misc",
+        "aliases": [
+            "rem",
+            "timer"
+        ],
+        "description": "Reminds of you somthing within a time limit",
+        "usage": "`PREFIXremind [time] [reminder]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "userinfo",
+        "category": "Misc",
+        "aliases": [
+            "ui"
+        ],
+        "description": "Displays info about a user.",
+        "usage": "`PREFIXuserinfo [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "ohno",
+        "category": "Images",
+        "description": "Oh no, its stupid.",
+        "usage": "`PREFIXohno [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "channels",
+        "category": "Utility",
+        "aliases": [
+            "chan"
+        ],
+        "usage": "- `PREFIXchannels` to display all currently disabled channels\n- `PREFIXchannels [#channel] [disable/enable]` to disable/enable channels.",
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "description": "Allows you to disable and enable channels",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "google",
+        "category": "Misc",
+        "aliases": [
+            "goog"
+        ],
+        "description": "Google something!",
+        "usage": "`PREFIXgoogle [query]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "youtube",
+        "category": "Misc",
+        "aliases": [
+            "yt"
+        ],
+        "description": "Sends a link to my youtube channel(s)",
+        "usage": "`PREFIXyoutube`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "opinion",
+        "category": "Images",
+        "aliases": [
+            "op"
+        ],
+        "description": "Lets everyone know about your opinion",
+        "usage": "`PREFIXopinion [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "commands",
+        "category": "Utility",
+        "aliases": [
+            "com"
+        ],
+        "usage": "- `PREFIXcommands` to display all currently disabled commands\n- `PREFIXcommands [command] [disable/enable]` to disable/enable commands.",
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "description": "Allows you to disable and enable commands",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "search",
+        "category": "Misc",
+        "description": "Searchs for a video on youtube",
+        "usage": "`PREFIXsearch [query]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "rainbow",
+        "category": "Images",
+        "aliases": [
+            "gay"
+        ],
+        "description": "Makes your profile picture rainbow",
+        "usage": "`PREFIXrainbow [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "cooldowns",
+        "category": "Utility",
+        "aliases": [
+            "cd"
+        ],
+        "usage": "- `PREFIXcooldowns [command]` to display all modified cooldowns for a command and update them.\n            - `PREFIXcooldowns [command] set [role] [cooldown]` to set the cooldown for this command to a certain value\n            - `PREFIXcooldowns [command] clear [role]` to use the default cooldown for this command",
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "showerthoughts",
+        "aliases": [
+            "sts"
+        ],
+        "category": "Misc",
+        "cooldown": 3,
+        "description": "Sends a shower thought from reddit",
+        "usage": "`PREFIXshowerthoughts`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "rip",
+        "category": "Images",
+        "description": "R.I.P",
+        "usage": "`PREFIXrip [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "setleave",
+        "category": "Utility",
+        "aliases": [
+            "setl",
+            "sl",
+            "leave"
+        ],
+        "description": "Sets a leave message for your server. Supported variables are `{user}`, `{username}`, `{usertag}`, `{membercount}`, `{guild}`, `{creation}`",
+        "usage": "`PREFIXsetleave [text]`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "spam",
+        "category": "Misc",
+        "cooldown": 15,
+        "description": "Spams a word",
+        "usage": "`PREFIXspam [word] [amount]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "slap",
+        "category": "Images",
+        "description": "Slaps the mentioned user",
+        "usage": "`PREFIXslap [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "permissions",
+        "aliases": [
+            "perms"
+        ],
+        "category": "Utility",
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "description": "Set your own custom permissions that your users need to run this command in your server.",
+        "usage": "- `PREFIXpermissions [command]` to display and change the permissions someone needs to use this command.",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "arguments": [
+            {
+                "type": "SOMETHING",
+                "prompt": "Please specify a command."
+            }
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "ADD_REACTIONS"
+        ]
+    },
+    {
+        "name": "sudo",
+        "category": "Misc",
+        "description": "Make anyone say anything",
+        "usage": "`PREFIXsudo [user] [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "spank",
+        "aliases": [
+            "beat"
+        ],
+        "category": "Images",
+        "description": "Spanks the mentioned user",
+        "usage": "`PREFIXspank [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "permissionsfor",
+        "category": "Utility",
+        "aliases": [
+            "permsfor",
+            "pf"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ],
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "description": "Allows you to view permissions for a user in the server and channel",
+        "usage": "- `PREFIXpermissionsfor [user]` to display all permissions"
+    },
+    {
+        "name": "tableflip",
+        "category": "Misc",
+        "aliases": [
+            "tf"
+        ],
+        "description": "Flips a table",
+        "usage": "`PREFIXtableflip`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "surprised",
+        "category": "Images",
+        "aliases": [
+            "surp",
+            "surprisedpikachu"
+        ],
+        "description": "Dam, that surprised me",
+        "usage": "`PREFIXsurprised [top text]/[bottom text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "setprefix",
+        "category": "Utility",
+        "aliases": [
+            "sp"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "description": "Set a new prefix for your server.",
+        "usage": "`PREFIXsetprefix [newprefix]`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "arguments": [
+            {
+                "type": "SOMETHING",
+                "prompt": "Please enter a new prefix to use!"
+            }
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES"
+        ]
+    },
+    {
+        "name": "trivia",
+        "category": "Misc",
+        "aliases": [
+            "triv",
+            "tri"
+        ],
+        "description": "Gives a fun trivia question for you too answer",
+        "usage": "`PREFIXtrivia`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "trash",
+        "category": "Images",
+        "aliases": [
+            "garbage"
+        ],
+        "description": "Shows someones true colors",
+        "usage": "`PREFIXtrash [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "settings",
+        "category": "Utility",
+        "aliases": [
+            "setting"
+        ],
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "description": "View and change settings for your server.  Some commands have different syntax's, such as: auto role, disabling commands/channels and prefix's",
+        "usage": "- `PREFIXsettings` to display all current settings\n- `PREFIXsettings [setting name] [disable/enable]` to disable/enable settings.",
+        "clientPerms": [
+            "MANAGE_GUILD"
+        ]
+    },
+    {
+        "name": "urban",
+        "category": "Misc",
+        "aliases": [
+            "urb"
+        ],
+        "description": "Gives the definition of a word from urban dictionary",
+        "usage": "`PREFIXurban [word]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "triggered",
+        "category": "Images",
+        "aliases": [
+            "trig",
+            "trigger"
+        ],
+        "description": "Makes your profile picture triggered",
+        "usage": "`PREFIXtriggered [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "simjoin",
+        "category": "Utility",
+        "description": "Simulates a user joining the server",
+        "usage": "`PREFIXsimjoin`",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "weather",
+        "category": "Misc",
+        "description": "Finds the weather of a zipcode/area",
+        "usage": "`PREFIXweather [zipcode/area]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "tweet",
+        "category": "Images",
+        "aliases": [
+            "twitter"
+        ],
+        "description": "Sends a tweet",
+        "usage": "`PREFIXtweet [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "simleave",
+        "category": "Utility",
+        "description": "Simulates a user leaving the server",
+        "usage": "`PREFIXsimleave`",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "whoasked",
+        "category": "Misc",
+        "description": "Who asked?",
+        "usage": "`PREFIXwhoasked`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "wanted",
+        "category": "Images",
+        "description": "That user is wanted!",
+        "usage": "`PREFIXwanted [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "setwelcome",
+        "category": "Utility",
+        "aliases": [
+            "setw",
+            "sw",
+            "welcome"
+        ],
+        "description": "Sets a welcome message for your server. Supported variables are `{user}`, `{username}`, `{usertag}`, `{membercount}`, `{guild}`, `{creation}`",
+        "usage": "`PREFIXsetwelcome [text]`",
+        "perms": [
+            "ADMINISTRATOR"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "wasted",
+        "category": "Images",
+        "description": "That user is wasted!",
+        "usage": "`PREFIXwasted [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "words",
+        "category": "Utility",
+        "aliases": [
+            "blword",
+            "blacklistword",
+            "blw"
+        ],
+        "usage": "- `PREFIXwords` to display all currently blacklisted words\n- `PREFIXwords [blacklist/whitelist] [word/phrase]` to blacklist/whitelist words.",
+        "canNotDisable": true,
+        "ignoreDisabledChannels": true,
+        "description": "Allows you to view, blacklist and whitelist words so that if they are used in your server, the message will be deleted",
+        "perms": [
+            "MANAGE_GUILD"
+        ],
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS",
+            "MANAGE_MESSAGES"
+        ]
+    },
+    {
+        "name": "worsethanhitler",
+        "category": "Images",
+        "aliases": [
+            "wth"
+        ],
+        "description": "Calls someone worse than hilter **(this is a joke, not to be taken seriously)**",
+        "usage": "`PREFIXrainbow [user]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    },
+    {
+        "name": "ytcomment",
+        "category": "Images",
+        "aliases": [
+            "ytc"
+        ],
+        "description": "Sends a youtube comment",
+        "usage": "`PREFIXytcomment [text]`",
+        "clientPerms": [
+            "SEND_MESSAGES",
+            "EMBED_LINKS"
+        ]
+    }
+]

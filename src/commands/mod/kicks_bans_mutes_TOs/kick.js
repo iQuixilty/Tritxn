@@ -44,7 +44,7 @@ module.exports = {
             .setColor(message.guild.me.displayColor)
 
         collector.on('collect', async (msg) => {
-            switch (msg.content) {
+            switch (msg.content.toLowerCase()) {
                 case "yes":
 
 

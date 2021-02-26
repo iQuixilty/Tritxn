@@ -7,7 +7,7 @@ const { setCooldown } = require('../../utils/utils')
 module.exports = {
     name: "resume",
     category: "Music",
-    aliases: ["r", 'res'],
+    aliases: ['res'],
     cooldown: 5,
     description: "Resumes currently playing music",
     usage: "\`PREFIXresume\`",

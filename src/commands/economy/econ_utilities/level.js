@@ -7,7 +7,7 @@ const emoji = require('../../../../config/emoji.json')
 const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
-    name: "levels",
+    name: "level",
     category: "Economy",
     aliases: ["lvl", 'xp', 'profile', 'prof'],
     description: "Displays the amount of XP a user has and what level they are",

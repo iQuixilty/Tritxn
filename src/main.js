@@ -13,6 +13,9 @@ const client = new discord.Client({
     restTimeOffset: 0,
 });
 
+const Levels = require("discord-xp");
+Levels.setURL(config.MONGODB_URI); 
+
 require('events').EventEmitter.defaultMaxListeners = 60;
 
 (async () => {

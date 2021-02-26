@@ -30,6 +30,8 @@ module.exports = async (client, message, newMessage) => {
 
         // console.log(message)
         // console.log(newMessage)
+
+        if (msg.content === '') return;
         
         channel.send(new Discord.MessageEmbed()
             .setColor('BLACK')

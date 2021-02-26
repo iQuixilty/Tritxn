@@ -1,8 +1,8 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
 const emoji = require('../../../../config/emoji.json')
+const ms = require('ms')
 
 module.exports = {
     name: "slowmode",
@@ -15,28 +15,35 @@ module.exports = {
 
     execute: async function (client, message, args) {
         const slowmodeE = new Discord.MessageEmbed()
-       
+
         const { channel } = message
 
         let duration = args[0]
-        if (duration === 'off') {
-            duration = 0
-        }
 
-        if (isNaN(duration)) {
-            message.reply(slowmodeE
-                .setColor('RED')
-                .setDescription(`**${emoji.downvote} ${message.author} please provide either a number of seconds (greater than 1) or the word \`off\`**`))
-            return;
+
+        if (isNaN(ms(duration))) {
+            if (duration === 'off') {
+                duration = 0
+            } else {
+                return message.reply(slowmodeE
+                    .setColor('RED')
+                    .setDescription(`**${message.author} please provide a valid time that is less than 6 hours or the word \`off\`**`))
+            }
         }
 
         if (duration < 1) {
-           duration = 0
+            duration = 0
         }
 
-        channel.setRateLimitPerUser(duration)
+        if (ms(duration) >= 1000 * 60 * 60 * 6 ) {
+            return message.reply(slowmodeE
+                .setColor('RED')
+                .setDescription(`**${message.author} please provide either a valid time that is less than 6 hours or the word \`off\`**`))
+        }
+
+        channel.setRateLimitPerUser(ms(duration) / 1000)
         message.reply(slowmodeE
             .setColor('GREEN')
-            .setDescription(`**${emoji.upvote} ${message.author} the slowmode for this channel has been set to ${duration} second(s)**`))
+            .setDescription(`**${emoji.upvote} ${message.author} the slowmode for this channel has been set to ${ms(ms(duration), { long: true })}**`))
     }
 }

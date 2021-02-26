@@ -33,7 +33,7 @@ async function registerCommands(client, ...dirs) {
                         }
 
                         client.commands.set(name, cmdModule);
-
+                
                         if (aliases && aliases.length !== 0) {
                             aliases.forEach(alias => {
                                 if (client.commands.has(alias)) {

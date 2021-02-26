@@ -5,6 +5,7 @@ const { devs, someServersOnly } = require('../../config/config.json')
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const afkSchema = require('../../schemas/afkschema')
+const Levels = require('discord-xp')
 const moment = require('moment')
 
 const Discord = require('discord.js')
@@ -145,6 +146,20 @@ module.exports = async (client, message) => {
             }
         }
 
+
+        //Levels
+
+        const randomAmountOfXp = Math.floor(Math.random() * 3) + 1
+        const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
+        if (hasLeveledUp) {
+            const user = await Levels.fetch(message.author.id, message.guild.id);
+            message.channel.send(`${message.author}`)
+            message.channel.send(new Discord.MessageEmbed()
+                .setAuthor(`Congrats ${message.author.username}!`, message.author.displayAvatarURL())
+                .setColor(message.guild.me.displayColor)
+                .setDescription(`You have leveled up to **${user.level}**`)
+                .setThumbnail(message.guild.iconURL()))
+        }
 
 
         const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(guildInfo.prefix)})\\s*`);

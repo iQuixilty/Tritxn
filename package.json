@@ -13,6 +13,7 @@
     "discord-emoji-convert": "^1.5.1",
     "discord-fetch-all": "^3.0.2",
     "discord-giveaways": "^4.3.0",
+    "discord-xp": "^1.1.8",
     "discord.js": "^12.5.1",
     "generate-password": "^1.5.1",
     "got": "^11.8.1",
@@ -30,7 +31,7 @@
     "txtgen": "^2.2.8",
     "urban": "^0.3.2",
     "weather-js": "^2.0.0",
-    "ytdl-core": "^4.4.5",
+    "ytdl-core": "^4.5.0",
     "ytdl-core-discord": "^1.2.5"
   },
   "scripts": {

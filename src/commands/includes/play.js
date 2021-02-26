@@ -21,8 +21,6 @@ module.exports = {
     const queue = message.client.queue.get(message.guild.id);
 
     if (!song) {
-      queue.channel.leave();
-      message.client.queue.delete(message.guild.id);
       return queue.textChannel.send(PLAY.setColor(message.guild.me.displayColor).setDescription("**❌ Music queue ended.**")).catch(console.error);
     }
 
