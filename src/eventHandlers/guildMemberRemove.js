@@ -8,7 +8,7 @@ module.exports = async (client, member) => {
         const { guild } = member
 
         const result = await client.DBSettings.findOne({ _id: guild.id })
-
+        if (!result) return;
 
         const channelId = result.leaveChannelId
         if (channelId === undefined) return;
@@ -34,7 +34,7 @@ module.exports = async (client, member) => {
     }
 
 
-    onLeave(member)
+    onLeave(member).catch((e) => { return; })
 
     const result = await client.DBSettings.findOne({ _id: member.guild.id })
 
@@ -55,5 +55,7 @@ module.exports = async (client, member) => {
         .setThumbnail(member.user.displayAvatarURL())
         .setFooter(`Member ID: ${member.id}`)
         .setTimestamp()
-    )
+    ).catch((e) => {
+        return;
+    })
 }

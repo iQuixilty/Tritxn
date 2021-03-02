@@ -11,13 +11,13 @@ const profileSchema = require('../../../../schemas/economy-schema')
  */
 
 module.exports = {
-    name: "leaderboard",
+    name: "ecoleaderboard",
     category: "Economy",
-    aliases: ["lb"],
+    aliases: ["ecolb"],
     cooldown: 5,
     canNotSetCooldown: true,
     description: "Displays a list of richest users",
-    usage: "\`PREFIXlb\`",
+    usage: "\`PREFIXecoleaderboard\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {

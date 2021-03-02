@@ -1,11 +1,9 @@
 const { canModifyQueue } = require("../../utils/vcUtil");
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
 const { play } = require("../includes/play");
 const YouTubeAPI = require("simple-youtube-api");
-
 
 let config;
 try {
@@ -44,11 +42,6 @@ module.exports = {
                 .catch(console.error);
         if (!channel) return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, you need to join a voice channel first!**`)).catch(console.error);
 
-        const permissions = channel.permissionsFor(message.client.user);
-        if (!permissions.has("CONNECT"))
-            return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, cannot connect to voice channel, missing permissions**`));
-        if (!permissions.has("SPEAK"))
-            return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, I cannot speak in this voice channel, make sure I have the proper permissions!**`));
 
         if (serverQueue && channel !== message.guild.me.voice.channel)
             return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, you must be in the same channel as ${message.client.user}**`)).catch(console.error);

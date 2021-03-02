@@ -5,7 +5,6 @@ const Discord = require('discord.js')
 module.exports = {
     name: "announce",
     category: "Moderation",
-    aliases: ["ann"],
     description: "Annouce something to a server",
     perms: ['ADMINISTRATOR'],
     usage: "\`PREFIXannounce #channel [annoucement <-everyone || -here || nothing>]\`",

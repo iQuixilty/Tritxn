@@ -18,7 +18,13 @@ module.exports = {
     execute: async function (client, message, args) {
         const embed = new Discord.MessageEmbed()
 
-        const target = message.mentions.users.first() || message.author;
+        let target = args[0]
+
+          if (!target) {
+            target = message.guild.members.cache.get(message.author.id);
+        } else {
+            target = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+        }
 
         const user = await Levels.fetch(target.id, message.guild.id, true);
 
@@ -27,13 +33,13 @@ module.exports = {
         const neededXp = Levels.xpFor(parseInt(user.level) + 1)
         
         const rank = new canvacord.Rank()
-            .setAvatar(target.displayAvatarURL({ dynamic: false, format: 'png' }))
+            .setAvatar(target.user.displayAvatarURL({ dynamic: false, format: 'png' }))
             .setCurrentXP(user.xp)
             .setLevel(user.level)
             .setRequiredXP(neededXp)
             .setProgressBar(message.guild.me.displayHexColor, "COLOR")
-            .setUsername(target.username)
-            .setDiscriminator(target.discriminator)
+            .setUsername(target.user.username)
+            .setDiscriminator(target.user.discriminator)
             .setRank(user.position)
 
         rank.build()

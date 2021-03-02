@@ -70,28 +70,22 @@ class myClient extends Client {
         this.guildAuditCache
 
         /**
-         * A collection containing all cached userInfo
-         * @type {Collection<Snowflake, userInfo>}
-         */
-        this.userInfoCache;
-
-        /**
          * A set containing all Discord IDs of blacklisted users
          * @type {Set<Snowflake>}
          */
         this.blacklistCache;
 
         /**
+         * A collection containing all server settings for levelings
+         * @type {Set<Snowflake>}
+         */
+        this.guildLevelsCache;
+
+        /**
          * A reference to the guildSchema
          * @type {Model<guildInfo, {}>}
          */
         this.DBGuild;
-
-        /**
-         * A reference to the guildSchema
-         * @type {Model<userInfo, {}>}
-         */
-        this.DBUser;
 
         /**
          * A reference to the config schema
@@ -112,6 +106,14 @@ class myClient extends Client {
          * @type {Model<>}
          */
         this.DBAudit;
+
+        /**
+         * 
+         * /**
+         * A reference to the levels schema
+         * @type {Model<>}
+         */
+        this.DBLevels;
 
         /**
         

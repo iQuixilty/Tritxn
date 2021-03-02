@@ -34,13 +34,16 @@ module.exports = {
         if (userXP.xp < newXp) return message.channel.send(embed.setColor(message.guild.me.displayColor)
         .setDescription(`**You cannot remove more XP then what the user has**`))
 
+        if (newXp > 300000 || newXp < 1) return message.channel.send(embed.setColor(message.guild.me.displayColor)
+            .setDescription(`**The max amount of XP you can remove is 300000**`))
+
         const user = await Levels.subtractXp(target.id, message.guild.id, newXp)
         
 
         message.channel.send(embed
             .setAuthor(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
             .setDescription(`Successfully removed \`${newXp}\` XP from ${target}`)
-            .setFooter(`${target.username} now has ${userXP.xp - newXp} XP`)
+            .setFooter(`They now have ${userXP.xp - newXp} XP`)
             .setColor(message.guild.me.displayColor))
       
 

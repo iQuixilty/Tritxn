@@ -39,11 +39,11 @@ module.exports = async (client, guild) => {
                 name: `For a list of commands`,
                 value: `I would recomend typing \`${PREFIX}help\``,
             },
-            // {
-            //     name: `If you have any problems with me please join are server! And we will try and fix the error!`,
-            //     value: `[Discord Server Link](Your Server Link)`,// This is optional if you have a support server
-            //     inline: true,
-            // },
+            {
+                name: `If you have any problems with me ,please join the support server!`,
+                value: `[Support Server Link](https://discord.gg/2CGSnFhxVy)`,// This is optional if you have a support server
+                inline: true,
+            },
             {
                 name: `If you want to invite me to your server please click below!`,
                 value: `[Invite me!](https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`,
@@ -58,13 +58,21 @@ module.exports = async (client, guild) => {
     }
 
     const channelId = '784592088729255946';
-    const channel = client.channels.cache.get(channelId); //This Gets That Channel
-    if (!channel) return; //If the channel is invalid it returns
-    const embed = new MessageEmbed()
-        .setTitle('I Joined A Guild!')
-        .setDescription(`**Guild Name:** ${guild.name} (${guild.id})\n**Members:** ${guild.memberCount}\n**Owner:** ${guild.owner}`)
-        .setTimestamp()
-        .setColor('GREEN')
-        .setFooter(`I'm In ${client.guilds.cache.size} Guilds Now!`);
-    channel.send(embed);
+    let inviteLink;
+    const channel = client.channels.cache.get(channelId);
+    const invChannel = getDefaultChannel(guild);
+    invChannel.createInvite()
+        .then(invite => {
+            if (!channel) return;
+
+            const embed = new MessageEmbed()
+                .setTitle('I Joined A Guild!')
+                .setDescription(`**Guild Name:** ${guild.name} (${guild.id})\n**Members:** ${guild.memberCount}\n**Owner:** ${guild.owner}\n**Invite Link:** [Click Here!](${invite.url})`)
+                .setTimestamp()
+                .setColor('GREEN')
+                .setFooter(`I'm In ${client.guilds.cache.size} Guilds Now!`);
+            channel.send(embed);
+        })
+
+
 }

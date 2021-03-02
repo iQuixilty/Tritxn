@@ -5,9 +5,9 @@ const Discord = require('discord.js')
 const { setCooldown } = require('../../utils/utils')
 
 module.exports = {
-    name: "leavevc",
+    name: "disconnect",
     category: "Music",
-    aliases: ['lvc'],
+    aliases: ['dc'],
     cooldown: 5,
     description: "Makes the bot leave the voice channel",
     usage: "\`PREFIXleavevc\`",

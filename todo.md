@@ -121,3 +121,14 @@
     - [x] Added more variable support to welcome/leave
     - [x] sim(join/leave) command to simulate joins and leaves
     - [x] Fixed unmute/to command
+
+# 2/25/201 - 2/29/2021
+
+    - [x] Added leveling commands, fixed minor bugs, changed when bot leaves voice chanel
+    - [x] Fixed command menu on site
+    - [x] Add role multipliers
+    - [x] Add channel multipliers
+    - [x] Add guild multiplier
+    - [x] Add settings menu for XP
+    - [x] Add role levels 
+    - [x] Add announce settings

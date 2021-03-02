@@ -29,13 +29,16 @@ module.exports = {
         if (!newXp || isNaN(newXp)) return message.channel.send(embed.setColor(message.guild.me.displayColor)
         .setDescription(`**Provide a valid amount of XP you want to give that user**`))
 
+        if (newXp > 300000 || newXp < 1) return message.channel.send(embed.setColor(message.guild.me.displayColor)
+            .setDescription(`**The max amount of XP you can add is 300000**`))
+
         const user = await Levels.appendXp(target.id, message.guild.id, newXp)
         const userXP = await Levels.fetch(target.id, message.guild.id)
 
         message.channel.send(embed
             .setAuthor(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
             .setDescription(`Successfully added \`${newXp}\` XP to ${target}`)
-            .setFooter(`${target.username} now has ${userXP.xp} XP`)
+            .setFooter(`They now have ${userXP.xp} XP`)
             .setColor(message.guild.me.displayColor))
       
 

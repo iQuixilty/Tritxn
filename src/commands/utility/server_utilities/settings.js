@@ -79,7 +79,7 @@ module.exports = {
                 .setFooter(`Prefix: ${guildInfo.prefix}`, message.author.displayAvatarURL())
                 .setTimestamp()
 
-            return paginate(message, [mainSetting, channelSettings, roleSettings, miscSettings])
+            return paginate(message, [mainSetting, channelSettings, roleSettings, miscSettings], { time: 1000 * 30 })
         }
 
         if (!message.member.permissions.has('MANAGE_GUILD')) return message.channel.send(settingEmbed.setColor(message.guild.me.displayColor).setDescription('**You need to have `manage server` permissions to change server settings**'))

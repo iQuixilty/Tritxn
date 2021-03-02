@@ -56,13 +56,20 @@ module.exports = {
                 const updatedItem = await economy.buyItem(userId, itemIndex, amount * -1)
                 const newCoins = await economy.buyItem(userId, typeOfCoin, amount * pricePer)
 
-                message.channel.send(`${message.author} **⇒**`)
-                message.channel.send(Sell
-                    .setColor(message.guild.me.displayColor)
-                    .setDescription(`**You sold ${amount} ${itemName}(s) for ${emojiCoin} \`${amount * pricePer} coins\`**`)
-                    .addField(`You now have:`, `${emojiItem} ─ \`${updatedItem} ${itemName}(s)\`\n\n${emojiCoin} ─ \`${newCoins} coins\``)
-                    .setFooter(`${message.guild.name}`, client.user.displayAvatarURL()))
-
+                message.channel.send(`${message.author} **⇒**`, {
+                    embed: {
+                        color: message.guild.me.displayColor,
+                        description: `**You sold ${amount} ${itemName}(s) for ${emojiCoin} \`${amount * pricePer} coins\`**`,
+                        fields: {
+                            name: `You now have:`,
+                            value: `${emojiItem} ─ \`${updatedItem} ${itemName}(s)\`\n\n${emojiCoin} ─ \`${newCoins} coins\``,
+                        },
+                        footer: {
+                            text: `${message.guild.name}`,
+                            iconURL: client.user.displayAvatarURL()
+                        }
+                    }
+                })
             }
         }
 
@@ -110,13 +117,22 @@ module.exports = {
                 const newCoins1 = await economy.buyItem(userId, 'bronzeCoins', amount * 225000)
                 const newCoins2 = await economy.buyItem(userId, 'silverCoins', amount * 40000)
 
-                message.channel.send(`${message.author} **⇒**`)
-                message.channel.send(Sell
-                    .setColor(message.guild.me.displayColor)
-                    .setDescription(`**You sold ${amount} silver key(s) for ${emoji.bronzeCoin} \`${amount * 225000} coins\` and ${emoji.silverCoin} \`${amount * 40000} coins\`**`)
-                    .addField(`You now have:`, `${emoji.sKey} ─ \`${updatedItem} silver keys(s)\`
-                    \n${emoji.bronzeCoin} ─ \`${newCoins1} coins\`\n${emoji.silverCoin} ─ \`${newCoins2} coins\``)
-                    .setFooter(`${message.guild.name}`, client.user.displayAvatarURL()))
+                message.channel.send(`${message.author} **⇒**`, {
+                    embed: {
+                        color: message.guild.me.displayColor,
+                        description: `**You sold ${amount} silver key(s) for ${emoji.bronzeCoin} \`${amount * 225000} coins\` and ${emoji.silverCoin} \`${amount * 40000} coins\`**`,
+                        fields: {
+                            name: `You now have:`,
+                            value: `${emoji.sKey} ─ \`${updatedItem} silver keys(s)\`
+                            \n${emoji.bronzeCoin} ─ \`${newCoins1} coins\`\n${emoji.silverCoin} ─ \`${newCoins2} coins\``,
+                        },
+                        footer: {
+                            text: `${message.guild.name}`,
+                            iconURL: client.user.displayAvatarURL()
+                        }
+                    }
+                })
+
 
             }
         } else if (item === `goldkey` || item === `gkey`) {
@@ -133,13 +149,22 @@ module.exports = {
                 const newCoins2 = await economy.buyItem(userId, 'silverCoins', amount * 115000)
                 const newCoins3 = await economy.buyItem(userId, 'goldCoins', amount * 40000)
 
-                message.channel.send(`${message.author} **⇒**`)
-                message.channel.send(Sell
-                    .setColor(message.guild.me.displayColor)
-                    .setDescription(`**You sold ${amount} gold key(s) for ${emoji.bronzeCoin} \`${amount * 425000} coins\`, ${emoji.silverCoin} \`${amount * 115000} coins\` and ${emoji.goldCoin} \`${amount * 40000} coins\`**`)
-                    .addField(`You now have:`, `${emoji.gKey} ─ \`${updatedItem} gold keys(s)\`
-                    \n${emoji.bronzeCoin} ─ \`${newCoins1} coins\`\n${emoji.silverCoin} ─ \`${newCoins2} coins\`\n${emoji.goldCoin} ─ \`${newCoins3} coins\``)
-                    .setFooter(`${message.guild.name}`, client.user.displayAvatarURL()))
+                message.channel.send(`${message.author} **⇒**`, {
+                    embed: {
+                        color: message.guild.me.displayColor,
+                        description: `**You sold ${amount} gold key(s) for ${emoji.bronzeCoin} \`${amount * 425000} coins\`, ${emoji.silverCoin} \`${amount * 115000} coins\` and ${emoji.goldCoin} \`${amount * 40000} coins\`**`,
+                        fields: {
+                            name: `You now have:`,
+                            value:  `${emoji.gKey} ─ \`${updatedItem} gold keys(s)\`
+                            \n${emoji.bronzeCoin} ─ \`${newCoins1} coins\`\n${emoji.silverCoin} ─ \`${newCoins2} coins\`\n${emoji.goldCoin} ─ \`${newCoins3} coins\``,
+                        },
+                        footer: {
+                            text: `${message.guild.name}`,
+                            iconURL: client.user.displayAvatarURL()
+                        }
+                    }
+                })
+
 
             }
         } else if (item === `bronzelock` || item === `block`) {

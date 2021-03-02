@@ -144,26 +144,36 @@ module.exports = {
 
                                 gameData[player].lastAttack = 'attack';
 
-                                const FightE = new Discord.MessageEmbed()
 
-                                message.channel.send(`${gameData[tempPlayer].member} **⇒**`)
-                                message.channel.send(FightE
-                                    .setColor(message.guild.me.displayColor)
-                                    .setDescription(`**${gameData[player].member} has dealt ${randNumb} damage to you**`)
-                                    .addField(`${gameData[player].member.username}'s Health`, `💓 \`${gameData[player].health}\``, true)
-                                    .addField(`${gameData[tempPlayer].member.username}'s Health`, `💓 \`${gameData[tempPlayer].health}\``, true)
-                                    .setFooter(`It is now your turn. Would you like to attack or defend?`))
-                                    .then(msg => { msg.delete({ timeout: 60000 }) });;
+                                message.channel.send(`${gameData[tempPlayer].member} **⇒**`, {
+                                    embed: {
+                                        color: message.guild.me.displayColor,
+                                        description: `**${gameData[player].member} has dealt ${randNumb} damage to you**`,
+                                        fields: [{
+                                            name: `${gameData[player].member.username}'s Health`,
+                                            value: `💓 \`${gameData[player].health}\``,
+                                            inline: true
+                                        }, {
+                                            name: `${gameData[tempPlayer].member.username}'s Health`,
+                                            value: `💓 \`${gameData[tempPlayer].health}\``,
+                                            inline: true
+                                        }],
+                                        footer: {
+                                            text: `It is now your turn. Would you like to attack or defend?`
+                                        }
+                                    }
+                                }).then(msg => { msg.delete({ timeout: 60000 }) });;
 
                                 player = (player + 1) % 2;
                             } else if (selection === 'defend') {
                                 const tempPlayer = (player + 1) % 2;
 
-                                message.channel.send(`${gameData[tempPlayer].member} **⇒**`)
-                                message.channel.send(fighte
-                                    .setColor(message.guild.me.displayColor)
-                                    .setDescription(`**${gameData[player].member} defended. It is now your turn. Would you like to \`attack\` or \`defend\`?**`))
-                                    .then(msg => { msg.delete({ timeout: 60000 }) });;;
+                                message.channel.send(`${gameData[tempPlayer].member} **⇒**`, {
+                                    embed: {
+                                        color: message.guild.me.displayColor,
+                                        description: `**${gameData[player].member} defended. It is now your turn. Would you like to \`attack\` or \`defend\`?**`,
+                                    }
+                                }).then(msg => { msg.delete({ timeout: 60000 }) });
 
                                 gameData[player].lastAttack = 'defend';
                                 player = (player + 1) % 2;

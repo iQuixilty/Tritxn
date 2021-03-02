@@ -5,6 +5,7 @@ const warnSchema = require('../../../../schemas/warn-schema')
 
 const emoji = require('../../../../config/emoji.json')
 const moment = require('moment')
+const { paginate } = require('../../../utils/utils')
 
 module.exports = {
     name: "warnings",
@@ -49,20 +50,30 @@ module.exports = {
             return;
         }
 
+        let counter = 1;
+        let embeds = [];
 
+        while (results.warnings.length > 0) {
+            let reply = ""
+            for (let i = 0; i < 5; i++) {
+                if (!results.warnings[0]) break;
+                const { author, timestamp, reason } = results.warnings.shift()
 
-        let reply = ``
+                reply += `${counter}. **Warning** \nIssued By: <@${author}> **|** Issued At: **${moment(timestamp).format("MMM DD YYYY")}** \nReason: \`${reason}\`\n\n`
 
-        for (let i = 0; i < results.warnings.length; i++) {
-            const { author, timestamp, reason } = results.warnings[i]
+                counter++
+            }
 
-            reply += `${i}. **Warning** \nIssued By: <@${author}> **|** Issued At: **${moment(timestamp).format("MMM DD YYYY")}** \nReason: \`${reason}\`\n\n`
+            let embed = new Discord.MessageEmbed()
+                .setColor(message.guild.me.displayColor)
+                .setThumbnail(message.guild.iconURL())
+                .setAuthor(`Warnings for ${target.user.username}`, target.user.displayAvatarURL())
+                .setThumbnail(message.guild.iconURL())
+                .setDescription(reply)
+
+            embeds.push(embed)
         }
-
-        message.channel.send(warningE.setColor(message.guild.me.displayColor)
-            .setAuthor(`Previous warnings for ${target.user.username}`, target.user.displayAvatarURL())
-            .setDescription(reply))
-
-
+        
+        paginate(message, embeds, { time: 1000 * 30 })
     }
 }

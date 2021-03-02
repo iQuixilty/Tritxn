@@ -12,7 +12,7 @@ module.exports = {
     execute: async function (client, message, args) {
         const embed5 = new Discord.MessageEmbed()
                 .setTitle(`Invite Tritxn!`)
-                .setDescription(`To invite me to your server, click [here](https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`)
+                .setDescription(`To invite me to your server, click [here](https://discord.com/oauth2/authorize?client_id=790016796576317473&scope=bot&permissions=2146958847) \n\nTo join the support server, click [here](https://discord.gg/2CGSnFhxVy)`)
                 .setColor(message.guild.me.displayColor)
                 .setFooter('Developer - Qzxy#0001', message.author.displayAvatarURL());
             message.channel.send(embed5)

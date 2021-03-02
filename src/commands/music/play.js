@@ -40,12 +40,6 @@ module.exports = {
                 .reply(PLA.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}play [YouTube URL | Video Name ]**`))
                 .catch(console.error);
 
-        const permissions = channel.permissionsFor(message.client.user);
-        if (!permissions.has("CONNECT"))
-            return message.reply(PLA.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, cannot connect to voice channel, missing permissions`))
-        if (!permissions.has("SPEAK"))
-            return message.reply(PLA.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, I cannot speak in this voice channel, make sure I have the proper permissions!**`));
-
         const search = args.join(" ");
         const videoPattern = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
         const playlistPattern = /^.*(list=)([^#\&\?]*).*/gi;

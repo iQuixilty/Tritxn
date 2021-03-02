@@ -23,26 +23,57 @@ module.exports = {
 
         setCooldown(client, this, message);
 
-        let work = async(amount, typeOfCoin, emojiCoin, lowNum, highNum) => {
+        let work = async (amount, typeOfCoin, emojiCoin, lowNum, highNum) => {
             let coins = Math.floor((Math.random() * amount) + 1);
             const newCoins = await economy.buyItem(userId, typeOfCoin, coins)
 
             if (coins <= lowNum) {
-                message.channel.send(`${message.author} **⇒**`)
-                message.channel.send(Coins
-                    .setColor(message.guild.me.displayColor).setTitle(`You didn't work hard enough!`)
-                    .addField("You only earned:", `${emojiCoin} \`${coins} coins\``)
-                    .addField(`You now have:`, `${emojiCoin} \`${newCoins} coins\``))
+                message.channel.send(`${message.author} **⇒**`, {
+                    embed: {
+                        color: message.guild.me.displayColor,
+                        title: `You didn't work hard enough!`,
+                        fields: [{
+                            name: "You only earned:",
+                            value: `${emojiCoin} \`${coins} coins\``
+                        },
+                        {
+                            name: `You now have:`,
+                            value: `${emojiCoin} \`${newCoins} coins\``
+                        }]
+                    }
+                })
+               
             } else if (coins > lowNum && coins <= highNum) {
-                message.channel.send(`${message.author} **⇒**`)
-                message.channel.send(Coins.setColor(message.guild.me.displayColor).setTitle(`You worked!`)
-                    .addField("You earned:", `${emojiCoin} \`${coins} coins\``)
-                    .addField(`You now have:`, `${emojiCoin} \`${newCoins} coins\``))
+                message.channel.send(`${message.author} **⇒**`, {
+                    embed: {
+                        color: message.guild.me.displayColor,
+                        title: `You worked!`,
+                        fields: [{
+                            name: "You only earned:",
+                            value: `${emojiCoin} \`${coins} coins\``
+                        },
+                        {
+                            name: `You now have:`,
+                            value: `${emojiCoin} \`${newCoins} coins\``
+                        }]
+                    }
+                })
+
             } else {
-                message.channel.send(`${message.author} **⇒**`)
-                message.channel.send(Coins.setColor(message.guild.me.displayColor).setTitle(`You worked really hard!`)
-                    .addField("You earned a lot:", `${emojiCoin} \`${coins} coins\``)
-                    .addField(`You now have:`, `${emojiCoin} \`${newCoins} coins\``))
+                message.channel.send(`${message.author} **⇒**`, {
+                    embed: {
+                        color: message.guild.me.displayColor,
+                        title: `You worked really hard!`,
+                        fields: [{
+                            name: "You only earned:",
+                            value: `${emojiCoin} \`${coins} coins\``
+                        },
+                        {
+                            name: `You now have:`,
+                            value: `${emojiCoin} \`${newCoins} coins\``
+                        }]
+                    }
+                })
             }
         }
 

@@ -45,11 +45,20 @@ module.exports = {
 
         let addToBal = async (typeOfCoin, coinName, emojiCoin) => {
             const newCoins = await economy.buyItem(userId, typeOfCoin, coins)
-            message.channel.send(`${message.author} **⇒**`)
-            message.channel.send(Coins
-                .setColor(message.guild.me.displayColor)
-                .setDescription(`**You have given ${mention.user.username}** \`${coins} ${coinName} coins\``)
-                .addField(`They now have:`, `${emojiCoin} \`${newCoins} coins\``))
+            message.channel.send(`${message.author} **⇒**`, {
+                embed: {
+                    color: message.guild.me.displayColor,
+                    description: `**You have given ${mention.user.username}** \`${coins} ${coinName} coins\``, 
+                    fields: {
+                        name: `They now have:`,
+                        value: `${emojiCoin} \`${newCoins} coins\``
+                    }
+                }
+            })
+            // message.channel.send(Coins
+            //     .setColor(message.guild.me.displayColor)
+            //     .setDescription(`**You have given ${mention.user.username}** \`${coins} ${coinName} coins\``)
+            //     .addField(`They now have:`, `${emojiCoin} \`${newCoins} coins\``))
         }
 
 

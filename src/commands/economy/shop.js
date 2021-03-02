@@ -311,5 +311,5 @@ function defaultHelp(client, message, guildPrefix) {
         .setTimestamp()
         .setThumbnail(client.user.displayAvatarURL())
 
-    paginate(message, [hEmbed1, hEmbed2, hEmbed3])
+    paginate(message, [hEmbed1, hEmbed2, hEmbed3], { time: 1000 * 7 })
 }

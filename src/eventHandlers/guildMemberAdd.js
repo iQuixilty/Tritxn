@@ -9,6 +9,7 @@ module.exports = async (client, member) => {
         const { guild } = member
 
         const result = await client.DBSettings.findOne({ _id: guild.id })
+        if (!result) return;
 
         const channelId = result.welcomeChannelId
 
@@ -37,6 +38,7 @@ module.exports = async (client, member) => {
 
     const autoRole = async (member) => {
         const result = await client.DBSettings.findOne({ _id: member.guild.id })
+        if (!result) return;
 
         let roleId = result.autoRoleId
         if (!roleId) return;
@@ -48,6 +50,7 @@ module.exports = async (client, member) => {
     autoRole(member)
 
     const result = await client.DBSettings.findOne({ _id: member.guild.id })
+    if (!result) return;
     let decancer = result.decancer
 
     if (decancer === 'Enabled') {

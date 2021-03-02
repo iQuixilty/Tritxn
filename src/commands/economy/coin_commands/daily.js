@@ -25,34 +25,70 @@ module.exports = {
         const level = await economy.getInv(userId, 'level')
 
         setCooldown(client, this, message);
-        
+
 
         if (level === 0 || level === 1) {
             let bCoins = Math.floor((Math.random() * 5000) + 1);
             const newBCoins = await economy.buyItem(userId, 'bronzeCoins', bCoins)
 
-            message.channel.send(`${message.author} **⇒**`)
-            message.channel.send(Coins.setColor(message.guild.me.displayColor).setTitle(`Daily Coins!`)
-                .addField("You earned:", `${emoji.bronzeCoin} \`${bCoins} coins\``)
-                .addField(`You now have:`, `${emoji.bronzeCoin} \`${newBCoins} coins\``))
+            message.channel.send(`${message.author} **⇒**`, {
+                embed: {
+                    color: message.guild.me.displayColor,
+                    title: `Daily Coins!`,
+                    fields: [{
+                        name: "You earned:",
+                        value: `${emoji.bronzeCoin} \`${bCoins} coins\``
+                    },
+                    {
+                        name: `You now have:`,
+                        value: `${emoji.bronzeCoin} \`${newBCoins} coins\``
+                    }],
+
+                }
+            })
+            // message.channel.send(Coins.setColor(message.guild.me.displayColor).setTitle(`Daily Coins!`)
+            //     .addField("You earned:", `${emoji.bronzeCoin} \`${bCoins} coins\``)
+            //     .addField(`You now have:`, `${emoji.bronzeCoin} \`${newBCoins} coins\``))
 
         } else if (level === 2) {
             let sCoins = Math.floor((Math.random() * 3000) + 1);
             const newSCoins = await economy.buyItem(userId, 'silverCoins', sCoins)
 
-            message.channel.send(`${message.author} **⇒**`)
-            message.channel.send(Coins.setColor(message.guild.me.displayColor).setTitle(`Daily Coins!`)
-                .addField("You earned:", `${emoji.silverCoin} \`${sCoins} coins\``)
-                .addField(`You now have:`, `${emoji.silverCoin} \`${newSCoins} coins\``))
+            message.channel.send(`${message.author} **⇒**`, {
+                embed: {
+                    color: message.guild.me.displayColor,
+                    title: `Daily Coins!`,
+                    fields: [{
+                        name: "You earned:",
+                        value: `${emoji.silverCoin} \`${sCoins} coins\``
+                    },
+                    {
+                        name: `You now have:`,
+                        value: `${emoji.silverCoin} \`${newSCoins} coins\``
+                    }],
+
+                }
+            })
 
         } else if (level >= 3) {
             let gCoins = Math.floor((Math.random() * 1000) + 1);
             const newGCoins = await economy.buyItem(userId, 'goldCoins', gCoins)
 
-            message.channel.send(`${message.author} **⇒**`)
-            message.channel.send(Coins.setColor(message.guild.me.displayColor).setTitle(`Daily Coins!`)
-                .addField("You earned:", `${emoji.goldCoin} \`${gCoins} coins\``)
-                .addField(`You now have:`, `${emoji.goldCoin} \`${newGCoins} coins\``))
+            message.channel.send(`${message.author} **⇒**`, {
+                embed: {
+                    color: message.guild.me.displayColor,
+                    title: `Daily Coins!`,
+                    fields: [{
+                        name: "You earned:",
+                        value: `${emoji.goldCoin} \`${gCoins} coins\``
+                    },
+                    {
+                        name: `You now have:`,
+                        value: `${emoji.goldCoin} \`${newGCoins} coins\``
+                    }],
+
+                }
+            })
 
         }
 

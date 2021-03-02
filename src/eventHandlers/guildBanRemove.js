@@ -6,6 +6,7 @@ module.exports = async (client, guild, user) => {
     let guildAudit = await client.DBAudit.findOne({ _id: guild.id })
 
     const result = await client.DBSettings.findOne({ _id: guild.id })
+    if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 

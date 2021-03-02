@@ -29,6 +29,7 @@ module.exports = async (client, role) => {
     client.guildInfoCache.set(role.guild.id, guildInfo)
 
     const result = await client.DBSettings.findOne({ _id: role.guild.id })
+    if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 

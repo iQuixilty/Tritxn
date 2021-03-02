@@ -10,7 +10,7 @@ module.exports = {
     usage: `- \`PREFIXcooldowns [command]\` to display all modified cooldowns for a command and update them.
             - \`PREFIXcooldowns [command] set [role] [cooldown]\` to set the cooldown for this command to a certain value
             - \`PREFIXcooldowns [command] clear [role]\` to use the default cooldown for this command`,
-    // serverOwnerOnly: true,
+    serverOwnerOnly: true,
     canNotDisable: true,
     ignoreDisabledChannels: true,
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],

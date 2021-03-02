@@ -25,6 +25,7 @@ require('events').EventEmitter.defaultMaxListeners = 60;
     client.guildInfoCache = new discord.Collection();
     client.guildSettingsCache = new discord.Collection()
     client.guildAuditCache = new discord.Collection()
+    client.guildLevelsCache = new discord.Collection()
 
     client.snipes = new discord.Collection()
     client.esnipes = new discord.Collection()
@@ -42,6 +43,7 @@ require('events').EventEmitter.defaultMaxListeners = 60;
     client.DBSettings = require('../schemas/guildSettingsSchema')
     client.DBAudit = require('../schemas/auditLogSchema')
     client.DBHighlight = require('../schemas/highlightSchema')
+    client.DBLevels = require('../schemas/levels-schema')
 
     client.serverCooldowns = new discord.Collection();
     client.globalCooldowns = new discord.Collection();

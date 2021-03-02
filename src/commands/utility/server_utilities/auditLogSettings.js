@@ -82,7 +82,7 @@ module.exports = {
         }
 
         if (!setting) {
-            return paginate(message, [loge1, loge2])
+            return paginate(message, [loge1, loge2], { time: 1000 * 30 })
         }
 
         const setE = new Discord.MessageEmbed()

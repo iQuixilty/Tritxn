@@ -14,7 +14,7 @@ module.exports = {
     description: "Allows the server owner to subtract coins from a users wallet",
     usage: "\`PREFIXsubtract [user] [type of coin] [amount]\`",
     canNotSetCooldown: true,
-    // serverOwnerOnly: true,
+    serverOwnerOnly: true,
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
@@ -50,11 +50,20 @@ module.exports = {
         let subtractFromBal = async (typeOfCoin, coinName, emojiCoin) => {
             const newCoins = await economy.buyItem(userId, typeOfCoin, coins * -1)
 
-            message.channel.send(`${message.author} **⇒**`)
-            message.channel.send(Coins
-                .setColor(message.guild.me.displayColor)
-                .setDescription(`**You have subtracted** \`${coins} ${coinName} coins\` **from ${mention.user.username}**`)
-                .addField(`They now have:`, `${emojiCoin} \`${newCoins} coins\``))
+            message.channel.send(`${message.author} **⇒**`, {
+                embed: {
+                    color: message.guild.me.displayColor,
+                    description: `**You have subtracted** \`${coins} ${coinName} coins\` **from ${mention.user.username}**`,
+                    fields: {
+                        name: `They now have:`,
+                        value: `${emojiCoin} \`${newCoins} coins\``
+                    }
+                }
+            })
+            // message.channel.send(Coins
+            //     .setColor(message.guild.me.displayColor)
+            //     .setDescription(`**You have subtracted** \`${coins} ${coinName} coins\` **from ${mention.user.username}**`)
+            //     .addField(`They now have:`, `${emojiCoin} \`${newCoins} coins\``))
         }
 
         if (typeOfCoins === 'bronzecoins' || typeOfCoins === 'bcoins') {

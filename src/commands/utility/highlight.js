@@ -12,7 +12,6 @@ module.exports = {
     aliases: ["hl", "highlights"],
     description: "Allows you to highlight words so that when are are said, it will DM you",
     usage: "- \`PREFIXhighlight\` to display the words you have highlighted\n- \`PREFIXhighlight [set/remove] [word/phrase]\` to set/remove words.",
-    perms: ['ADMINISTRATOR'],
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
     canNotDisable: true,
     ignoreDisabledChannels: true,

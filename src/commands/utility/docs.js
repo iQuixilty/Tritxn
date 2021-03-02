@@ -1,8 +1,12 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
 const fetch = require('node-fetch')
+
+/**
+ * @type {import('../../typings.d').Command}
+ */
+
 
 module.exports = {
     name: "docs",
@@ -38,7 +42,7 @@ module.exports = {
                 { max: 1, time: 10000, errors: ['time'] }
             )
         } catch (error) {
-            msg.reactions.removeAll();
+            msg.reactions.removeAll().catch((e) => { return; })
         }
 
         if (react && react.first()) {

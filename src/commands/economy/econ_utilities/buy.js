@@ -68,12 +68,19 @@ module.exports = {
             const newCoins = await economy.buyItem(userId, typeOfCoin, -1 * price * amount)
             const newItem = await economy.buyItem(userId, itemIndex, amount)
 
-            message.channel.send(`${message.author} **⇒**`)
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setTitle(`**You have bought ${emojiItem} \`${amount} ${itemName}(s)\`!**`)
-                .addField(`You have:`, `${emojiCoin} ─ \`${newCoins} coins\`\n\n${emojiItem} ─ \`${newItem} ${itemName}(s)\``)
-                .setFooter(`Use ${guildPrefix}shop ${itemName} to see what you can do with it (no spaces)`))
+            message.channel.send(`${message.author} **⇒**`, {
+                embed: {
+                    color: message.guild.me.displayColor,
+                    title: `**You have bought ${emojiItem} \`${amount} ${itemName}(s)\`!**`,
+                    fields: {
+                        name: `You have:`,
+                        value: `${emojiCoin} ─ \`${newCoins} coins\`\n\n${emojiItem} ─ \`${newItem} ${itemName}(s)\``,
+                    },
+                    footer: {
+                        text: `Use ${guildPrefix}shop ${itemName} to see what you can do with it (no spaces)`
+                    }
+                }
+            })
             return
         }
 

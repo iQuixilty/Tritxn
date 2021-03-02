@@ -30,61 +30,56 @@ module.exports = {
         const guildId = message.guild.id
         const userId = target.id
 
-        let setting = args[1]
 
-        if (!setting) {
+        const warningE = new Discord.MessageEmbed()
 
-            const warningE = new Discord.MessageEmbed()
-
-            if (!target) {
-                message.channel.send(warningE.setColor('RED').setDescription(`**${emoji.downvote} Please specify a user to check the modlogs for**`))
-                return
-            }
-
-            if (target.bot) {
-                message.channel.send(warningE.setColor('RED').setDescription(`**${emoji.downvote} Bots don\'t have mod logs**`))
-                return
-            }
-
-
-            const results = await modLogSchema.findOne({
-                guildId,
-                userId,
-            })
-
-            if (results === null) {
-                message.channel.send(warningE
-                    .setColor('RED')
-                    .setDescription(`**${emoji.downvote} There are no mod logs for this user**`))
-                return;
-            }
-
-
-            let counter = 1;
-            let embeds = [];
-
-            while (results.modlogs.length > 0) {
-                let reply = ""
-                for (let i = 0; i < 5; i++) {
-                    if (!results.modlogs[0]) break;
-                    const { author, timestamp, reason, type } = results.modlogs.shift()
-                    reply += `${counter}. **${type}**\nIssued By: <@${author}> **|** Issued at: **${moment(timestamp).format("MMM DD YYYY")}** \nReason: \`${reason}\`\n\n`
-                    counter++
-                }
-
-                let embed = new Discord.MessageEmbed()
-                    .setColor(message.guild.me.displayColor)
-                    .setThumbnail(message.guild.iconURL())
-                    .setAuthor(`Mod Logs for ${target.user.username}`, target.user.displayAvatarURL())
-                    .setThumbnail(message.guild.iconURL())
-                    .setDescription(reply)
-
-                embeds.push(embed)
-            }
-
-            paginate(message, embeds)
-
+        if (!target) {
+            message.channel.send(warningE.setColor('RED').setDescription(`**${emoji.downvote} Please specify a user to check the modlogs for**`))
+            return
         }
+
+        if (target.bot) {
+            message.channel.send(warningE.setColor('RED').setDescription(`**${emoji.downvote} Bots don\'t have mod logs**`))
+            return
+        }
+
+
+        const results = await modLogSchema.findOne({
+            guildId,
+            userId,
+        })
+
+        if (results === null) {
+            message.channel.send(warningE
+                .setColor('RED')
+                .setDescription(`**${emoji.downvote} There are no mod logs for this user**`))
+            return;
+        }
+
+
+        let counter = 1;
+        let embeds = [];
+
+        while (results.modlogs.length > 0) {
+            let reply = ""
+            for (let i = 0; i < 5; i++) {
+                if (!results.modlogs[0]) break;
+                const { author, timestamp, reason, type } = results.modlogs.shift()
+                reply += `${counter}. **${type}**\nIssued By: <@${author}> **|** Issued at: **${moment(timestamp).format("MMM DD YYYY")}** \nReason: \`${reason}\`\n\n`
+                counter++
+            }
+
+            let embed = new Discord.MessageEmbed()
+                .setColor(message.guild.me.displayColor)
+                .setThumbnail(message.guild.iconURL())
+                .setAuthor(`Mod Logs for ${target.user.username}`, target.user.displayAvatarURL())
+                .setThumbnail(message.guild.iconURL())
+                .setDescription(reply)
+
+            embeds.push(embed)
+        }
+
+        paginate(message, embeds, { time: 1000 * 30 })
 
     }
 }

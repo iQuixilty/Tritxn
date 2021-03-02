@@ -32,7 +32,7 @@ module.exports = {
 
         if (!args.length)
             return message
-                .reply(sea.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}${module.exports.name} [Video Name]**`))
+                .reply(sea.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}${this.name} [Video Name]**`))
                 .catch(console.error);
         if (message.channel.activeCollector)
             return message.reply(sea.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, a message collector is already active in this channel.**`));

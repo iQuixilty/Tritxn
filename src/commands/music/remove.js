@@ -23,8 +23,7 @@ module.exports = {
         if (!queue) return message.channel.send(reme.setColor(message.guild.me.displayColor).setTitle("There is no queue.")).catch(console.error);
         if (!canModifyQueue(message.member)) return;
 
-        if (!args.length) return message.reply(reme.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}remove [Queue Number]**`));
-        if (isNaN(args[0])) return message.reply(reme.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}remove [Queue Number]**`));
+        if (!args.length || isNaN(args[0])) return message.reply(reme.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}remove [Queue Number]**`));
 
         const song = queue.songs.splice(args[0] - 1, 1);
         queue.textChannel.send(reme.setColor(message.guild.me.displayColor).setDescription(`${message.author} ❌ removed **${song[0].title}** from the queue.`));

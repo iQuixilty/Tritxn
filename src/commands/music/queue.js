@@ -1,7 +1,5 @@
 const { canModifyQueue } = require("../../utils/vcUtil");
 const PREFIX = require('../../../config/config.json').PREFIX;
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
 const { MessageEmbed } = require("discord.js");
 
 const { setCooldown } = require('../../utils/utils')
@@ -16,13 +14,8 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
 
     execute: async function (client, message, args) {
-        
         setCooldown(client, this, message);
         const qu = new MessageEmbed()
-
-        const permissions = message.channel.permissionsFor(message.client.user);
-        if (!permissions.has(["MANAGE_MESSAGES", "ADD_REACTIONS"]))
-            return message.reply(qu.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, missing permission to manage messages or add reactions**`));
 
         const queue = message.client.queue.get(message.guild.id);
         if (!queue) return message.channel.send(qu.setColor(message.guild.me.displayColor).setDescription("❌ **Nothing playing in this server**"));

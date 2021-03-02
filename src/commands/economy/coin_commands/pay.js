@@ -57,10 +57,20 @@ module.exports = {
             const remainingCoins = await economy.buyItem(member.id, typeOfCoin, coinsToGive * -1)
 
             const newBalance = await economy.buyItem(target.id, typeOfCoin, coinsToGive)
-            message.channel.send(`${message.author} **⇒**`)
-            message.reply(Coins.setColor(message.guild.me.displayColor).setTitle(`**You have given ${target.user.username} \`${coinsToGive} coins\`!**`)
-                .addField(`They now have:`, `${emojiCoin} \`${newBalance} coins\``)
-                .addField(`You have:`, `${emojiCoin} \`${remainingCoins} coins\``))
+            message.channel.send(`${message.author} **⇒**`, {
+                embed: {
+                    color: message.guild.me.displayColor,
+                    title: `**You have given ${target.user.username} \`${coinsToGive} coins\`!**`,
+                    fields: [{
+                        name: `They now have:`,
+                        value: `${emojiCoin} \`${newBalance} coins\``,
+                    },
+                    {
+                        name: `You have:`,
+                        value: `${emojiCoin} \`${remainingCoins} coins\``
+                    }]
+                }
+            })
         }
 
 

@@ -22,12 +22,8 @@ module.exports = {
             .setThumbnail(client.user.displayAvatarURL())
             .setDescription(`**Thank you to everyone who helped create my bot,
             whether it was with suggestions or with code to help me along! Even if your not on here, still thank you for using my bot**`)
-            .addField(`Ideas`, `<@!743242732570673284>
-            <@!669353507035545610>
-            <@!709918645152645192>
-            <@!244219148467437568>`, true)
-            .addField(`Actual Code`, `<@!244219148467437568> 
-            <@!743242732570673284>`, true)
+            .addField(`Ideas`, `<@!743242732570673284>\n<@!669353507035545610>\n<@!709918645152645192>\n<@!244219148467437568>\n<@!611368258838331428>`, true)
+            .addField(`Actual Code`, `<@!244219148467437568>\n<@!277215400696217610>`, true)
             .addField(`Command Handler`, `<@!277215400696217610>`, true)
             .setFooter(`ZeroErrors owns 40% of the economy commands`)
 

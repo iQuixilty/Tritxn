@@ -40,9 +40,13 @@ module.exports = {
                     let workpay = Math.floor(Math.random() * 5) + 1
                     const responses = [`You mined \`${workpay} silver ingot(s)\` ${emoji.silver}`]
 
-                    message.channel.send(`${message.author} **⇒**`)
-                    message.channel.send(INV.setColor(message.guild.me.displayColor).setDescription(`**${responses}**`))
-
+                    message.channel.send(`${message.author} **⇒**`, {
+                        embed: {
+                            color: message.guild.me.displayColor,
+                            description: `**${responses}**`
+                        }
+                    })
+             
                     await economy.buyItem(userId, 'silverIngot', workpay)
                     await economy.buyItem(userId, 'XP', workpay)
                     break;
@@ -50,8 +54,12 @@ module.exports = {
                     let Workpay = Math.floor(Math.random() * 3) + 1
                     const Responses = [`You somehow managed to mine \`${Workpay} gold ingot(s)\` ${emoji.gold}`]
 
-                    message.channel.send(`${message.author} **⇒**`)
-                    message.channel.send(INV.setColor(message.guild.me.displayColor).setDescription(`**${Responses}**`))
+                    message.channel.send(`${message.author} **⇒**`, {
+                        embed: {
+                            color: message.guild.me.displayColor,
+                            description: `**${Responses}**`
+                        }
+                    })
 
                     await economy.buyItem(userId, 'goldIngot', Workpay)
                     await economy.buyItem(userId, 'XP', Workpay * 2)

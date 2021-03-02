@@ -37,9 +37,13 @@ module.exports = {
                     let workpay = Math.floor(Math.random() * 4) + 1
                     const responses = [`You hunted \`${workpay} raccoon(s)\` 🦝`]
 
-                    message.channel.send(`${message.author} **⇒**`)
-                    message.channel.send(INV.setColor(message.guild.me.displayColor).setDescription(`**${responses}**`))
-
+                    message.channel.send(`${message.author} **⇒**`, {
+                        embed: {
+                            color: message.guild.me.displayColor,
+                            description: `**${responses}**`
+                        }
+                    })
+             
                     await economy.buyItem(userId, 'raccoon', workpay)
                     await economy.buyItem(userId, 'XP', workpay * 2)
                     break;
@@ -47,9 +51,13 @@ module.exports = {
                     let Workpay = Math.floor(Math.random() * 5) + 1
                     const Responses = [`You somehow caught \`${Workpay} rabbit(s)\` 🐇`]
 
-                    message.channel.send(`${message.author} **⇒**`)
-                    message.channel.send(INV.setColor(message.guild.me.displayColor).setDescription(`**${Responses}**`))
-
+                    message.channel.send(`${message.author} **⇒**`, {
+                        embed: {
+                            color: message.guild.me.displayColor,
+                            description: `**${Responses}**`
+                        }
+                    })
+                  
                     await economy.buyItem(userId, 'rabbit', Workpay)
                     await economy.buyItem(userId, 'XP', Workpay)
                     break;

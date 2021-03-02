@@ -82,7 +82,7 @@ function defaultHelp(client, message, guildPrefix) {
         .setDescription(`Use \`${guildPrefix}help [category]\` to get more info on a category, for example: \`${guildPrefix}help misc\``)
         .setTimestamp()
         .setThumbnail(client.user.displayAvatarURL())
-        .addField('Categories', `🕹  **  -  Games** \n\n🎉  **  -  Giveaways**\n\n🛠  **  -  Moderation**\n\n✨  **  -  Misc**\n\n📷  **  -  Images**\n\n🎼  **  -  Music**\n\n🔧  **  -  Utility**\n\n💰  **  -  Economy**`)
+        .addField('Categories', `🕹  **  -  Games** \n\n🎉  **  -  Giveaways**\n\n🛠  **  -  Moderation**\n\n✨  **  -  Misc**\n\n📷  **  -  Images**\n\n🎼  **  -  Music**\n\n🔧  **  -  Utility**\n\n💰  **  -  Economy**\n\n🎇  **  -  Levels**`)
 
     message.channel.send(hEmbed);
 }

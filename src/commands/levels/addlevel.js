@@ -29,12 +29,15 @@ module.exports = {
         if (!newLevel || isNaN(newLevel)) return message.channel.send(embed.setColor(message.guild.me.displayColor)
         .setDescription(`**Provide a valid amount of level(s) that you want to add to that user**`))
 
+        if (newLevel > 300 || newLevel < 1) return message.channel.send(embed.setColor(message.guild.me.displayColor)
+            .setDescription(`**The max amount of levels you can add is 300**`))
+
         const user = await Levels.appendLevel(target.id, message.guild.id, newLevel)
 
         message.channel.send(embed
             .setAuthor(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
             .setDescription(`Successfully added \`${newLevel}\` level(s) to ${target}'s`)
-            .setFooter(`${target.username} is now level ${user.level}`)
+            .setFooter(`They are now level ${user.level}`)
             .setColor(message.guild.me.displayColor))
       
 

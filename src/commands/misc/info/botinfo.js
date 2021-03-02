@@ -31,6 +31,7 @@ module.exports = {
             .addField("Time Since Last Restart:", `\`${process.uptime().toFixed(2)}s\``)
             .addField("Server Count:", `\`${client.guilds.cache.size}\``)
             .addField("Total Members:", `\`${totalMembers}\``)
+            // .addField("Total Commands:", `\`${client.commands.size}\``)
             .addField('Channels:', `\`${client.channels.cache.size.toLocaleString()}\``)
 
         message.channel.send(botInfo)

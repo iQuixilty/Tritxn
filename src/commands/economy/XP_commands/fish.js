@@ -35,9 +35,13 @@ module.exports = {
 
             const respond = responses[Math.floor(Math.random() * responses.length)]
 
-            message.channel.send(`${message.author} **⇒**`)
-            message.channel.send(INV.setColor(message.guild.me.displayColor).setDescription(`**${respond}**`))
-
+            message.channel.send(`${message.author} **⇒**`, {
+                embed: {
+                    color: message.guild.me.displayColor,
+                    description: `**${respond}**`
+                }
+            })
+           
             if (workpay) {
                 await economy.buyItem(userId, 'fish', workpay)
                  await economy.buyItem(userId, 'XP', workpay)

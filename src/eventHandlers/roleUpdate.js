@@ -4,6 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = async (client, oldRole, newRole) => {
 
     const result = await client.DBSettings.findOne({ _id: newRole.guild.id })
+    if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 

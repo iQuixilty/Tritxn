@@ -6,6 +6,7 @@ module.exports = async (client, channel) => {
     if (channel.type !== 'text') return;
 
     const result = await client.DBSettings.findOne({ _id: channel.guild.id })
+    if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 

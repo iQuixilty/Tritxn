@@ -29,12 +29,15 @@ module.exports = {
         if (!newLevel || isNaN(newLevel)) return message.channel.send(embed.setColor(message.guild.me.displayColor)
         .setDescription(`**Provide a valid amount of level(s) that you want from remove from that user**`))
 
+        if (newLevel > 300 || newLevel < 1) return message.channel.send(embed.setColor(message.guild.me.displayColor)
+            .setDescription(`**The max amount of levels you can remove is 300**`))
+
         const user = await Levels.subtractLevel(target.id, message.guild.id, newLevel)
 
         message.channel.send(embed
             .setAuthor(`${message.author.username}`, message.author.displayAvatarURL({dynamic: true}))
             .setDescription(`Successfully removed \`${newLevel}\` level(s) from ${target}'s`)
-            .setFooter(`${target.username} is now level ${user.level}`)
+            .setFooter(`They are now level ${user.level}`)
             .setColor(message.guild.me.displayColor))
       
 
