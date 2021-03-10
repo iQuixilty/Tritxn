@@ -2,8 +2,6 @@ const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 const moment  = require('moment')
 
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
 /** 
  * @type {import('../../../typings.d').Command}
 */

@@ -18,6 +18,7 @@ module.exports = {
     category: "Misc",
     description: "Searchs for a video on youtube",
     usage: "\`PREFIXsearch [query]\`",
+    nsfwOnly: true,
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
@@ -25,12 +26,6 @@ module.exports = {
         const url = args[0] ? args[0].replace(/<(.+)>/g, '$1') : ''
 
         const yt2 = new Discord.MessageEmbed()
-
-        if (!message.channel.nsfw) {
-            return message.channel.send(yt2
-                .setColor('RED')
-                .setDescription("**You cannot use this command in a non-nsfw channel**"))
-        }
 
         if (!query) {
             return message.channel.send(yt2
@@ -51,7 +46,6 @@ module.exports = {
                     .setTitle("I couldnt find any search results"))
             }
         }
-
 
 
         const ytembed = new Discord.MessageEmbed()

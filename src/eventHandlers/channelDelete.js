@@ -14,11 +14,21 @@ module.exports = async (client, channel) => {
         client.guildInfoCache.set(channel.guild.id, guildInfo)
     }
 
+    auditChannelDelete(client, channel)
+
+    deleteChannelEntry(client, channel, guildInfo)
+}
+
+let auditChannelDelete = async (client, channel) => {
+    if (channel.type !== 'text') return;
+
     const result = await client.DBSettings.findOne({ _id: channel.guild.id })
+    if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 
     const guildAudit = await client.DBAudit.findOne({ _id: channel.guild.id })
+    if (!guildAudit) return;
 
     if (auditLogChannel === undefined) return;
     if (guildAudit.channelDelete === undefined || guildAudit.channelDelete === 'Disabled') return;
@@ -32,7 +42,9 @@ module.exports = async (client, channel) => {
         .setFooter(`Channel ID: ${channel.id}`)
         .setTimestamp()
     )
+}
 
+let deleteChannelEntry = async (client, channel, guildInfo) => {
     if (channel.type !== 'text') return;
 
     let disabledChannels = guildInfo.disabledChannels

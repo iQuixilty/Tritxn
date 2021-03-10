@@ -11,7 +11,7 @@ module.exports = {
     name: "warnings",
     category: "Moderation",
     description: "Displays the warnings of a user",
-    aliases: ['lw', 'listwarns', 'listwarnings'],
+    aliases: ['lw', 'listwarns', 'listwarnings', 'warns'],
     usage: "\`PREFIXwarnings [user]\`",
     perms: ['MANAGE_GUILD'],
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
@@ -32,7 +32,7 @@ module.exports = {
             return
         }
 
-        if (target.bot) {
+        if (target.user.bot) {
             message.channel.send(warningE.setColor('RED').setDescription(`**${emoji.downvote} Bots don\'t have warnings**`))
             return
         }

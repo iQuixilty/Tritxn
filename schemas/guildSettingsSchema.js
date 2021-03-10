@@ -13,8 +13,7 @@ const guildSettingsSchema = Schema({
         type: String
     },
     decancer: {
-        default: 'Disabled',
-        type: String
+        type: Boolean
     },
     ignoreChannelId: {
         type: [Object],
@@ -26,6 +25,18 @@ const guildSettingsSchema = Schema({
     leaveChannelId: reqString,
     leaveChannelText: reqString,
     auditLogChannelId: reqString,
+    antiSpam: {
+        default: true,
+        type: Boolean
+    },
+    antiSpamAmount: {
+        default: 5,
+        type: Number,
+    },
+    antiSpamTimeout: {
+        default: 5000,
+        type: Number
+    }
 });
 
 module.exports = model('guildSettingsSchema', guildSettingsSchema)

@@ -9,6 +9,7 @@ module.exports = async (client, role) => {
     let auditLogChannel = result.auditLogChannelId
 
     const guildAudit = await client.DBAudit.findOne({ _id: role.guild.id })
+    if (!guildAudit) return;
 
     if (auditLogChannel === undefined) return;
     if (guildAudit.roleCreate === undefined || guildAudit.roleCreate === 'Disabled') return;

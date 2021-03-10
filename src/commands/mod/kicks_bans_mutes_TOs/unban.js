@@ -50,7 +50,7 @@ module.exports = {
             })
 
             collector.on('collect', msg => {
-                switch (msg.content) {
+                switch (msg.content.toLowerCase()) {
                     case "yes":
                         message.guild.members.unban(bUser.user, reason).catch(err => {
                             console.log(err);

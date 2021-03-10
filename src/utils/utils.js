@@ -6,7 +6,7 @@ const consoleColors = {
     "WARNING": "\u001b[33m",
     "ERROR": "\u001b[31m"
 }
-
+let x = '```'
 /**
  * Function to check if the user has passed in the proper arguments when using a command
  * @param {Message} message - The message to check the arguments for
@@ -175,7 +175,12 @@ async function paginate(message, embeds, options) {
 
         const collector = pageMsg.createReactionCollector(filter, { time: time });
         collector.on('collect', async (reaction, user) => {
-            reaction.users.remove(user)
+            reaction.users.remove(user).catch((e) => {
+                message.channel.send(new MessageEmbed()
+                .setColor(message.guild.me.displayColor)
+                .setDescription(x + 'js' + `\n${e}` + x)
+                .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+            })
             if (reaction.emoji.name === '⏩') {
                 pageIndex = embeds.length - 1
                 await pageMsg.edit({ embed: embeds[pageIndex] })
@@ -294,7 +299,7 @@ function getCooldown(client, command, message) {
         let highestRole = message.member.roles.cache.filter(role => roles.includes(role.id)).sort((a, b) => b.position - a.position).first();
         if (highestRole) cd = guildInfo.commandCooldowns[command.name][highestRole.id] / 1000;
     }
-
+    cd = typeof cd === 'undefined' ? 3 : cd
     return cd;
 }
 

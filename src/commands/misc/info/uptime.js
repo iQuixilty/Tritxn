@@ -1,6 +1,5 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
 module.exports = {
     name: "uptime",
@@ -20,7 +19,7 @@ module.exports = {
         hours %= 24;
 
         message
-            .reply(`Uptime: \`${days} day(s),${hours} hours, ${minutes} minutes, ${seconds} seconds\``)
+            .channel.send(new Discord.MessageEmbed().setColor(message.guild.me.displayColor).setDescription(`**Uptime: \`${days} day${days > 1 ? 's' : ''}, ${hours} hour${hours > 1 ? 's' : ''}, ${minutes} minute${minutes > 1 ? 's' : ''}, ${seconds} second${seconds > 1 ? 's' : ''}\`**`))
             .catch(console.error);
     }
 }

@@ -21,11 +21,17 @@ module.exports = async (client, oldState, newState) => {
         .setTimestamp()
 
     if (oldState.channelID === null && newState.channelID !== null) {
-        auditE.addField(`Member`, `<@${oldState.id}>`, true).addField(`Voice Channel Joined`, `**<#${newState.channelID}>**`, true)
+        auditE
+            .addField(`Member`, `<@${oldState.id}>`, true)
+            .addField(`Voice Channel Joined`, `**<#${newState.channelID}>**`, true)
     } else if (oldState.channelID !== null && newState.channelID === null) {
-        auditE.addField(`Member`, `<@${oldState.id}>`, true).addField(`Voice Channel Left`, `**<#${oldState.channelID}>**`, true)
+        auditE
+            .addField(`Member`, `<@${oldState.id}>`, true)
+            .addField(`Voice Channel Left`, `**<#${oldState.channelID}>**`, true)
     } else if (oldState.sessionID !== null && newState.channelID !== null) {
-        auditE.addField(`Member`, `<@${oldState.id}>`, true).addField(`Voice Channel Switched`, `**<#${oldState.channelID}> \`to\` <#${newState.channelID}>**`, true)
+        auditE
+            .addField(`Member`, `<@${oldState.id}>`, true)
+            .addField(`Voice Channel Switched`, `**<#${oldState.channelID}> \`to\` <#${newState.channelID}>**`, true)
     }
 
     Channel.send(auditE)

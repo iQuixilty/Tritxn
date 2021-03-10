@@ -36,18 +36,20 @@ function snipes(client, message) {
 function blacklistedWords(client, message, guildInfo, guildSettings) {
     if (guildInfo.disabledWords === undefined) return;
 
-    if (guildInfo.disabledWords.some((a) => message.content.includes(a))) {
+    if (!message.member.hasPermission('ADMINISTRATOR')) {
+        if (guildInfo.disabledWords.some((a) => message.content.includes(a))) {
 
-        if (guildSettings.auditLogChannelId === undefined || guildSettings.auditLogChannelId === 'Disabled') return;
-        const channel = client.channels.cache.get(guildSettings.auditLogChannelId)
+            if (guildSettings.auditLogChannelId === undefined || guildSettings.auditLogChannelId === 'Disabled') return;
+            const channel = client.channels.cache.get(guildSettings.auditLogChannelId)
 
-        return channel.send(new Discord.MessageEmbed()
-            .setColor('RED')
-            .setAuthor(`Blacklisted Word`, message.author.displayAvatarURL())
-            .addField(`${message.author.username} Sent`, message.content.length > 1023 ? 'Too Many Characters' : `\`${message.content}\``)
-            .addField(`Message Was Sent In`, `${message.channel}`,)
-            .setFooter(`Author Id: ${message.author.id}`)
-            .setTimestamp())
+            return channel.send(new Discord.MessageEmbed()
+                .setColor('RED')
+                .setAuthor(`Blacklisted Word`, message.author.displayAvatarURL())
+                .addField(`${message.author.username} Sent`, message.content.length > 1023 ? 'Too Many Characters' : `\`${message.content}\``)
+                .addField(`Message Was Sent In`, `${message.channel}`,)
+                .setFooter(`Author Id: ${message.author.id}`)
+                .setTimestamp())
+        }
     }
 }
 
@@ -55,6 +57,8 @@ function auditLog(client, message, guildAudit, guildSettings, guildInfo) {
 
     if (guildSettings.auditLogChannelId === undefined || guildSettings.auditLogChannelId === 'Disabled') return;
     if (guildAudit.messageDelete === undefined || guildAudit.messageDelete === 'Disabled') return;
+
+    if (guildInfo.disabledWords.some((a) => message.content.includes(a))) return
 
     const channel = client.channels.cache.get(guildSettings.auditLogChannelId)
 

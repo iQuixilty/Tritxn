@@ -161,6 +161,7 @@ class myClient extends Client {
  * @property {boolean} [someServersOnly=false] - Whether or not this command can only be used in specific servers
  * @property {string[]} [someServers=[]] - Specific custom servers that the command only works for
  * @property {boolean} [serverOwnerOnly=false] - Whether or not this command can only be used by the server owner
+ * @property {boolean} [nsfwOnly=false] - Whether or not this command can be used in nsfw channels
  * @property {Arguments} [arguments=[]] - Arguments that the user should provide
  * @property {ExecuteFunction} execute - The function that will be ran when someone successfully uses a command
  */

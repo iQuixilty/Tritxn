@@ -19,8 +19,9 @@ module.exports = {
         const note = new Discord.MessageEmbed()
 
         if(!args[0]) return message.channel.send(note.setColor(message.guild.me.displayColor).setTitle('Provide something to send a note about'))
+        // text.replace(/([^\n]{1,32})\s/g, '$1\n');
 
-        let image = await canvacord.Canvas.note(text);
+        let image = await canvacord.Canvas.note(text.replace(/([^\n]{1,32})\s/g, '$1\n'));
 
         let Note = new Discord.MessageAttachment(image, "note.png")
 

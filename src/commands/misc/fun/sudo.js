@@ -1,10 +1,5 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
-
-const {
-    Client,
-    Message,
-    MessageEmbed
-} = require('discord.js');
+const Discord = require('discord.js');
 
 /**
  * @type {import('../../../typings.d').Command}
@@ -13,7 +8,7 @@ const {
 module.exports = {
     name: "sudo",
     category: "Misc",
-    description: "Make anyone say anything",
+    description: "Make anyone say anything, (they didn't actually say it)",
     usage: "\`PREFIXsudo [user] [text]\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 

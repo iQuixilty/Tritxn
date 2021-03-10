@@ -61,7 +61,7 @@ require('events').EventEmitter.defaultMaxListeners = 60;
         default: {
             botsCanWin: false,
             endedGiveawaysLifetime: 3600000,
-            reaction: "<a:tada:811787239494516767>"
+            
         }
     })
     client.giveaways = manager

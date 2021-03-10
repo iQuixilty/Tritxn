@@ -5,6 +5,8 @@ const PREFIX = require('../../config/config.json').PREFIX;
 module.exports = async (client, messages) => {
     let guildSettings = client.guildSettingsCache.get(messages.first().guild.id)
     let guildAudit = client.guildAuditCache.get(messages.first().guild.id)
+    if (!guildSettings) return
+    if (!guildAudit) return;
 
 
     if (guildSettings.auditLogChannelId === undefined || guildSettings.auditLogChannelId === 'Disabled') return;
@@ -24,14 +26,4 @@ module.exports = async (client, messages) => {
         .setTimestamp();
 
     channel.send(embed);
-
-
-    // channel.send(new Discord.MessageEmbed()
-    //     .setColor('BLACK')
-    //     .setAuthor(`Bulk Messages Deleted By ${messages.author.tag}`, messages.author.displayAvatarURL())
-    //     .addField(`Amount Deleted`, `\`${messages}\``)
-    //     .addField(`Bulk Deleted In`, `${messages.channel}`,)
-    //     .setFooter(`Author ID: ${messages.author.id}`)
-    //     .setTimestamp()
-    // )
 }

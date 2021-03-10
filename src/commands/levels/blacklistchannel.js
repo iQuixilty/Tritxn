@@ -8,7 +8,7 @@ const Levels = require('discord-xp')
 
 module.exports = {
     name: "blacklistchannel",
-    category: "Utility",
+    category: "Levels",
     aliases: ["bchannel", "bchan"],
     usage: "- \`PREFIXblacklistchannel\` to display all currently blacklisted channel\n- \`PREFIXblacklistchannel [channel] [blacklist/whitelist]\` to blacklist/whitelist channel .",
     description: "Allows you to blacklist and whitelist channel so that messages sent in the blacklisted channel will not give any XP to the author",

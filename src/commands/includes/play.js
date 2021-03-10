@@ -14,7 +14,7 @@ module.exports = {
       config = null;
     }
 
-    const PLAY  = new MessageEmbed()
+    const PLAY = new MessageEmbed()
 
     const PRUNING = config.PRUNING
 
@@ -68,7 +68,7 @@ module.exports = {
     dispatcher.setVolumeLogarithmic(queue.volume / 100);
 
     try {
-      var playingMessage = await queue.textChannel.send(PLAY.setColor(message.guild.me.displayColor).setDescription(`🎶 **Starting Playing: 🎶** \n\n[${song.title}](${song.url}) \n**[Requested By: ${message.author}]**`));
+      var playingMessage = await queue.textChannel.send(PLAY.setColor(message.guild.me.displayColor).setDescription(`🎶 **Starting Playing: 🎶** \n\n[${song.title}](${song.url}) \n**[Requested By: <@${queue.requester}>]**`));
       await playingMessage.react("⏭");
       await playingMessage.react("⏯");
       await playingMessage.react("🔇");
@@ -181,7 +181,9 @@ module.exports = {
     collector.on("end", () => {
       playingMessage.reactions.removeAll().catch(console.error);
       if (PRUNING === true || (PRUNING == "true") && playingMessage && !playingMessage.deleted) {
-        playingMessage.delete({ timeout: 3000 }).catch(console.error);
+        playingMessage.delete({ timeout: 3000 }).catch((e) => {
+          return;
+        });
       }
     });
   }

@@ -13,12 +13,13 @@ module.exports = {
     aliases: ["aki"],
     description: "Let akinator read your mind",
     usage: "\`PREFIXakinator\`",
+    nsfwOnly: true,
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
         if (!Started.has(message.author.id)) Started.add(message.author.id);
         else return message.channel.send("**:x: | The game already started..**");
-        const aki = new Aki("en"); 
+        const aki = new Aki("en");
 
         await aki.start();
 

@@ -2,6 +2,7 @@ const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 const config = require('../../../config/config.json')
 const fs = require('fs')
+const  { inlineReply }  = require('../../utils/extendedMessage')
 
 require('../../utils/extendedMessage')
 
@@ -40,28 +41,6 @@ module.exports = {
 
         // })
         // }
-
-
-        // .setAuthor(`Congrats ${message.author.username}!`, message.author.displayAvatarURL())
-        // .setColor(message.guild.me.displayColor)
-        // .setDescription(`You have leveled up to **${user.level + 1}**`)
-        // .setThumbnail(message.guild.iconURL()))
-
-        message.channel.send(`${message.author}`, {
-            embed: {
-                author: {
-                    name: `Congrats ${message.author.username}!`,
-                    iconURL: message.author.displayAvatarURL()
-                },
-                color: message.guild.me.displayColor,
-                description: `You have leveled up to **1**`,
-                thumbnail: {
-                    url: message.guild.iconURL()
-                },
-     
-            },
-
-        })
 
     }
 }

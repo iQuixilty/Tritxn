@@ -1,10 +1,14 @@
+const Discord = require('discord.js');
+const message = require('../eventHandlers/message');
+
 module.exports = {
     canModifyQueue(member) {
         const { channelID } = member.voice;
         const botChannel = member.guild.voice.channelID;
 
         if (channelID !== botChannel) {
-            member.send("You need to join the voice channel first!").catch(console.error);
+            member.send(new Discord.MessageEmbed().setColor(member.guild.me.displayColor)
+            .setDescription("**Either this session has ended or you need to join the voice channel!**")).catch((e) => {return});
             return;
         }
 

@@ -1,11 +1,15 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
-const mongo = require('../../../../schemas/mongo')
+const autoModSchema = require('../../../../schemas/automodSchema')
 const warnSchema = require('../../../../schemas/warn-schema')
+const ms = require('ms')
 
 const emoji = require('../../../../config/emoji.json')
+
+/** 
+ * @type {import('../../../typings.d').Command}
+*/
 
 module.exports = {
     name: "warn",
@@ -27,7 +31,7 @@ module.exports = {
             return
         }
 
-        if (target.bot) {
+        if (target.user.bot) {
             message.channel.send(warnE.setColor('RED').setDescription(`**${emoji.downvote} Bots don\'t have warnings**`))
             return
         }
@@ -76,6 +80,68 @@ module.exports = {
                 console.log(`I couldnt DM the user`)
             })
 
+
+        const results = await autoModSchema.findOne({
+            guildId,
+        })
+        const warns = await warnSchema.findOne({
+            guildId,
+            userId,
+        })
+        if (results === undefined || results === null) return;
+        let warnAutomod = results.warnAutomod
+        let amounts = []
+        let typeOfPunishment = []
+        let time = []
+
+        for (const [amount, punishment] of Object.entries(warnAutomod)) {
+            let arg = punishment.split(' ')
+            amounts.push(amount)
+            typeOfPunishment.push(arg[0])
+            if (arg[0] === 'mute') time.push(ms(arg[1]))
+        }
+
+
+        let guildInfo = client.guildInfoCache.get(message.guild.id)
+        let mutedRole = guildInfo.mutedRole
+        let role = message.guild.roles.cache.get(mutedRole)
+
+        for (let i = 0; i < amounts.length; i++) {
+            if (parseInt(amounts[i]) === warns.warnings.length) {
+                if (typeOfPunishment[i].toLowerCase() === 'mute') {
+                    if (mutedRole === undefined) return
+                    target.roles.add(role).catch((e) => {
+                        message.channel.send(new Discord.MessageEmbed()
+                            .setColor(message.guild.me.displayColor)
+                            .setDescription(x + 'js' + `\n${e}` + x)
+                            .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                    })
+
+                    setTimeout(async () => {
+                        target.roles.remove(role).catch((e) => {
+                            message.channel.send(new Discord.MessageEmbed()
+                                .setColor(message.guild.me.displayColor)
+                                .setDescription(x + 'js' + `\n${e}` + x)
+                                .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                        })
+                    }, time[i])
+                } else if (typeOfPunishment[i].toLowerCase() === 'kick') {
+                    target.kick({ reason: `Reached ${amounts[i]} Warnings` }).catch((e) => {
+                        message.channel.send(new Discord.MessageEmbed()
+                            .setColor(message.guild.me.displayColor)
+                            .setDescription(x + 'js' + `\n${e}` + x)
+                            .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                    })
+                } else if (typeOfPunishment[i].toLowerCase() === 'ban') {
+                    target.ban({ reason: `Reached ${amounts[i]} Warnings` }).catch((e) => {
+                        message.channel.send(new Discord.MessageEmbed()
+                            .setColor(message.guild.me.displayColor)
+                            .setDescription(x + 'js' + `\n${e}` + x)
+                            .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                    })
+                }
+            }
+        }
 
     }
 }

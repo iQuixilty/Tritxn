@@ -3,10 +3,15 @@ const PREFIX = require('../../config/config.json').PREFIX;
 
 
 module.exports = async (client, guild, user) => {
-    let guildAudit = await client.DBAudit.findOne({ _id: guild.id })
+    unbannedMember(client, guild, user)
+}
 
+let unbannedMember = async (client, guild, user) => {
     const result = await client.DBSettings.findOne({ _id: guild.id })
     if (!result) return;
+
+    let guildAudit = await client.DBAudit.findOne({ _id: guild.id })
+    if (!guildAudit) return
 
     let auditLogChannel = result.auditLogChannelId
 
@@ -25,6 +30,4 @@ module.exports = async (client, guild, user) => {
         .setFooter(`Member ID: ${user.id}`)
         .setTimestamp()
     )
-
-
 }

@@ -10,6 +10,7 @@ module.exports = {
     aliases: ["ins"],
     description: "Insults a user",
     usage: "\`PREFIXinsult [user]\`",
+    nsfwOnly: true,
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {

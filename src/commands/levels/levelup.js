@@ -1,7 +1,6 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-const Levels = require('discord-xp')
-
+let x = '```'
 
 /**
  * @type {import('../../typings.d').Command}
@@ -20,6 +19,8 @@ module.exports = {
     execute: async function (client, message, args) {
         const embed = new Discord.MessageEmbed()
         let guildLevels = client.guildLevelsCache.get(message.guild.id)
+        let guildInfo = client.guildInfoCache.get(message.guild.id)
+        let prefix = guildInfo.prefix
         let levelUpNotifs = guildLevels.levelUp
         let levelUpDisplay = guildLevels.levelUpType
         let levelUpPings = guildLevels.levelUpPings
@@ -28,13 +29,14 @@ module.exports = {
 
 
         if (!setting) {
-            return message.channel.send(embed
+            let lvlupchannel = message.guild.channels.cache.get(guildLevels.levelUpType)
+            const lvlupSettings = new Discord.MessageEmbed()
                 .setColor(message.guild.me.displayColor)
-                .setThumbnail(message.guild.iconURL())
-                .setAuthor(`Level Up Settings Overview For ${message.guild.name}`)
-                .addField(`Level Up Notifications`, `${guildLevels.levelUp === undefined ? '\`Disabled\`' : '\`Enabled\`'}`)
-                .addField(`Level Up Display`, levelUpDisplay === undefined ? '\`Off\`' : levelUpDisplay === 'DM' ? `\`DM\`` : `<#${guildLevels.levelUpType}>`)
-                .addField(`Level Up Pings`, `${guildLevels.levelUpPings === undefined ? '\`Off\`' : '\`On\`'}`))
+                .setThumbnail(message.guild.iconURL({ dynamic: true }))
+                .setAuthor(`Level Up Settings For ${message.guild.name}`)
+                .setDescription(x + `Level Up Notifications: ${levelUpNotifs === undefined ? 'Disabled' : 'Enabled'}\nLevel Up Display: ${levelUpDisplay === undefined ? 'Off' : levelUpDisplay === 'DM' ? `DM` : `${lvlupchannel.name}`}\nLevel Up Pings: ${levelUpPings === undefined ? 'Off' : 'On'}` + x)
+
+            return message.channel.send(lvlupSettings)
         }
 
 
@@ -89,11 +91,10 @@ module.exports = {
                 return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`**Level up notifications are now set to DMs**`))
 
             } else if (args[1].toLowerCase() === 'off') {
-                if (levelUpDisplay === 'Off') return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`**Level up notifcations are already disabled**`))
+                if (levelUpDisplay === 'Off') return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`**Level up notifications are already disabled**`))
 
                 guildLevels = await client.DBLevels.findByIdAndUpdate(message.guild.id, { $unset: { levelUpType: 'Off' } }, { new: true, upsert: true, setDefaultsOnInsert: true })
-                guildLevels = await client.DBLevels.findByIdAndUpdate(message.guild.id, { $unset: { levelUp: false } }, { new: true, upsert: true, setDefaultsOnInsert: true })
-                guildLevels = await client.DBLevels.findByIdAndUpdate(message.guild.id, { $unset: { levelUpPings: false } }, { new: true, upsert: true, setDefaultsOnInsert: true })
+
 
                 client.guildLevelsCache.set(message.guild.id, guildLevels)
 

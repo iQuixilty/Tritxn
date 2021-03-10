@@ -61,12 +61,12 @@ module.exports = {
         let inventoryE1 = new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)
             .setTitle(`${target.user.username}'s Inventory`)
-            .setDescription(animalsCount === 0 ? 'This user has not caught any animals yet!' : `-----------Tools-----------${Rods === 0 ? '' : `\n\n${emoji.rod} \`${Rods} fishing rod(s)\``}${Rifle === 0 ? '' : `\n\n${emoji.rifle} \`${Rifle} hunting rifle(s)\``}${Pick === 0 ? '' : `\n\n${emoji.pick} \`${Pick} pickaxe(s)\``}`)
+            .setDescription(toolsCount === 0 ? 'This user has not bought any tools yet!' : `-----------Tools-----------${Rods === 0 ? '' : `\n\n${emoji.rod} \`${Rods} fishing rod(s)\``}${Rifle === 0 ? '' : `\n\n${emoji.rifle} \`${Rifle} hunting rifle(s)\``}${Pick === 0 ? '' : `\n\n${emoji.pick} \`${Pick} pickaxe(s)\``}`)
 
         let inventoryE2 = new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)
             .setTitle(`${target.user.username}'s Inventory`)
-            .setDescription(toolsCount === 0 ? 'This user has not found any tools yet!' : `-----------Animals-----------\n\n ${Fishs === 0 ? '' : `\n\n🐟 \`${Fishs} fish\``}${Rabbits === 0 ? '' : `\n\n🐇 \`${Rabbits} rabbits\``}${Raccoons === 0 ? '' : `\n\n🦝 \`${Raccoons} raccoon(s)\``}`)
+            .setDescription(animalsCount === 0 ? 'This user has not caught any animals yet!' : `-----------Animals----------- ${Fishs === 0 ? '' : `\n\n🐟 \`${Fishs} fish\``}${Rabbits === 0 ? '' : `\n\n🐇 \`${Rabbits} rabbits\``}${Raccoons === 0 ? '' : `\n\n🦝 \`${Raccoons} raccoon(s)\``}`)
 
         let inventoryE3 = new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)
@@ -79,7 +79,7 @@ module.exports = {
             .setDescription(collectablesCount === 0 ? 'This person does not have any collectables yet!' : `-----------Collectables-----------${bronzeLock === 0 ? '' : `\n\n${emoji.bLock} \`${bronzeLock} bronze lock(s)\``} ${bronzeKey === 0 ? '' : `\n\n${emoji.bKey} \`${bronzeKey} bronze key(s)\``}${silverLock === 0 ? '' : `\n\n${emoji.sLock} \`${silverLock} silver lock(s)\``}${silverKey === 0 ? '' : `\n\n${emoji.sKey} \`${silverKey} silver key(s)\``}${goldLock === 0 ? '' : `\n\n${emoji.gLock} \`${goldLock} gold lock(s)\``}${goldKey === 0 ? '' : `\n\n${emoji.gKey} \`${goldKey} gold key(s)\``}${TriShard === 0 ? '' : `\n\n${emoji.trishard} \`${TriShard} trident shard(s)\``}${Trident === 0 ? '' : `\n\n${emoji.tri} \`${Trident} trident(s)\``}`)
 
 
-        paginate(message, [inventoryE1, inventoryE2, inventoryE3, inventoryE4], { time: 1000 * 7 })
+        paginate(message, [inventoryE1, inventoryE2, inventoryE3, inventoryE4], { time: 1000 * 20 })
     }
 }
 

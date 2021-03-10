@@ -20,9 +20,10 @@ module.exports = {
     someServersOnly: false,
     someServers: [],
     serverOwnerOnly: false,
+    nsfwOnly: false,
     arguments: [],
 
-    execute: async function(client, message, args) {
+    execute: async function (client, message, args) {
 
     }
 }
@@ -87,6 +88,9 @@ Attributes:
         - default: every server
     > serverOwnerOnly [Boolean, optional]
         - whether only the guild owner can use this command
+        - default: false
+    > nsfwOnly [Boolean, optional]
+        - whether the command can be used in a normal channel
         - default: false
     > arguments [Array of Objects, optional]
         - Argument Object:

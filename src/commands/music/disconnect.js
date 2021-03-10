@@ -4,6 +4,10 @@ const Discord = require('discord.js')
 
 const { setCooldown } = require('../../utils/utils')
 
+/** 
+* @type {import('../../typings.d').Command}
+*/
+
 module.exports = {
     name: "disconnect",
     category: "Music",
@@ -19,6 +23,7 @@ module.exports = {
         const queue = client.queue.get(message.guild.id);
 
         queue.channel.leave();
+        client.queue.delete(message.guild.id)
 
         return message.channel.send(new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)

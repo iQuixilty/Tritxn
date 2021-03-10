@@ -7,7 +7,7 @@ const { setCooldown } = require('../../../utils/utils')
 module.exports = {
     name: "suggest",
     category: "Misc",
-    cooldown: 60*60*24,
+    cooldown: 60 * 60 * 24,
     description: "Suggest a feature to me",
     usage: "\`PREFIXsuggest [suggestion]\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],

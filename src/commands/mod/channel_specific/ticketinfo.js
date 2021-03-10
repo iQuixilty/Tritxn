@@ -45,19 +45,19 @@ module.exports = {
 
         if (emoji === '✅') {
             message.channel.bulkDelete(2, true)
-            message.channel.send(ct2.setColor(message.guild.me.displayColor).setTitle("Ok nevermind"))
+            message.channel.send(ct2.setColor(message.guild.me.displayColor).setDescription("**Ok nevermind**"))
         }
 
         if (emoji === '⛔') {
             message.channel.bulkDelete(2, true)
-            message.channel.send(ct2.setColor(message.guild.me.displayColor).setTitle("Ok deleting this channel in 10 seconds..."))
+            message.channel.send(ct2.setColor(message.guild.me.displayColor).setDescription("**Ok deleting this channel in 10 seconds...**"))
             setTimeout(async () => {
                 await message.channel.delete()
             }, 10000)
         }
 
         if (emoji === '🎫') {
-            message.channel.send(ct2.setColor(message.guild.me.displayColor).setTitle("Generating transcript..."))
+            message.channel.send(ct2.setColor(message.guild.me.displayColor).setDescription("**Generating transcript...**"))
 
             const msgs = await fetchAll.messages(message.channel, {
                 reverseArray: true

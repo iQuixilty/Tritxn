@@ -14,6 +14,7 @@ module.exports = {
     category: "Music",
     aliases: ["syt"],
     cooldown: 5,
+    nsfwOnly: true,
     description: "Search and select videos to play",
     usage: "\`PREFIXsearchyt [Video Name]\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
@@ -23,12 +24,6 @@ module.exports = {
         setCooldown(client, this, message);
         const sea = new MessageEmbed()
         const guildInfo = client.guildInfoCache.get(message.guild.id)
-
-        if (!message.channel.nsfw) {
-            return message.channel.send(sea
-                .setColor(message.guild.me.displayColor)
-                .setDescription(`**Due to restrictions, you can only use this command in nsfw channels**`))
-        }
 
         if (!args.length)
             return message

@@ -58,7 +58,6 @@ module.exports = async (client, guild) => {
     }
 
     const channelId = '784592088729255946';
-    let inviteLink;
     const channel = client.channels.cache.get(channelId);
     const invChannel = getDefaultChannel(guild);
     invChannel.createInvite()

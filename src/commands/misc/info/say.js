@@ -18,6 +18,7 @@ module.exports = {
             return message.channel.send(no.setColor(message.guild.me.displayColor).setDescription('**sike you thought**'))
         }
         const say = args.join(" ")
+        if (!say) return;
 
         message.delete()
         message.channel.send(say)

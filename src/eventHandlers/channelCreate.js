@@ -2,7 +2,11 @@ const { Channel, MessageEmbed } = require('discord.js');
 
 
 module.exports = async (client, channel) => {
+    createdChannel(client, channel)    
+}
 
+let createdChannel = async (client, channel) =>  {
+    
     if (channel.type !== 'text') return;
 
     const result = await client.DBSettings.findOne({ _id: channel.guild.id })
@@ -11,6 +15,7 @@ module.exports = async (client, channel) => {
     let auditLogChannel = result.auditLogChannelId
 
     const guildAudit = await client.DBAudit.findOne({ _id: channel.guild.id })
+    if (!guildAudit) return;
 
     if (auditLogChannel === undefined) return;
     if (guildAudit.channelCreate === undefined || guildAudit.channelCreate === 'Disabled') return;
@@ -24,5 +29,4 @@ module.exports = async (client, channel) => {
         .setFooter(`Channel ID: ${channel.id}`)
         .setTimestamp()
     )
-
 }

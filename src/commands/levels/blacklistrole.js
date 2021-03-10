@@ -8,7 +8,7 @@ const Levels = require('discord-xp')
 
 module.exports = {
     name: "blacklistrole",
-    category: "Utility",
+    category: "Levels",
     aliases: ["brole"],
     usage: "- \`PREFIXblacklistrole\` to display all currently blacklisted roles\n- \`PREFIXblacklistrole [role] [blacklist/whitelist]\` to blacklist/whitelist roles .",
     description: "Allows you to blacklist and whitelist roles so that members with the blacklisted role do not gain any XP",

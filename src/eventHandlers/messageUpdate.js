@@ -3,49 +3,49 @@ const PREFIX = require('../../config/config.json').PREFIX;
 
 
 module.exports = async (client, message, newMessage) => {
-    try {
-        if (message.author.bot) return;
 
-        const esnipes = client.esnipes.get(message.channel.id) || []
+    if (message.author.bot) return;
 
-        esnipes.unshift({
-            content: message.content,
-            author: message.author,
-            date: new Date().toLocaleString("en-GB", { dataStyle: "full", timeStyle: "short" })
-        })
-        esnipes.splice(5);
+    esnipes(client, message, newMessage)
+    auditMessage(client, message, newMessage)
 
-        client.esnipes.set(message.channel.id, esnipes)
+}
 
-        const msg = esnipes[0]
+const esnipes = async (client, message, newMessage) => {
+    const esnipes = client.esnipes.get(message.channel.id) || []
 
-        let guildSettings = client.guildSettingsCache.get(message.guild.id)
+    esnipes.unshift({
+        content: message.content,
+        author: message.author,
+        date: new Date().toLocaleString("en-GB", { dataStyle: "full", timeStyle: "short" })
+    })
+    esnipes.splice(5);
 
-        let guildAudit = client.guildAuditCache.get(message.guild.id)
+    client.esnipes.set(message.channel.id, esnipes)
+}
 
-        if (guildSettings.auditLogChannelId === undefined || guildSettings.auditLogChannelId === 'Disabled') return;
-        if (guildAudit.messageUpdate === undefined || guildAudit.messageUpdate === 'Disabled') return;
+const auditMessage = async (client, message, newMessage) => {
+    let guildSettings = client.guildSettingsCache.get(message.guild.id)
+    if (!guildSettings) return;
 
-        const channel = client.channels.cache.get(guildSettings.auditLogChannelId)
+    let guildAudit = client.guildAuditCache.get(message.guild.id)
+    if (!guildAudit) return
 
-        // console.log(message)
-        // console.log(newMessage)
+    if (guildSettings.auditLogChannelId === undefined || guildSettings.auditLogChannelId === 'Disabled') return;
+    if (guildAudit.messageUpdate === undefined || guildAudit.messageUpdate === 'Disabled') return;
 
-        if (msg.content === '') return;
-        
-        channel.send(new Discord.MessageEmbed()
-            .setColor('BLACK')
-            .setAuthor(`Message Edited By ${message.author.tag}`, message.author.displayAvatarURL())
-            .addField(`Orginal Message`, message.content.length > 1023 ? 'Too Many Characters' :  `${msg.content}`, )
-            .addField(`New Message`, newMessage.content.length > 1023 ? 'Too Many Characters' : `${newMessage.content}`, true)
-            .addField(`Message Was Sent In`, `[Click Here](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}) **|** ${message.channel}`,)
-            .setFooter(`Author ID: ${message.author.id}`)
-            .setTimestamp()
-        )
+    const channel = client.channels.cache.get(guildSettings.auditLogChannelId)
 
-    } catch (e) {
-        console.log(e)
-    }
+    if (message.content === '') return;
+    if (message.embeds.length != newMessage.embeds.length) return;
 
-
+    channel.send(new Discord.MessageEmbed()
+        .setColor('BLACK')
+        .setAuthor(`Message Edited By ${message.author.tag}`, message.author.displayAvatarURL())
+        .addField(`Orginal Message`, message.content.length > 1023 ? 'Too Many Characters' : `${message.content}`,)
+        .addField(`New Message`, newMessage.content.length > 1023 ? 'Too Many Characters' : `${newMessage.content}`, true)
+        .addField(`Message Was Sent In`, `[Click Here](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}) **|** ${message.channel}`,)
+        .setFooter(`Author ID: ${message.author.id}`)
+        .setTimestamp()
+    )
 }

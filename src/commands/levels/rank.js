@@ -7,6 +7,11 @@ const canvacord = require('canvacord')
  * @type {import('../../typings.d').Command}
  */
 
+//https://cdn.discordapp.com/attachments/800789365411938335/816827131858124841/images.png <-- Black
+//https://cdn.discordapp.com/attachments/800789365411938335/817123660845809664/images.png <-- Red
+//https://cdn.discordapp.com/attachments/800789365411938335/817124024235720704/4686795.png <-- Blue
+//https://cdn.discordapp.com/attachments/800789365411938335/817125127389052999/video-games-firewatch-wood-wallpaper-preview.png <-- Green
+
 module.exports = {
     name: "rank",
     category: "Levels",
@@ -41,7 +46,8 @@ module.exports = {
             .setUsername(target.user.username)
             .setDiscriminator(target.user.discriminator)
             .setRank(user.position)
-
+            .setCustomStatusColor('#000000')
+            .setBackground('IMAGE', `https://cdn.discordapp.com/attachments/800789365411938335/816827131858124841/images.png`)
         rank.build()
         .then(data => {
             const attachment = new Discord.MessageAttachment(data, 'rank.png')

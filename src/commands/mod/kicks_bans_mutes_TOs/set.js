@@ -43,26 +43,26 @@ module.exports = {
                 let option = args[2]
                 switch (option) {
                     case 'set':
-                        if (mutedRole === role.id) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is already the muted role for this server`))
+                        if (mutedRole === role.id) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is already the muted role for this server**`))
 
                         if (role.position > message.guild.me.roles.highest.position) {
-                            return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is higher than my role.  Either move the role down, or my role higher.`))
+                            return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role}** is higher than my role.  Either move the role down, or my role higher.**`))
                         }
 
                         await client.DBGuild.findByIdAndUpdate(message.guild.id, { $set: { mutedRole: role.id } }, { new: true, upsert: true, setDefaultsOnInsert: true })
                         guildInfo.mutedRole = role.id
                         client.guildInfoCache.set(message.guild.id, guildInfo)
 
-                        message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is now the muted role for this server`))
+                        message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is now the muted role for this server**`))
 
                         break;
                     case 'remove':
-                        if (mutedRole !== role.id) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is not the muted role for this server`))
+                        if (mutedRole !== role.id) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is not the muted role for this server**`))
 
                         guildInfo = await client.DBGuild.findByIdAndUpdate(message.guild.id, { $unset: { mutedRole: role.id } }, { new: true, upsert: true, setDefaultsOnInsert: true })
                         client.guildInfoCache.set(message.guild.id, guildInfo)
 
-                        message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is no longer the muted role for this server`))
+                        message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is no longer the muted role for this server**`))
                         break;
                     default:
                         message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, please check the usage of the command.**`))
@@ -74,26 +74,26 @@ module.exports = {
                 let option = args[2]
                 switch (option) {
                     case 'set':
-                        if (timeoutRole === role.id) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is already the time out role for this server`))
+                        if (timeoutRole === role.id) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is already the time out role for this server**`))
 
                         if (role.position > message.guild.me.roles.highest.position) {
-                            return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is higher than my role.  Either move the role down, or my role higher.`))
+                            return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is higher than my role.  Either move the role down, or my role higher.**`))
                         }
 
                         await client.DBGuild.findByIdAndUpdate(message.guild.id, { $set: { timeoutRole: role.id } }, { new: true, upsert: true, setDefaultsOnInsert: true })
                         guildInfo.timeoutRole = role.id
                         client.guildInfoCache.set(message.guild.id, guildInfo)
 
-                        message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is now the time out role for this server`))
+                        message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is now the time out role for this server**`))
 
                         break;
                     case 'remove':
-                        if (timeoutRole !== role.id) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is not the time out role for this server`))
+                        if (timeoutRole !== role.id) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is not the time out role for this server**`))
 
                         guildInfo = await client.DBGuild.findByIdAndUpdate(message.guild.id, { $unset: { timeoutRole: role.id } }, { new: true, upsert: true, setDefaultsOnInsert: true })
                         client.guildInfoCache.set(message.guild.id, guildInfo)
 
-                        message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} is no longer the time out role for this server`))
+                        message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`${role} **is no longer the time out role for this server**`))
                         break;
                     default:
                         message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, please check the usage of the command.**`))

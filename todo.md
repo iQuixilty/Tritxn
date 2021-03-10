@@ -132,3 +132,18 @@
     - [x] Add settings menu for XP
     - [x] Add role levels 
     - [x] Add announce settings
+
+# 3/6/2021
+
+    - [x] Fixed unban bug
+    - [x] Make settings changes
+    - [x] Make level settings changes
+    - [x] Fixed unknown message error
+
+# 3/7/2021  
+    - [x] Started automoderation
+    - [x] Finished auto-mod for warns
+    - [x] Added antispam settings
+
+# 3/10/2021
+    - [x] Finished automoderaton

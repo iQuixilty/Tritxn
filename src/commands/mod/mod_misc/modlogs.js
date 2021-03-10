@@ -2,10 +2,12 @@ const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 
 const modLogSchema = require('../../../../schemas/modLogSchema')
+const autoModSchema = require('../../../../schemas/automodSchema')
 const { paginate } = require('../../../utils/utils')
 
 const emoji = require('../../../../config/emoji.json')
 const moment = require('moment')
+const ms = require('ms')
 
 
 /** 
@@ -80,6 +82,69 @@ module.exports = {
         }
 
         paginate(message, embeds, { time: 1000 * 30 })
+
+        const newResults = await autoModSchema.findOne({
+            guildId,
+        })
+        const modlogs = await modLogSchema.findOne({
+            guildId,
+            userId,
+        })
+        if (newResults === undefined || newResults === null || newResults.modlogAutomod === undefined) return;
+        let modlogAutomod = newResults.modlogAutomod
+        let amounts = []
+        let typeOfPunishment = []
+        let time = []
+
+        for (const [amount, punishment] of Object.entries(modlogAutomod)) {
+            let arg = punishment.split(' ')
+            amounts.push(amount)
+            typeOfPunishment.push(arg[0])
+            if (arg[0] === 'mute') time.push(ms(arg[1]))
+        }
+
+
+        let guildInfo = client.guildInfoCache.get(message.guild.id)
+        let mutedRole = guildInfo.mutedRole
+        let role = message.guild.roles.cache.get(mutedRole)
+
+        for (let i = 0; i < amounts.length; i++) {
+            if (parseInt(amounts[i]) === modlogs.modlogs.length) {
+                if (typeOfPunishment[i].toLowerCase() === 'mute') {
+                    if (mutedRole === undefined) return
+                    target.roles.add(role).catch((e) => {
+                        message.channel.send(new Discord.MessageEmbed()
+                            .setColor(message.guild.me.displayColor)
+                            .setDescription(x + 'js' + `\n${e}` + x)
+                            .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                    })
+
+                    setTimeout(async () => {
+                        target.roles.remove(role).catch((e) => {
+                            message.channel.send(new Discord.MessageEmbed()
+                                .setColor(message.guild.me.displayColor)
+                                .setDescription(x + 'js' + `\n${e}` + x)
+                                .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                        })
+                    }, time[i])
+                } else if (typeOfPunishment[i].toLowerCase() === 'kick') {
+                    target.kick({ reason: `Reached ${amounts[i]} Modlogs` }).catch((e) => {
+                        message.channel.send(new Discord.MessageEmbed()
+                            .setColor(message.guild.me.displayColor)
+                            .setDescription(x + 'js' + `\n${e}` + x)
+                            .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                    })
+                } else if (typeOfPunishment[i].toLowerCase() === 'ban') {
+                    target.ban({ reason: `Reached ${amounts[i]} Modlogs` }).catch((e) => {
+                        message.channel.send(new Discord.MessageEmbed()
+                            .setColor(message.guild.me.displayColor)
+                            .setDescription(x + 'js' + `\n${e}` + x)
+                            .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                    })
+                }
+            }
+        }
+
 
     }
 }

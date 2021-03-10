@@ -2,7 +2,7 @@ const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 const Levels = require('discord-xp')
 const { paginate } = require('../../utils/utils')
-
+let x = '```'
 
 /**
  * @type {import('../../typings.d').Command}
@@ -14,13 +14,13 @@ module.exports = {
     aliases: ["lvlsettings", 'xpsettings', 'lvls'],
     description: "Display the XP multiplier to the specified role",
     usage: "- \`PREFIXlevelsettings\` to view the current level settings for the server",
-    perms: ['MANAGE_GUILD'],
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
 
         let guildLevels = client.guildLevelsCache.get(message.guild.id)
         let guildInfo = client.guildInfoCache.get(message.guild.id)
+        let prefix = guildInfo.prefix
 
         let levelUpNotifs = guildLevels.levelUp
         let levelUpDisplay = guildLevels.levelUpType
@@ -39,70 +39,97 @@ module.exports = {
         let roleDesc = ''
         if (roleMultiplier) {
             for (const [role, multiplier] of Object.entries(roleMultiplier)) {
-                roleDesc += `\`${multiplier}\` | <@&${role}>\n`
+                let Role = message.guild.roles.cache.get(role)
+                roleDesc += `${multiplier} | ${Role.name}\n`
             }
         }
 
         let channelDesc = ''
         if (channelMultiplier) {
             for (const [channel, multiplier] of Object.entries(channelMultiplier)) {
-                channelDesc += `\`${multiplier}\` | <#${channel}>\n`
+                let Channel = message.guild.channels.cache.get(channel)
+                channelDesc += `${multiplier} | ${Channel.name}\n`
             }
         }
 
         let levelDesc = ''
         if (roleLevel) {
             for (const [role, level] of Object.entries(roleLevel)) {
-                levelDesc += `\`${level}\` | <@&${role}>\n`
+                let Role = message.guild.roles.cache.get(role)
+                levelDesc += `${level} | ${Role.name}\n`
             }
         }
 
-        const embed1 = new Discord.MessageEmbed()
+        let embeds = []
+        const firstSetting = new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setAuthor(`Level Settings Overview For ${message.guild.name}`)
-            .setThumbnail(message.guild.iconURL())
-            .addField(`__Turn level up messages on and off__`, `No notifications will be set (used with \`levelup\` command)`)
-            .addField(`__Choose where your level up messages are sent__`, `You can customize it to a channel/dm (used with \`levelup\` command)`)
-            .addField(`__You can disable pings__`, `Members wont be ping when they level up (used with \`levelup\` command)`)
-            .addField(`__Customize, guild, role, and channel multipliers__`, `Each message gains a litte more XP (used with \`gmulti\`, \`rmulti\` and \`cmulti\` commands)`)
-            .addField(`__Blacklist roles and channels__`, `To prevent them from gaining XP (used with \`brole\` and \`bchannel\` command)`)
-            .addField(`__Add roles to be gained at a level__`, `To automatically give your users roles once they reach a level (used with \`rolelevel\``)
-            .setDescription(`Here is a guide to all the level settings you can customize for your server`)
-            .setFooter(`Prefix: ${guildInfo.prefix}`, message.author.displayAvatarURL())
-            .setTimestamp()
+            .setDescription(`Here is a guide to all the settings you can customize for your server \n\n\`#1️\` \`Main Settings (this page)\`\n\n\`#2️\` \`Level Up\`\n\n\`#3️\` \`Guild Mutliplier\` \n\n\`#4️\` \`Role Multiplier\` \n\n\`#5️\` \`Channel Multiplier\` \n\n\`#6️\` \`Blacklist Roles\`\n\n\`#7️\` \`Blacklist Channels\`\n\n\`#8️\` \`Role Levels\``)
+            .setFooter(`React with 🔢 and then type the number in front of the setting you wish to see!`)
+        embeds.push(firstSetting)
 
-        let embed2 = new Discord.MessageEmbed()
+        let lvlupchannel = message.guild.channels.cache.get(guildLevels.levelUpType)
+        const lvlupSettings = new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setAuthor(`Level Up Settings For ${message.guild.name}`)
-            .addField(`Level Up Notifications`, `${levelUpNotifs === undefined ? '\`Disabled\`' : '\`Enabled\`'}`)
-            .addField(`Level Up Display`, levelUpDisplay === undefined ? '\`Off\`' : levelUpDisplay === 'DM' ? `\`DM\`` : `<#${guildLevels.levelUpType}>`)
-            .addField(`Level Up Pings`, `${levelUpPings === undefined ? '\`Off\`' : '\`On\`'}`)
-            .setThumbnail(message.guild.iconURL())
-            .setFooter(`Prefix: ${guildInfo.prefix}`, message.author.displayAvatarURL())
-            .setTimestamp()
+            .setDescription(`Customize your servers level up settings so that you can disable level up messages, choose where to send the level up message, and enable/disable pings\n\n\`${prefix}levelup\` to view the current level up settings\n\`${prefix}levelup [notifs] [true/false]\` to change whether you want notifications or not\n\`${prefix}levelup [ping] [true/false]\` to change whether you want members to be pinged when level up or not\n\`${prefix}levelup type [DM | #channel | off]\` to choose where you want level up messages to go, if \`off\` is used, it will send the message to the channel the member leveled up in.\nOn default, notifications will ping the member in the channel they leveled up in\n\n**Level Up Settings**` + x + `Level Up Notifications: ${levelUpNotifs === undefined ? 'Disabled' : 'Enabled'}\nLevel Up Display: ${levelUpDisplay === undefined ? 'Off' : levelUpDisplay === 'DM' ? `DM` : `${lvlupchannel.name}`}\nLevel Up Pings: ${levelUpPings === undefined ? 'Off' : 'On'}` + x)
+        embeds.push(lvlupSettings)
 
-        let embed3 = new Discord.MessageEmbed()
+        const gmultiSettings = new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)
-            .setAuthor(`Level Multiplier Settings For ${message.guild.name}`)
-            .addField(`Guild Multiplier`, guildMultiplier === undefined ? `\`None!\`` : `\`${guildMultiplier}\``)
-            .addField(`Role Multipliers`, roleDesc === '' ? '\`None!\`' : `${roleDesc}`)
-            .addField(`Channel Multipliers`, channelDesc === '' ? '`None!`' : `${channelDesc}`)
-            .addField(`Role Levels`, levelDesc === '' ? '`None!`' : `${levelDesc}`)
-            .setThumbnail(message.guild.iconURL())
-            .setFooter(`Prefix: ${guildInfo.prefix}`, message.author.displayAvatarURL())
-            .setTimestamp()
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setAuthor(`Guild Multiplier Settings For ${message.guild.name}`)
+            .setDescription(`Customize your guild multiplier for your server so that each message gains that much more XP\n\n\`${prefix}gmulti\` to view the current guild multiplier\n\`${prefix}gmulti [amount] [set/remove]\` to change the guild multi for your server. By default, the guild multiplier is 1\n\n**Guild Multipler Settings**` + x + `Guild Multipler: ${guildMultiplier === undefined ? `None!` : `${guildMultiplier}`}` + x)
+        embeds.push(gmultiSettings)
 
-        let embed4 = new Discord.MessageEmbed()
+        const rmultiSettings = new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)
-            .setAuthor(`Blacklisted Level Settings For ${message.guild.name}`)
-            .addField(`Blacklisted Roles`, blacklistedRoles.length === 0 ? '\`None!\`' : '<@&' + blacklistedRoles.join('>\n<@&') + '>')
-            .addField(`Blacklisted Channels`, blacklistedChannels.length === 0 ? '\`None!\`' : '<#' + blacklistedChannels.join('>\n<#') + '>')
-            .setThumbnail(message.guild.iconURL())
-            .setFooter(`Prefix: ${guildInfo.prefix}`, message.author.displayAvatarURL())
-            .setTimestamp()
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setAuthor(`Role Multiplier Settings For ${message.guild.name}`)
+            .setDescription(`Customize the role multipliers for your server so that members with that role gain that much more XP\n\n\`${prefix}rmulti\` to view the current role multipliers\n\`${prefix}rmulti set [role] [amount]\` to set the multiplier for a role\n\`${prefix}rmulti clear [role]\` to clear the multipler for that role. By default, there are no role multipliers\n\n**Role Multipler Settings**` + x + `Role Multiplers: ${roleDesc === '' ? 'None!' : `\n${roleDesc}`}` + x)
+        embeds.push(rmultiSettings)
+
+        const cmultiSettings = new Discord.MessageEmbed()
+            .setColor(message.guild.me.displayColor)
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setAuthor(`Channel Multiplier Settings For ${message.guild.name}`)
+            .setDescription(`Customize the channel multipliers for your server so that messages send in that channel gain that much more XP\n\n\`${prefix}gmulti\` to view the current channel multipliers\n\`${prefix}cmulti set [#channel] [amount]\` to set the multiplier for a channel\n\`${prefix}cmulti clear [#channel]\` to clear the multipler for that channel. By default, there are no channel multipliers\n\n**Channel Multipler Settings**` + x + `Channel Multiplers: ${channelDesc === '' ? 'None!' : `\n${channelDesc}`}` + x)
+        embeds.push(cmultiSettings)
+
+        const rlevelSettings = new Discord.MessageEmbed()
+            .setColor(message.guild.me.displayColor)
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setAuthor(`Role Level Settings For ${message.guild.name}`)
+            .setDescription(`Customize what roles your members get when they reach a specific level\n\n\`${prefix}rlevel\` to view the current level roles\n\`${prefix}rlevel set [role] [level]\` to set the role to gain at that level\n\`${prefix}rlevel clear [role]\` to clear the role for that level. By default, there are no level roles\n\n**Role Level Settings**` + x + `Role Levels: ${levelDesc === '' ? 'None!' : `\n${levelDesc}`}` + x)
+        embeds.push(rlevelSettings)
 
 
+        let blChannelNames = []
+        for (let i = 0; i < blacklistedChannels.length; i++) {
+            let chan = message.guild.channels.cache.get(blacklistedChannels[i])
+            blChannelNames.push(chan === undefined ? 'Deleted Channel!' : chan.name)
+        }
+        const blchannelSettings = new Discord.MessageEmbed()
+            .setColor(message.guild.me.displayColor)
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setAuthor(`Blacklisted Channel Settings For ${message.guild.name}`)
+            .setDescription(`You can blacklist and whitelist channels so that messages send in that channel will not gain any XP\n\n\`${prefix}bchan\` to view the currently blacklisted channels\n\`${prefix}bchan [#channel] [blacklist/whitelist]\` to blacklist and whitelist a channel. On default, no channels are blacklisted\n\n**Blacklisted Channels**` + x + `Channels: \n${blacklistedChannels.length === 0 ? 'None!' : '' + blChannelNames.join('\n') + ''}` + x)
+        embeds.push(blchannelSettings)
 
-        paginate(message, [embed1, embed2, embed3, embed4], { time: 1000 * 30 })
+        let blRoleNames = []
+        for (let i = 0; i < blacklistedRoles.length; i++) {
+            let role = message.guild.roles.cache.get(blacklistedRoles[i])
+            blRoleNames.push(role === undefined ? 'Deleted Role!' : role.name)
+        }
+        const blroleSettings = new Discord.MessageEmbed()
+            .setColor(message.guild.me.displayColor)
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setAuthor(`Blacklisted Role Settings For ${message.guild.name}`)
+            .setDescription(`You can blacklist and whitelist role so that members with the blacklisted role will not gain any XP\n\n\`${prefix}brole\` to view the currently blacklisted roles\n\`${prefix}brole [role] [blacklist/whitelist]\` to blacklist and whitelist a role. On default, no roles are blacklisted\n\n**Blacklisted Roles**` + x + `Roles: \n${blacklistedRoles.length === 0 ? 'None!' : '' + blRoleNames.join('\n') + ''}` + x)
+        embeds.push(blroleSettings)
+
+        paginate(message, embeds, { time: 1000 * 30 })
     }
 }

@@ -5,11 +5,8 @@ module.exports = async (client, role) => {
     let guildInfo = client.guildInfoCache.get(role.guild.id)
     if (!guildInfo) {
         const fetch = await client.DBGuild.findByIdAndUpdate(role.guild.id, {}, { new: true, upsert: true, setDefaultsOnInsert: true });
-        guildInfo = {};
-        guildInfo['prefix'] = fetch.prefix;
-        if (fetch.disabledCommands) guildInfo.disabledCommands = fetch.disabledCommands;
-        if (fetch.commandPerms) guildInfo.commandPerms = fetch.commandPerms
-        if (fetch.commandCooldowns) guildInfo.commandCooldowns = fetch.commandCooldowns
+        guildInfo = fetch
+        delete guildInfo._id
         client.guildInfoCache.set(role.guild.id, guildInfo)
     }
 
@@ -28,12 +25,17 @@ module.exports = async (client, role) => {
     guildInfo.commandCooldowns = commandCooldowns
     client.guildInfoCache.set(role.guild.id, guildInfo)
 
+    auditRole(client, role)
+}
+
+const auditRole = async (client, role) => {
     const result = await client.DBSettings.findOne({ _id: role.guild.id })
     if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 
     const guildAudit = await client.DBAudit.findOne({ _id: role.guild.id })
+    if (!guildAudit) return;
 
     if (auditLogChannel === undefined) return;
     if (guildAudit.roleDelete === undefined || guildAudit.roleDelete === 'Disabled') return;

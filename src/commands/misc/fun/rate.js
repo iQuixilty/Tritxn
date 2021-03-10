@@ -61,12 +61,9 @@ module.exports = {
         let answer = answers[Math.floor(Math.random() * answers.length)];
 
         if (args[0]) {
-            message.channel.send(rate.setColor(message.guild.me.displayColor).setTitle(answer));
+            message.channel.send(rate.setColor(message.guild.me.displayColor).setDescription(`**${answer}**`));
         } else {
-            message.channel.send(rate.setColor(message.guild.me.displayColor).setTitle(
-                "Give me something to rate"
-            )
-            .setDescription("Example: `r!rate [image] or <@user>`"));
+            message.channel.send(rate.setColor(message.guild.me.displayColor).setDescription("**Give me something to rate**"));
         }
     }
 }

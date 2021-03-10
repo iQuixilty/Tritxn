@@ -59,7 +59,8 @@ module.exports = {
             songs: [],
             loop: false,
             volume: 95,
-            playing: true
+            playing: true,
+            requester: message.author.id,
         };
 
         let songInfo = null;
