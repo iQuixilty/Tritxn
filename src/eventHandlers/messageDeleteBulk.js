@@ -1,10 +1,14 @@
 const Discord = require('discord.js')
 const PREFIX = require('../../config/config.json').PREFIX;
+const { getGuildInfo, getGuildAudit, getGuildLevels, getGuildSettings } = require("../utils/utils")
 
+/**
+ * @param {import('../typings.d').myClient} client 
+ */
 
 module.exports = async (client, messages) => {
-    let guildSettings = client.guildSettingsCache.get(messages.first().guild.id)
-    let guildAudit = client.guildAuditCache.get(messages.first().guild.id)
+    let guildSettings = await getGuildSettings(client, messages.first().guild.id)
+    let guildAudit = await getGuildAudit(client, messages.first().guild.id)
     if (!guildSettings) return
     if (!guildAudit) return;
 

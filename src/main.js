@@ -20,12 +20,15 @@ require('events').EventEmitter.defaultMaxListeners = 60;
 
 (async () => {
     client.commands = new discord.Collection();
+    client.rawCommands = new discord.Collection()
     client.categories = new discord.Collection();
+    client.aliases = new discord.Collection()
 
     client.guildInfoCache = new discord.Collection();
     client.guildSettingsCache = new discord.Collection()
     client.guildAuditCache = new discord.Collection()
     client.guildLevelsCache = new discord.Collection()
+    client.userCache = new discord.Collection()
 
     client.snipes = new discord.Collection()
     client.esnipes = new discord.Collection()
@@ -44,6 +47,7 @@ require('events').EventEmitter.defaultMaxListeners = 60;
     client.DBAudit = require('../schemas/auditLogSchema')
     client.DBHighlight = require('../schemas/highlightSchema')
     client.DBLevels = require('../schemas/levels-schema')
+    client.DBUsers = require('../schemas/userSchema')
 
     client.serverCooldowns = new discord.Collection();
     client.globalCooldowns = new discord.Collection();
@@ -120,9 +124,5 @@ require('events').EventEmitter.defaultMaxListeners = 60;
     log("SUCCESS", "src/main.js", "Added all commands, categories, events, schemas and connected to MongoDB.");
 })();
 
-
-client.on('ready', () => {
-    client.user.setActivity(`with my economy`, { type: 'PLAYING' }).catch(console.error);
-})
 
 

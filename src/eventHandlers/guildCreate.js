@@ -1,6 +1,5 @@
 const { Guild, Client, MessageEmbed } = require('discord.js')
 const PREFIX = require('../../config/config.json').PREFIX;
-// const message.guild.me.displayColor = require('../../config/config.json').message.guild.me.displayColor
 
 const getDefaultChannel = (guild) => {
     let channel;

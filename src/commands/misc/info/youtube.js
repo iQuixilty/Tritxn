@@ -1,7 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
+const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
     name: "youtube",
@@ -12,6 +11,8 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
+
         const youtube = new Discord.MessageEmbed()
             .setTitle('Links To My Channels:')
             .setDescription('`Subscribe if you want!` \n\n[Main Youtube Channel](https://www.youtube.com/channel/UCGGkfviead-IgJeyNNTQryg) \n\n[Rocket League Team](https://www.youtube.com/channel/UCbg1vu2_J_Dlit3qF9MUaiQ)')

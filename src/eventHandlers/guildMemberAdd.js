@@ -1,11 +1,18 @@
 const { Guild, Client, MessageEmbed } = require('discord.js')
 const PREFIX = require('../../config/config.json').PREFIX;
+const { getGuildInfo, getGuildAudit, getGuildLevels, getGuildSettings } = require("../utils/utils")
 
 const nameRegExp = /^[a-zA-Z0-9~`!@#\$%\^&\*\(\)_\-\+={\[\}\]\|\\:;"'<,>\.\?\/  ]{1,32}$/;
 const moment = require('moment')
 
+/**
+ * @param {import('../typings.d').myClient} client 
+ * @param {import('discord.js').GuildMember} member 
+ */
+
 module.exports = async (client, member) => {
-    const result = await client.DBSettings.findOne({ _id: member.guild.id })
+    const result = await getGuildSettings(client, member.guild.id)
+    const guildInfo = await getGuildInfo(client, member.guild.id)
 
     onJoin(client, member, result)
 
@@ -15,7 +22,21 @@ module.exports = async (client, member) => {
 
     auditMembers(client, member, result)
 
+    checkIsMuted(client, member, guildInfo)
+}
 
+const checkIsMuted = async (client, member, guildInfo) => {
+    let mutes = guildInfo.mutes
+    let mutedRole = guildInfo.mutedRole
+    if (mutes && mutes.length > 0) {
+        if (mutes.includes(member.user.id)) {
+            if (!mutedRole) return
+            let role = member.guild.roles.cache.get(mutedRole)
+            member.roles.add(role).catch((e) => {
+                return
+            })
+        }
+    }
 }
 
 const onJoin = async (client, member, result) => {
@@ -52,7 +73,7 @@ const autoRole = async (client, member, result) => {
     if (!roleId) return;
     if (member.roles.cache.has(roleId)) return;
 
-    member.roles.add(roleId)
+    member.roles.add(roleId).catch((e) => { return })
 }
 
 const decancer = async (client, member, result) => {
@@ -61,7 +82,7 @@ const decancer = async (client, member, result) => {
 
     if (decancer === true) {
         if (!nameRegExp.test(member.user.username)) {
-            member.setNickname('Choose A Better Name')
+            member.setNickname('Choose A Better Name').catch((e) => { return })
         }
     }
 }
@@ -70,7 +91,7 @@ const auditMembers = async (client, member, result) => {
     if (!result) return;
     let auditLogChannel = result.auditLogChannelId
 
-    const guildAudit = await client.DBAudit.findOne({ _id: member.guild.id })
+    const guildAudit = await getGuildAudit(client, member.guild.id)
     if (!guildAudit) return;
 
 

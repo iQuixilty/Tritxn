@@ -12,7 +12,7 @@ module.exports = {
     cooldown: 5,
     description: "Skip to the selected queue number",
     usage: "\`PREFIXskipto [Queue Number]\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT'],
 
     execute: async function (client, message, args) {
         const spo = new Discord.MessageEmbed()
@@ -23,13 +23,13 @@ module.exports = {
         if (!args.length || isNaN(args[0]))
             return message
                 .reply(spo.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}${module.exports.name} [Queue Number]**`))
-                .catch(console.error);
+                .catch((e) => console.log(e));
 
         const queue = message.client.queue.get(message.guild.id);
-        if (!queue) return message.channel.send(spo.setColor(message.guild.me.displayColor).setTitle("There is no queue.")).catch(console.error);
+        if (!queue) return message.channel.send(spo.setColor(message.guild.me.displayColor).setTitle("There is no queue.")).catch((e) => console.log(e));
         if (!canModifyQueue(message.member)) return;
         if (args[0] > queue.songs.length)
-            return message.reply(spo.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, the queue is only ${queue.songs.length} songs long!**`)).catch(console.error);
+            return message.reply(spo.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, the queue is only ${queue.songs.length} songs long!**`)).catch((e) => console.log(e));
 
         queue.playing = true;
 
@@ -42,6 +42,6 @@ module.exports = {
         }
 
         queue.connection.dispatcher.end();
-        queue.textChannel.send(spo.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ⏭ skipped ${args[0] - 1} songs**`)).catch(console.error);
+        queue.textChannel.send(spo.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ⏭ skipped ${args[0] - 1} songs**`)).catch((e) => console.log(e));
     }
 };

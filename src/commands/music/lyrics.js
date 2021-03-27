@@ -14,7 +14,7 @@ module.exports = {
     cooldown: 5,
     description: "Fetches the lyrics of a song",
     usage: "\`PREFIXlyrics\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT',],
 
     execute: async function (client, message, args) {
         const lyr = new Discord.MessageEmbed()
@@ -22,7 +22,7 @@ module.exports = {
         setCooldown(client, this, message);
 
         const queue = message.client.queue.get(message.guild.id);
-        if (!queue) return message.channel.send(lyr.setColor(message.guild.me.displayColor).setDescription("**There is nothing playing.**")).catch(console.error);
+        if (!queue) return message.channel.send(lyr.setColor(message.guild.me.displayColor).setDescription("**❌ There is nothing playing.**")).catch((e) => console.log(e));
 
         let lyrics = null;
 
@@ -41,6 +41,6 @@ module.exports = {
 
         if (lyricsEmbed.description.length >= 2048)
             lyricsEmbed.description = `${lyricsEmbed.description.substr(0, 2045)}...`;
-        return message.channel.send(lyricsEmbed).catch(console.error);
+        return message.channel.send(lyricsEmbed).catch((e) => console.log(e));
     }
 };

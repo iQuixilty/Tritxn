@@ -1,7 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-    ////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
+const { setCooldown } = require('../../../utils/utils')
 
 
 module.exports = {
@@ -11,10 +10,13 @@ module.exports = {
     usage: "\`PREFIXsay\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
-    execute: async function(client, message, args) {
+    execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const no = new Discord.MessageEmbed()
 
-        if (message.author.id !== `751606134938402866`) {
+        let users = [`751606134938402866`, `713897845412855828`, `478605759542722570`]
+
+        if (!users.includes(message.author.id)) {
             return message.channel.send(no.setColor(message.guild.me.displayColor).setDescription('**sike you thought**'))
         }
         const say = args.join(" ")

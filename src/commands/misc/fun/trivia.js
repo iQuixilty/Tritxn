@@ -1,6 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
+const {setCooldown} = require('../../../utils/utils')
 
 module.exports = {
     name: "trivia",
@@ -11,6 +11,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         let questions = [
             {
                 title: "How many soccer players should each team have on the field at the start of the match?",

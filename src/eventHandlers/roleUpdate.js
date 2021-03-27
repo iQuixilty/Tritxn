@@ -1,14 +1,21 @@
 const { MessageEmbed } = require('discord.js');
+const { getGuildAudit, getGuildInfo, getGuildSettings, getGuildLevels } = require('../utils/utils')
 
+/**
+ * roleUpdate event
+ * @param {import('../typings.d').myClient} client 
+ * @param {import('discord.js').Role} oldRole 
+ * @param {import('discord.js').Role} newRole
+ */
 
 module.exports = async (client, oldRole, newRole) => {
 
-    const result = await client.DBSettings.findOne({ _id: newRole.guild.id })
+    const result = await getGuildSettings(client, newRole.guild.id)
     if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 
-    const guildAudit = await client.DBAudit.findOne({ _id: newRole.guild.id })
+    const guildAudit = await getGuildAudit(client, newRole.guild.id)
     if (!guildAudit) return;
 
     if (auditLogChannel === undefined) return;

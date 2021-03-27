@@ -8,13 +8,14 @@ const guildSchema = Schema({
         type: String
     },
     mutedRole: String,
+    mutes: Array,
     timeoutRole: String,
     disabledCommands: Array,
     disabledChannels: Array,
     disabledWords: Array,
     commandPerms: {},
     commandCooldowns: {},
-    commandAlias: {}
+    commandAlias: {},
 });
 
 module.exports = model('guildSchema', guildSchema)

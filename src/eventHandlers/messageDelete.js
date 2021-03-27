@@ -1,22 +1,27 @@
 const Discord = require('discord.js')
 const PREFIX = require('../../config/config.json').PREFIX;
+const { filterOutWords, filterMarkdownWords, getGuildAudit, getGuildInfo, getGuildLevels, getGuildSettings } = require('../utils/utils')
 
+
+/**
+ * messgeDelete event
+ * @param {import('../typings.d').myClient} client 
+ * @param {import('discord.js').Message} message 
+ */
 
 module.exports = async (client, message) => {
 
     if (message.author.bot) return;
 
-    let guildSettings = client.guildSettingsCache.get(message.guild.id)
-
-    let guildAudit = client.guildAuditCache.get(message.guild.id)
-
-    let guildInfo = client.guildInfoCache.get(message.guild.id)
+    let guildSettings = await getGuildSettings(client, message.guild.id)
+    let guildAudit = await getGuildAudit(client, message.guild.id)
+    let guildInfo = await getGuildInfo(client, message.guild.id)
+    let args = message.content.trim().split(/ +/);
 
     snipes(client, message)
-    blacklistedWords(client, message, guildInfo, guildSettings)
-    auditLog(client, message, guildAudit, guildSettings, guildInfo)
+    blacklistedWords(client, message, guildInfo, guildSettings, args)
+    auditLog(client, message, guildAudit, guildSettings, guildInfo, args)
     ghostPing(client, message, guildAudit, guildSettings, guildInfo)
-
 }
 
 function snipes(client, message) {
@@ -33,12 +38,16 @@ function snipes(client, message) {
     client.snipes.set(message.channel.id, snipes)
 }
 
-function blacklistedWords(client, message, guildInfo, guildSettings) {
+//TODO: Add filtered markdown function to check here: Done ✅
+
+function blacklistedWords(client, message, guildInfo, guildSettings, args) {
+    if (guildInfo === undefined) return;
     if (guildInfo.disabledWords === undefined) return;
+    if (message.member.bot) return
 
-    if (!message.member.hasPermission('ADMINISTRATOR')) {
-        if (guildInfo.disabledWords.some((a) => message.content.includes(a))) {
-
+    if (!message.member.permissions.has('ADMINISTRATOR')) {
+        let res = filterMarkdownWords(guildInfo.disabledWords, args)
+        if (guildInfo.disabledWords.some((a) => res.toLowerCase().includes(a))) {
             if (guildSettings.auditLogChannelId === undefined || guildSettings.auditLogChannelId === 'Disabled') return;
             const channel = client.channels.cache.get(guildSettings.auditLogChannelId)
 
@@ -53,12 +62,13 @@ function blacklistedWords(client, message, guildInfo, guildSettings) {
     }
 }
 
-function auditLog(client, message, guildAudit, guildSettings, guildInfo) {
+function auditLog(client, message, guildAudit, guildSettings, guildInfo, args) {
 
     if (guildSettings.auditLogChannelId === undefined || guildSettings.auditLogChannelId === 'Disabled') return;
     if (guildAudit.messageDelete === undefined || guildAudit.messageDelete === 'Disabled') return;
 
-    if (guildInfo.disabledWords.some((a) => message.content.includes(a))) return
+    let res = filterMarkdownWords(guildInfo.disabledWords, args)
+    if (guildInfo.disabledWords.some((a) => res.toLowerCase().includes(a))) return
 
     const channel = client.channels.cache.get(guildSettings.auditLogChannelId)
 
@@ -75,6 +85,15 @@ function auditLog(client, message, guildAudit, guildSettings, guildInfo) {
 }
 
 function ghostPing(client, message, guildAudit, guildSettings, guildInfo) {
+    let result;
+    if (guildInfo) {
+        if (guildInfo.disabledWords) {
+            if (guildInfo.disabledWords.some((a) => message.content.toLowerCase().includes(a))) {
+                result = filterOutWords(guildInfo.disabledWords, message.content, '**---**')
+            }
+        }
+    }
+
     if (!guildSettings) return;
     let ghostPingSetting = guildSettings.ghostPing
 
@@ -89,7 +108,7 @@ function ghostPing(client, message, guildAudit, guildSettings, guildInfo) {
             .setTitle('Ghost Ping Detected!')
             .setColor(message.guild.me.displayColor)
             .addField('Author', message.author)
-            .addField('Message', message.content);
+            .addField('Message', result === undefined ? message.content : result);
 
         message.channel.send(embed)
     }

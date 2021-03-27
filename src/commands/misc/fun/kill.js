@@ -1,8 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
-
+const {setCooldown} = require('../../../utils/utils')
 
 module.exports = {
     name: "kill",
@@ -12,6 +10,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         let user = message.mentions.users.first()
         const killEmbed = new Discord.MessageEmbed()
 

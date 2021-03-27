@@ -2,6 +2,7 @@ const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 const Levels = require('discord-xp')
 const canvacord = require('canvacord')
+const { setCooldown } = require('../../utils/utils')
 
 /**
  * @type {import('../../typings.d').Command}
@@ -25,18 +26,19 @@ module.exports = {
 
         let target = args[0]
 
-          if (!target) {
+        if (!target) {
             target = message.guild.members.cache.get(message.author.id);
         } else {
             target = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         }
+        setCooldown(client, this, message)
 
         const user = await Levels.fetch(target.id, message.guild.id, true);
 
         if (!user) return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription("**This user has not amassed any XP yet.**"));
 
         const neededXp = Levels.xpFor(parseInt(user.level) + 1)
-        
+
         const rank = new canvacord.Rank()
             .setAvatar(target.user.displayAvatarURL({ dynamic: false, format: 'png' }))
             .setCurrentXP(user.xp)
@@ -49,10 +51,10 @@ module.exports = {
             .setCustomStatusColor('#000000')
             .setBackground('IMAGE', `https://cdn.discordapp.com/attachments/800789365411938335/816827131858124841/images.png`)
         rank.build()
-        .then(data => {
-            const attachment = new Discord.MessageAttachment(data, 'rank.png')
-            message.channel.send(attachment)
-        })
+            .then(data => {
+                const attachment = new Discord.MessageAttachment(data, 'rank.png')
+                message.channel.send(attachment)
+            })
 
 
     }

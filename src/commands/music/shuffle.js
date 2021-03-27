@@ -12,14 +12,14 @@ module.exports = {
     cooldown: 5,
     description: "Shuffles the queue",
     usage: "\`PREFIXshuffle\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS'],
 
     execute: async function (client, message, args) {
         const shf = new Discord.MessageEmbed()
         setCooldown(client, this, message);
 
         const queue = message.client.queue.get(message.guild.id);
-        if (!queue) return message.channel.send(shf.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is no queue.**`)).catch(console.error);
+        if (!queue) return message.channel.send(shf.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is no queue.**`)).catch((e) => console.log(e));
         if (!canModifyQueue(message.member)) return;
 
         let songs = queue.songs;
@@ -29,6 +29,6 @@ module.exports = {
         }
         queue.songs = songs;
         message.client.queue.set(message.guild.id, queue);
-        queue.textChannel.send(shf.setColor(message.guild.me.displayColor).setDescription(`**${message.author} 🔀 shuffled the queue**`)).catch(console.error);
+        queue.textChannel.send(shf.setColor(message.guild.me.displayColor).setDescription(`**${message.author} 🔀 shuffled the queue**`)).catch((e) => console.log(e));
     }
 };

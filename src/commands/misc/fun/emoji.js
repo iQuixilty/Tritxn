@@ -1,6 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
+const {setCooldown} = require('../../../utils/utils')
 
 module.exports = {
     name: "emoji",
@@ -10,6 +10,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         function getEmoji(message) {
             const emojiId = message.replace(/<a?:(.*?):+/g, '').replace(/>+/g, '');
             let imageUrl = `https://cdn.discordapp.com/emojis/${emojiId}`;

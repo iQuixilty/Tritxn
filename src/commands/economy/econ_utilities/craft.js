@@ -1,10 +1,8 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
 const economy = require('../../../../schemas/economy')
 const emoji = require('../../../../config/emoji.json')
-const mongo = require('../../../../schemas/mongo')
 
 const { setCooldown } = require('../../../utils/utils')
 

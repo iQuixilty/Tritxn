@@ -1,14 +1,21 @@
 const { Channel, MessageEmbed } = require('discord.js');
+const { getGuildAudit, getGuildInfo, getGuildSettings, getGuildLevels } = require('../utils/utils')
 
+/**
+ * voiceStateUpdate event
+ * @param {import('../typings.d').myClient} client 
+ * @param {import('discord.js').VoiceState} oldState
+ * @param {import('discord.js').VoiceState} newState 
+ */
 
 module.exports = async (client, oldState, newState) => {
 
-    const result = await client.DBSettings.findOne({ _id: newState.guild.id })
+    const result = await getGuildSettings(client, newState.guild.id)
     if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 
-    const guildAudit = await client.DBAudit.findOne({ _id: newState.guild.id })
+    const guildAudit = await getGuildAudit(client, newState.guild.id)
 
     if (auditLogChannel === undefined) return;
     if (guildAudit.voiceStateUpdate === undefined || guildAudit.voiceStateUpdate === 'Disabled') return;

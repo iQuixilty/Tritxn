@@ -1,7 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
+const {setCooldown} = require('../../../utils/utils')
 const weather = require('weather-js')
 
 module.exports = {
@@ -12,6 +11,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         weather.find({ search: args.join(" "), degreeType: 'F' }, function (error, result) {
             const weather = new Discord.MessageEmbed()
 

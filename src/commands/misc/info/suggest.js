@@ -1,18 +1,18 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
+const { setSavedCooldown } = require('../../../utils/utils')
 
-const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
     name: "suggest",
     category: "Misc",
-    cooldown: 60 * 60 * 24,
+    savedCooldown: 60 * 5,
     description: "Suggest a feature to me",
     usage: "\`PREFIXsuggest [suggestion]\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        
         const Sug = new Discord.MessageEmbed()
 
         if (!args[0]) return message.channel.send(Sug
@@ -27,7 +27,7 @@ module.exports = {
 
         let suggest = args.slice(0).join(" ");
 
-        setCooldown(client, this, message);
+        setSavedCooldown(client, this, message)
 
         message.channel.send(Sug
             .setColor(message.guild.me.displayColor)

@@ -13,8 +13,8 @@ module.exports = {
     execute: async function (client, message, args) {
         setCooldown(client, this, message);
 
-        let Message = args[0]
-        let amount = args[1]
+        let Message = args.slice(1).join(' ')
+        let amount = args[0]
 
         if (!Message) return message.reply(`What do you want to spam?`)
         if (!amount) return message.reply(`Specify an amount`)

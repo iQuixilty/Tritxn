@@ -3,7 +3,7 @@
     "PREFIX": ";;",
     "message.guild.me.displayColor": "message.guild.me.displayColor",
     "MONGODB_URI": "mongodb://localhost:27017/discordbot",
-    "devs": [],
+    "devs": ["751606134938402866", "713897845412855828"],
     "someServers": [],
     "YOUTUBE_API_KEY": "AIzaSyBB0VmRORHM5WEsWft8RgbGtHR9",
     "MAX_PLAYLIST_SIZE": 50,

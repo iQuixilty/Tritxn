@@ -10,7 +10,7 @@ module.exports = {
     name: "avatar",
     category: "Misc",
     aliases: ["a", "av"],
-    cooldown: 1,
+    cooldown: 3,
     description: "Displays a users avatar",
     usage: "\`PREFIXavatar\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],

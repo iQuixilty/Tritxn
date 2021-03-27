@@ -14,7 +14,7 @@ module.exports = {
     perms: ['ADMINISTRATOR'],
     canNotDisable: true,
     ignoreDisabledChannels: true,
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_ROLES'],
     execute: async function (client, message, args) {
         const autoRE = new Discord.MessageEmbed()
 

@@ -1,8 +1,7 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
+const { setCooldown } = require('../../utils/utils')
 const Levels = require('discord-xp')
-const levels = require('discord-xp/models/levels')
-
 /**
  * @type {import('../../typings.d').Command}
  */
@@ -16,6 +15,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const embed = new Discord.MessageEmbed()
 
         const rawLeaderboard = await Levels.fetchLeaderboard(message.guild.id, 10);

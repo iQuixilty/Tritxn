@@ -2,6 +2,7 @@ const PREFIX = require('../../../../config/config.json').PREFIX;
 const Canvas = require('canvas')
 const Discord = require('discord.js')
 const axios = require('axios')
+const { setCooldown } = require('../../../utils/utils')
 
 /** 
  * @type {import('../../../typings.d').Command}
@@ -16,6 +17,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const colorE = new Discord.MessageEmbed()
 
         let color;

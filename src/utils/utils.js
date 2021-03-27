@@ -161,6 +161,7 @@ async function paginate(message, embeds, options) {
 
         for (const emote of reactions) {
             await pageMsg.react(emote);
+            await delay(750);
         }
 
         let pageIndex = 0;
@@ -177,9 +178,9 @@ async function paginate(message, embeds, options) {
         collector.on('collect', async (reaction, user) => {
             reaction.users.remove(user).catch((e) => {
                 message.channel.send(new MessageEmbed()
-                .setColor(message.guild.me.displayColor)
-                .setDescription(x + 'js' + `\n${e}` + x)
-                .setFooter(`If this error occurs again, please inform Qzxy#4227`))
+                    .setColor(message.guild.me.displayColor)
+                    .setDescription(x + 'js' + `\n${e}` + x)
+                    .setFooter(`If this error occurs again, please inform Qzxy#4227`))
             })
             if (reaction.emoji.name === '⏩') {
                 pageIndex = embeds.length - 1
@@ -232,8 +233,6 @@ async function paginate(message, embeds, options) {
     }
 }
 
-
-
 /**
  * Function to await a reply from a specific user.
  * @param {Message} message - The message to listen to
@@ -273,6 +272,67 @@ async function getReply(message, options) {
  */
 function randomRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/**
+ * Return a filtered string
+ * @param {array} arr - The array of bad words
+ * @param {message} message - The message you want to filter
+ * @param {string} string - The message you want to replace the bad word with
+ */
+function filterOutWords(arr, message, replace) {
+    let removedWords = [...arr]
+    let content = message.split(' ')
+    let newString;
+
+    for (let i = 0; i < content.length; i++) {
+        for (let j = 0; j < removedWords.length; j++) {
+            if (content[i].includes(removedWords[j])) {
+                content[i] = replace
+            }
+        }
+
+        newString = content.join(' ')
+    }
+    return newString
+}
+
+/**
+ * Returns a filtered string indiciating if filtered string contains contents of array
+ * @param {array} arr - The array of bad words
+ * @param {args} args - The message args of the message
+ */
+function filterMarkdownWords(arr, args) {
+    let markdown = ['|', '*', '`', '_', '>', '~', ' ', '!', '^', '&', '(', ')', '[', ']', '<', '>', '@', '$', '#', '%', '-', '+']
+    let rawContent = args.slice(0).join(' ')
+    let rawChar = []
+    let filteredChar = []
+
+    for (let i = 0; i < rawContent.length; i++) {
+        let charLength = rawContent[i].length
+        for (let j = 0; j < charLength; j++) {
+            let char = rawContent[i].charAt(j)
+            rawChar.push(char)
+        }
+    }
+
+    for (let k = 0; k < rawChar.length; k++) {
+        for (let l = 0; l < markdown.length; l++) {
+            if (rawChar[k] === markdown[l]) {
+                rawChar[k] = ''
+            }
+        }
+
+        if (rawChar[k] !== '') filteredChar.push(rawChar[k])
+    }
+
+    let result = filteredChar.join("")
+
+    if (arr.some((a) => result.includes(a))) {
+        return result
+    }
+
+    return result
 }
 
 /**
@@ -332,6 +392,26 @@ function setCooldown(client, command, message) {
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 }
 
+
+/**
+ * 
+ * @param {import('../typings.d').myClient} client 
+ * @param {import('../typings.d').Command} command 
+ * @param {Message} message
+ */
+async function setSavedCooldown(client, command, message) {
+    const cd = command.savedCooldown
+
+    if (!cd) return;
+    let userCache = await getUserCache(client, message.author.id)
+    let commandSC = userCache.savedCooldowns || {}
+    const savedCD = { commandSC: {} }
+    savedCD.commandSC[command.name] = {}
+    commandSC[command.name] = new Date().getTime()
+
+    userCache = await client.DBUsers.findByIdAndUpdate(message.author.id, { $set: { savedCooldowns: commandSC } }, { new: true, upsert: true, setDefaultsOnInsert: true })
+}
+
 /**
  * Function to convert milliseconds into readable time
  * @param {Number} ms - The time in 
@@ -347,7 +427,7 @@ function msToTime(ms) {
     day = Math.floor(hour / 24);
     hour = hour % 24;
     return day ? (hour ? (`${day}d ${hour}h ${minute}m ${seconds}s`) : (minute ? (`${day}d ${minute}m ${seconds}s`) : (`${day}d ${seconds}s`))) :
-        (hour ? (` ${hour}h ${minute}m ${seconds}s`) : (minute ? (`${minute}m ${seconds}s`) : (`${seconds}s`)))
+        (hour ? (`${hour}h ${minute}m ${seconds}s`) : (minute ? (`${minute}m ${seconds}s`) : (`${seconds}s`)))
 }
 
 /**
@@ -367,6 +447,96 @@ function missingPermissions(member, perms) {
 
 /**
  * Function to shorten down console logs
+ * @param {import('../typings.d').myClient} client
+ * @param {message} message - The message properties
+ * @param {err} error - Error that was thrown
+ */
+function errorMessage(client, message, err) {
+    message.channel.send(new MessageEmbed()
+        .setColor(message.guild.me.displayColor)
+        .setDescription(x + 'js' + `\n${err}` + x)
+        .setFooter(`Contact Qzxy#4227 if this happens again`))
+}
+
+/**
+ * @param {import('../typings.d').myClient} client 
+ * @param {string} guildID 
+ */
+async function getGuildInfo(client, guildID) {
+    let guildInfo = client.guildInfoCache.get(guildID);
+
+    if (!guildInfo) {
+        guildInfo = await client.DBGuild.findByIdAndUpdate(guildID, {}, { new: true, upsert: true, setDefaultsOnInsert: true });
+        client.guildInfoCache.set(guildID, guildInfo);
+    }
+
+    return guildInfo;
+}
+
+/**
+ * @param {import('../typings.d').myClient} client 
+ * @param {string} guildID 
+ */
+async function getGuildSettings(client, guildID) {
+    let guildSettings = client.guildSettingsCache.get(guildID);
+
+    if (!guildSettings) {
+        guildSettings = await client.DBSettings.findByIdAndUpdate(guildID, {}, { new: true, upsert: true, setDefaultsOnInsert: true });
+        client.guildSettingsCache.set(guildID, guildSettings);
+    }
+
+    return guildSettings;
+}
+
+
+/**
+ * @param {import('../typings.d').myClient} client 
+ * @param {string} guildID 
+ */
+async function getGuildAudit(client, guildID) {
+    let guildAudit = client.guildAuditCache.get(guildID);
+
+    if (!guildAudit) {
+        guildAudit = await client.DBAudit.findByIdAndUpdate(guildID, {}, { new: true, upsert: true, setDefaultsOnInsert: true });
+        client.guildAuditCache.set(guildID, guildAudit);
+    }
+
+    return guildAudit;
+}
+
+/**
+ * @param {import('../typings.d').myClient} client 
+ * @param {string} guildID 
+ */
+async function getGuildLevels(client, guildID) {
+    let guildLevels = client.guildLevelsCache.get(guildID);
+
+    if (!guildLevels) {
+        guildLevels = await client.DBLevels.findByIdAndUpdate(guildID, {}, { new: true, upsert: true, setDefaultsOnInsert: true });
+        client.guildLevelsCache.set(guildID, guildLevels);
+    }
+
+    return guildLevels;
+}
+
+/**
+ * @param {import('../typings.d').myClient} client 
+ * @param {string} userID 
+ */
+async function getUserCache(client, userID) {
+    let userCache = client.userCache.get(userID);
+
+    if (!userCache) {
+        userCache = await client.DBUsers.findByIdAndUpdate(userID, {}, { new: true, upsert: true, setDefaultsOnInsert: true });
+        client.userCache.set(userID, userCache);
+    }
+
+    return userCache;
+}
+
+
+/**
+ * Function to shorten down console logs
  * @param {('SUCCESS'|'WARNING'|'ERROR')} type - The type of log (SUCCESS, WARNING, ERROR)
  * @param {String} path - The path where the console log is coming from
  * @param {String} text - The message to be displayed
@@ -378,5 +548,7 @@ function log(type, path, text) {
 module.exports = {
     processArguments, blacklist, whitelist, paginate, log,
     getReply, randomRange, delay, msToTime, missingPermissions,
-    getCooldown, setCooldown
+    getCooldown, setCooldown, errorMessage, filterOutWords,
+    filterMarkdownWords, getGuildInfo, getGuildAudit, getGuildLevels,
+    getGuildSettings, getUserCache, setSavedCooldown
 }

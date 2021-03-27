@@ -1,18 +1,22 @@
 const { MessageEmbed } = require('discord.js');
+const { getGuildInfo, getGuildAudit, getGuildLevels, getGuildSettings } = require("../utils/utils")
 
+/**
+ * @param {import('../typings.d').myClient} client 
+ * @param {import('discord.js').GuildMember} oldMember 
+ */
 
 module.exports = async (client, oldMember, newMember) => {
     memberUpdate(client, oldMember, newMember)
-
 }
 
 const memberUpdate = async (client, oldMember, newMember) => {
-    const result = await client.DBSettings.findOne({ _id: oldMember.guild.id })
+    const result = await getGuildSettings(client, oldMember.guild.id)
     if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 
-    const guildAudit = await client.DBAudit.findOne({ _id: oldMember.guild.id })
+    const guildAudit = await getGuildAudit(client, oldMember.guild.id)
     if (!guildAudit) return
 
     if (auditLogChannel === undefined) return;

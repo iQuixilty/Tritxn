@@ -1,11 +1,10 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../../schemas/economy')
 
 const emoji = require('../../../../config/emoji.json')
 
-
+const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
     name: "subtract",
@@ -18,6 +17,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         let mention =
             message.mentions.members.first() ||
             message.guild.members.cache.get(args[0])

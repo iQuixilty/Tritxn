@@ -7,6 +7,7 @@ module.exports = {
     category: "Utility",
     description: "Generates a link for you to invite the bot to your server",
     usage: "\`PREFIXinvite\`",
+    savedCooldown: 10,
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {

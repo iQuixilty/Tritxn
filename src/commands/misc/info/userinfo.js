@@ -1,6 +1,7 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 const moment  = require('moment')
+const { setCooldown } = require('../../../utils/utils')
 
 /** 
  * @type {import('../../../typings.d').Command}
@@ -15,6 +16,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         let userINFO =
             message.mentions.members.first() ||
             message.guild.members.cache.get(args[0]) ||

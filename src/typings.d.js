@@ -7,7 +7,7 @@ const { Model } = require('mongoose')
  * @property {string} prefix - The prefix for the bot
  * @property {string[]} [disabledCommands] - Array with all disabled command names
  * @property {string[]} [disabledChannels] - Array with all channel ID's that are disabled
- * @property {Object.<string, PermissionResolvable>} [commandPerms] - Contains all the custom command permissions for a command
+ * @property {Object.<string, import('discord.js').PermissionString[]>} [commandPerms] - Contains all the custom command permissions for a command
  * @property {Object.<string, Object.<string, number>>} [commandCooldowns] - Contains all custom role cooldowns for a command
  * @property {Object.<string, string>} [commandAlias] - Contains all custom command aliases: { alias: commandName }
  */
@@ -42,18 +42,21 @@ class myClient extends Client {
         /**
          * A collection containing all commands
          * @type {Collection<Snowflake, Command>}
+         * @type {import('discord.js').Collection<Snowflake, Command>}
          */
         this.commands;
 
         /**
          * A collection containing all categories and the commands inside that category
          * @type {Collection<Snowflake, string[]>}
+         * @type {import('discord.js').Collection<Snowflake, string[]>}
          */
         this.categories;
 
         /**
          * A collection containing all cached guildInfo
          * @type {Collection<Snowflake, guildInfo>}
+         * @type {import('discord.js').Collection<Snowflake, guildInfo>}
          */
         this.guildInfoCache;
 
@@ -82,6 +85,12 @@ class myClient extends Client {
         this.guildLevelsCache;
 
         /**
+         * A collection containing all user settings
+         * @type {Set<Snowflake>}
+         */
+        this.userCache;
+
+        /**
          * A reference to the guildSchema
          * @type {Model<guildInfo, {}>}
          */
@@ -100,33 +109,37 @@ class myClient extends Client {
         this.DBSettings;
 
         /**
-         * 
-         * /**
          * A reference to the audit log schema
          * @type {Model<>}
          */
         this.DBAudit;
 
         /**
-         * 
-         * /**
          * A reference to the levels schema
          * @type {Model<>}
          */
         this.DBLevels;
 
         /**
+         * A reference to the user schema
+         * @type {Model<>}
+         */
+         this.DBUsers;
+
+        /**
         
         /**
          * A collection containing all stored server cooldowns
          * @type {Collection<Snowflake, Collection<string, Collection<Snowflake, number>>>}
-         */
+         * @type {import('discord.js').Collection<Snowflake, Collection<string, Collection<Snowflake, number>>>} 
+        */
         this.serverCooldowns;
 
         /**
          * A collection containing all stored global cooldowns
          * @type {Collection<string, Collection<Snowflake, number>>}
-         */
+         * @type {import('discord.js').Collection<string, Collection<Snowflake, number>>} 
+        */
         this.globalCooldowns;
     }
 }
@@ -152,11 +165,12 @@ class myClient extends Client {
  * @property {boolean} [globalCooldown=true] - Whether the cooldown on this command will be globally or for a server only
  * @property {boolean} [canNotDisable=false] - Whether or not this command can be disabled in a server
  * @property {boolean} [canNotSetCooldown=false] - Whether or not users can set a custom command cooldown for this command
+ * @property {string} [savedCooldown=0] - Whether or not this command is saved in database
  * @property {boolean} [canNotAddAlias=false] - Whether or not users can add custom aliases for this command
  * @property {boolean} [hideCommand=false] - Whether or not this command will be displayed in the help command
  * @property {boolean} [ignoreDisabledChannels=false] - Whether or not this command will still run in ignored channels
- * @property {PermissionResolvable} [perms=[]] - Permissions that the user needs in order to use this command
- * @property {PermissionResolvable} [clientPerms=[]] - Permissions that the client needs to run this command
+ * @property {import('discord.js').PermissionString[]} [perms=[]] - Permissions that the user needs in order to use this command
+ * @property {import('discord.js').PermissionString[]} [clientPerms=[]] - Permissions that the client needs to run this command
  * @property {boolean} [devOnly=false] - Whether or not this command can only be used by a developer
  * @property {boolean} [someServersOnly=false] - Whether or not this command can only be used in specific servers
  * @property {string[]} [someServers=[]] - Specific custom servers that the command only works for

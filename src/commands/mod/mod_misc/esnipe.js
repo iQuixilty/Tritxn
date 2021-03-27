@@ -9,7 +9,7 @@ module.exports = {
     category: "Moderation",
     description: "Finds a recently edited message",
     usage: "\`PREFIXesnipe [number]\`",
-    someServers: ['796125520961994764'],
+    // someServers: ['796125520961994764'],
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_MESSAGES'],
 
     execute: async function (client, message, args) {

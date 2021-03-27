@@ -147,3 +147,43 @@
 
 # 3/10/2021
     - [x] Finished automoderaton
+    - [x] Fixed a ton of bugs and added nsfwOnly to prefab to handler
+    - [x] Added replay and clear-queue commands to music
+
+# 3/11/2021
+    - [x] Added fast forward to music
+    - [x] Fixed now playing
+
+# 3/12/2021
+    
+    - [x] Added role commands
+
+# 3/13/2021
+
+    - [x] Add-emoji command **Removed**
+    - [x] Added eval
+    - [x] Added filter function
+    - [x] Added so you cant swear after editing messages
+
+# 3/15/2021 - 3/16/2021
+
+    - [x] Added custom playlists
+    - [x] Fixed music bugs and added move
+
+# 3/17/2021
+ 
+    - [x] Aded getGuild[Info, Settings, Levels, Audit] methods to utils.js and updated every event
+    - [x] Fixed ecolb bug
+    - [x] Saved cooldowns
+    - [x] Added global cooldowns
+
+# 3/24/2021
+
+    - [x] Added highlight DM cooldown
+
+# 3/25/2021 - 3/26/2021
+
+    - [x] Added SunTzu command, per request
+    - [x] Fixed bugs in music players
+    - [x] Added reload feature
+    - [x] Added isMuted

@@ -10,7 +10,7 @@ module.exports = {
     description: "Pauses the music player",
     usage: "\`PREFIXpause\`",
     cooldown: 5,
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT'],
 
     execute: async function (client, message, args) {
         const pa = new Discord.MessageEmbed()
@@ -18,13 +18,13 @@ module.exports = {
         setCooldown(client, this, message);
         
         const queue = message.client.queue.get(message.guild.id);
-        if (!queue) return message.reply(pa.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is nothing playing.**`)).catch(console.error);
+        if (!queue) return message.reply(pa.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is nothing playing.**`)).catch((e) => console.log(e));
         if (!canModifyQueue(message.member)) return;
 
         if (queue.playing) {
             queue.playing = false;
             queue.connection.dispatcher.pause(true);
-            return queue.textChannel.send(pa.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ⏸ paused the music.**`)).catch(console.error);
+            return queue.textChannel.send(pa.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ⏸ paused the music.**`)).catch((e) => console.log(e));
         }
     }
 };

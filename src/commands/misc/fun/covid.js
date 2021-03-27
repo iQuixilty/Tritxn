@@ -1,7 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
-
+const {setCooldown} = require('../../../utils/utils')
 const fetch = require('node-fetch')
 
 module.exports = {
@@ -12,7 +11,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-
+        setCooldown(client, this, message)
         let countryName = (args[0])
 
         if (!countryName) {

@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const waterDROP = new Discord.MessageEmbed()
-
+const {setCooldown} = require('../../utils/utils')
 
 class Waterdrop {
 
@@ -331,7 +331,6 @@ class Waterdrop {
 module.exports = Waterdrop;
 
 const PREFIX = require('../../../config/config.json').PREFIX;
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
 module.exports = {
     name: "dropper",
@@ -342,6 +341,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const wat = new Waterdrop(client)
         wat.run(message)
     }

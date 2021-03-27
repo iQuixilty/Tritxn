@@ -1,14 +1,19 @@
 const { Channel, MessageEmbed } = require('discord.js');
+const { getGuildAudit, getGuildInfo, getGuildSettings, getGuildLevels } = require('../utils/utils')
 
+/**
+ * roleCreate event
+ * @param {import('../typings.d').myClient} client 
+ * @param {import('discord.js').Role} role 
+ */
 
 module.exports = async (client, role) => {
-
-    const result = await client.DBSettings.findOne({ _id: role.guild.id })
+    const result = await getGuildSettings(client, role.guild.id)
     if (!result) return;
 
     let auditLogChannel = result.auditLogChannelId
 
-    const guildAudit = await client.DBAudit.findOne({ _id: role.guild.id })
+    const guildAudit = await getGuildAudit(client, role.guild.id)
     if (!guildAudit) return;
 
     if (auditLogChannel === undefined) return;

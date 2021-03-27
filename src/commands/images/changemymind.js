@@ -1,7 +1,6 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
+const { setCooldown } = require('../../utils/utils')
 const canvacord = require('canvacord');
 
 
@@ -14,12 +13,12 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-        
+        setCooldown(client, this, message)
         let text = args.join(" ");
 
         const cmme = new Discord.MessageEmbed()
 
-        if(!args[0]) return message.channel.send(cmme.setColor(message.guild.me.displayColor).setTitle('Provide something to change your mind about'))
+        if (!args[0]) return message.channel.send(cmme.setColor(message.guild.me.displayColor).setTitle('Provide something to change your mind about'))
 
         let image = await canvacord.Canvas.changemymind(text);
 

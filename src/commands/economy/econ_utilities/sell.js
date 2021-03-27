@@ -1,8 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../../schemas/economy')
-
 const emoji = require('../../../../config/emoji.json')
 
 const { setCooldown } = require('../../../utils/utils')
@@ -74,7 +72,7 @@ module.exports = {
         }
 
         if (item === `fish` || item === `f`) {
-            sellItem('fish', 'fish', 'bronzeCoins', 200, emoji.bronzeCoin, '🐟')
+            sellItem('fish', 'fish', 'bronzeCoins', 200, emoji.bronzeCoin, emoji.fish)
 
         } else if (item === `rod` || item === `pole` || item === 'fishingpole') {
             sellItem('fishingRod', 'fishing rod', 'bronzeCoins', 10000, emoji.bronzeCoin, emoji.rod)
@@ -90,10 +88,10 @@ module.exports = {
             sellItem('pickaxe', 'pickaxe', 'bronzeCoins', 15000, emoji.bronzeCoin, emoji.pick)
 
         } else if (item === `raccoon` || item === `rac`) {
-            sellItem('raccoon', 'raccoon', 'bronzeCoins', 1000, emoji.bronzeCoin, '🦝')
+            sellItem('raccoon', 'raccoon', 'bronzeCoins', 1000, emoji.bronzeCoin, emoji.raccoon)
 
         } else if (item === `rabbit` || item === `rab`) {
-            sellItem('rabbit', 'rabbit', 'bronzeCoins', 500, emoji.bronzeCoin, '🐇')
+            sellItem('rabbit', 'rabbit', 'bronzeCoins', 500, emoji.bronzeCoin, emoji.rabbit)
 
         } else if (item === `silveringot` || item === `silveri` || item === 'si') {
             sellItem('silverIngot', 'silver ingot', 'bronzeCoins', 2000, emoji.bronzeCoin, emoji.silver)

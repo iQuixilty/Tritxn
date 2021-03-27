@@ -1,8 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
-
+const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
     name: "emojiinfo",
@@ -15,13 +13,13 @@ module.exports = {
     execute: async function (client, message, args) {
         const ei = new Discord.MessageEmbed()
 
-        if (!args[0]) return message.channel.send(ei.setColor(message.guild.me.displayColor).setTitle('Give an emoji name or id'))
+        if (!args[0]) return message.channel.send(ei.setColor(message.guild.me.displayColor).setDescription('**Give an emoji name or id**'))
 
 
         let emoji = message.guild.emojis.cache.find(emoji => emoji.name === args[0] || emoji.id === args[0] || emoji == args[0].replace(/([^\d])+/gim, ''));
 
-        if (!emoji) return message.reply(ei.setColor(message.guild.me.displayColor).setTitle('Invalid emoji'))
-
+        if (!emoji) return message.reply(ei.setColor(message.guild.me.displayColor).setDescription('**Invalid emoji**'))
+        setCooldown(client, this, message)
         let a = null
 
         let x = "`"

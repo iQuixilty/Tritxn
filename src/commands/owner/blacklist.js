@@ -5,7 +5,7 @@ const Discord = require('discord.js')
 
 module.exports = {
     name: "blacklist",
-    category: "Misc",
+    category: "Owner",
     aliases: ["bl"],
     ignoreDisabledChannels: true,
     canNotDisable: true,

@@ -36,6 +36,11 @@ module.exports = {
                 .setColor(message.guild.me.displayColor)
                 .setTitle('Wednesday Schedule')
                 .setDescription(`\`\`\`Advisory - 9:00 to 10:00\n\nBreak - 10:00 to 10:15\n\nLearning Time - 10:15 to 12:00\n\nLunch - 12:00 to 1:00\n\nOffice Hours - 1:00 to 1:45\`\`\``))
+        } else if (day.toLowerCase() === 'skinny') {
+            return message.channel.send(dayEmbed
+                .setColor(message.guild.me.displayColor)
+                .setTitle('Skinny Tuesday Schedule')
+                .setDescription(`\`\`\`1st Period - 8:00 to 8:45\n\n2nd Period - 8:55 to 9:40\n\n3rd Period - 9:50 to 10:35\n\nBreak - 10:35 to 11:05\n\n4th Period - 11:05 to 11:50\n\n5th Period - 12:00 to 12:45\n\nLunch - 12:45 to 1:45\n\n6th Period - 1:45 to 2:30\n\n7th Period - 2:40 to 3:25\`\`\``))
         }
     }
 }

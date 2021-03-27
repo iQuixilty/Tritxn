@@ -1,8 +1,5 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
-const { MessageEmbed } = require('discord.js')
 
 const ms = require('ms')
 
@@ -18,8 +15,6 @@ module.exports = {
 
     execute: async function (client, message, args) {
         const GIVEEMBED = new Discord.MessageEmbed()
-
-
         let messageID = args[0];
 
         let giveawayDuration = args[1];

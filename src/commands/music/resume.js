@@ -11,7 +11,7 @@ module.exports = {
     cooldown: 5,
     description: "Resumes currently playing music",
     usage: "\`PREFIXresume\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT'],
 
     execute: async function (client, message, args) {
         const res = new Discord.MessageEmbed()
@@ -19,15 +19,15 @@ module.exports = {
         setCooldown(client, this, message);
 
         const queue = message.client.queue.get(message.guild.id);
-        if (!queue) return message.reply(res.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is nothing playing.**`)).catch(console.error);
+        if (!queue) return message.reply(res.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is nothing playing.**`)).catch((e) => console.log(e));
         if (!canModifyQueue(message.member)) return;
 
         if (!queue.playing) {
             queue.playing = true;
             queue.connection.dispatcher.resume();
-            return queue.textChannel.send(res.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ▶ resumed the music!**`)).catch(console.error);
+            return queue.textChannel.send(res.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ▶ resumed the music!**`)).catch((e) => console.log(e));
         }
 
-        return message.reply(res.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, the queue is not paused.**`)).catch(console.error);
+        return message.reply(res.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, the queue is not paused.**`)).catch((e) => console.log(e));
     }
 };

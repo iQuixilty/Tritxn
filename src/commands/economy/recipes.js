@@ -1,9 +1,7 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../schemas/economy')
 const emoji = require('../../../config/emoji.json')
-
 const { setCooldown } = require('../../utils/utils')
 
 module.exports = {
@@ -46,7 +44,7 @@ module.exports = {
                 .addField(`${emoji.gKey} ─ Gold Key`, 'Used to prestige to the highest level, 3 **(Useless Unless Already Level 2)**')
                 .addField(`${emoji.tri} ─ Trident`, `Used To Flex On Others **(also sellable)**`)
                 .setFooter(`Use ${guildInfo.prefix}recipes [item] to see the exact recipe for the item`)
-                .setThumbnail(client.user.displayAvatarURL()))
+                .setThumbnail('https://cdn.discordapp.com/emojis/824730894866055189.png'))
             return
         }
 
@@ -55,24 +53,28 @@ module.exports = {
                 .setColor(message.guild.me.displayColor)
                 .setTitle(`Recipe For Bronze Key ${emoji.bKey}`)
                 .addField('Items Needed', `${emoji.bronzeCoin} ─ **100000 bronze coins \`(${bCoin} owned)\`\n\n${emoji.silver} ─ 10 silver ingots \`(${SilverIngot} owned)\`\n\n${emoji.gold} ─ 3 gold ingots \`(${GoldIngot} owned)\`**`)
+                .setThumbnail('https://cdn.discordapp.com/emojis/824730894866055189.png')
                 .setFooter(`⭐ XP Required: ${xp}/100`))
         } else if (item.toLowerCase() === 'silverkey' || item.toLowerCase() === 'skey') {
             message.channel.send(recipe
                 .setColor(message.guild.me.displayColor)
                 .setTitle(`Recipe For Silver Key ${emoji.sKey}`)
                 .addField('Items Needed', `${emoji.bronzeCoin} ─ **200000 bronze coins \`(${bCoin} owned)\`\n\n${emoji.silverCoin} ─ 50000 silver coins \`(${sCoin} owned)\`\n\n${emoji.silver} ─ 20 silver ingots \`(${SilverIngot} owned)\`\n\n${emoji.gold} ─ 6 gold ingots \`(${GoldIngot} owned)\`**`)
+                .setThumbnail('https://cdn.discordapp.com/emojis/824730894866055189.png')
                 .setFooter(`⭐ XP Required: ${xp}/300`))
         } else if (item.toLowerCase() === 'goldkey' || item.toLowerCase() === 'gkey') {
             message.channel.send(recipe
                 .setColor(message.guild.me.displayColor)
                 .setTitle(`Recipe For Gold Key ${emoji.gKey}`)
                 .addField('Items Needed', `${emoji.bronzeCoin} ─ **400000 bronze coins \`(${bCoin} owned)\`\n\n${emoji.silverCoin} ─ 125000 silver coins \`(${sCoin} owned)\`\n\n${emoji.goldCoin} ─ 50000 gold coins \`(${gCoin} owned)\`\n\n${emoji.silver} ─ 40 silver ingots \`(${SilverIngot} owned)\`\n\n${emoji.gold} ─ 12 gold ingots \`(${GoldIngot} owned)\`**`)
+                .setThumbnail('https://cdn.discordapp.com/emojis/824730894866055189.png')
                 .setFooter(`⭐ XP Required: ${xp}/600`))
         } else if (item.toLowerCase() === 'trid' || item.toLowerCase() === 'trident') {
             message.channel.send(recipe
                 .setColor(message.guild.me.displayColor)
                 .setTitle(`Recipe For Trident ${emoji.tri}`)
                 .addField(`Item Needed`, `${emoji.trishard} ─ **3 trident shards \`(${TriShard} owned)\`**`)
+                .setThumbnail('https://cdn.discordapp.com/emojis/824730894866055189.png')
                 .setFooter(`⭐ XP Required: ${xp}/150`))
         } else {
             message.channel.send(recipe

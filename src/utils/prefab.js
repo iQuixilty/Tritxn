@@ -12,6 +12,7 @@ module.exports = {
     globalCooldown: true,
     canNotDisable: false,
     canNotSetCooldown: false,
+    savedCooldown: 0,
     canNotAddAlias: false,
     hideCommand: false,
     perms: [],
@@ -64,7 +65,9 @@ Attributes:
     - canNotAddAlias [Boolean, optional]
         - whether the users can add alias for this command
         - default: false
-      [ - set it to 'true', if you don't want this command to have custom aliases ]
+     - savedCooldown [Number (seconds), optional]
+        - whether the cooldown is saved to database or not
+        - default: 0
     - hideCommand [Boolean, optional]
         - whether or not this command will be displayed in the help command
         - default: false

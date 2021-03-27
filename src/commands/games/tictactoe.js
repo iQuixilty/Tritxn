@@ -1,7 +1,6 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
+const { setCooldown } = require('../../utils/utils')
 const midDuel = new Set()
 
 module.exports = {
@@ -13,6 +12,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+
         const tttE = new Discord.MessageEmbed()
 
         const author = message.author.id
@@ -40,7 +40,7 @@ module.exports = {
         }
 
         let memberName = member.user.username
-
+        setCooldown(client, this, message)
 
         midDuel.add(author)
         midDuel.add(member.id)

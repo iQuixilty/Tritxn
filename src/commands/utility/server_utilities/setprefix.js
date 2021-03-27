@@ -18,7 +18,7 @@ module.exports = {
             prompt: 'Please enter a new prefix to use!'
         }
     ],
-    clientPerms: ['SEND_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
         const newPref = new Discord.MessageEmbed()

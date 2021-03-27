@@ -17,7 +17,7 @@ module.exports = {
     nsfwOnly: true,
     description: "Search and select videos to play",
     usage: "\`PREFIXsearchyt [Video Name]\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'MANAGE_MESSAGES'],
 
     execute: async function (client, message, args) {
 
@@ -28,11 +28,11 @@ module.exports = {
         if (!args.length)
             return message
                 .reply(sea.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}${this.name} [Video Name]**`))
-                .catch(console.error);
+                .catch((e) => console.log(e));
         if (message.channel.activeCollector)
             return message.reply(sea.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, a message collector is already active in this channel.**`));
         if (!message.member.voice.channel)
-            return message.reply(sea.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, you need to join a voice channel first!**`)).catch(console.error);
+            return message.reply(sea.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, you need to join a voice channel first!**`)).catch((e) => console.log(e));
 
         const search = args.join(" ");
 
@@ -70,13 +70,13 @@ module.exports = {
             }
 
             message.channel.activeCollector = false;
-            resultsMessage.delete().catch(console.error);
-            response.first().delete().catch(console.error);
+            resultsMessage.delete().catch((e) => console.log(e));
+            response.first().delete().catch((e) => console.log(e));
 
         } catch (error) {
-            console.error(error);
+            console.log(error);
             message.channel.activeCollector = false;
-            message.reply(error.message).catch(console.error);
+            message.reply(error.message).catch((e) => console.log(e));
         }
     }
 };

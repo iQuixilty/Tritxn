@@ -21,6 +21,13 @@ module.exports = {
             .setTimestamp()
 
         if (!args[0]) {
+            for (let i = 0; i < disabledChannels.length; i++) {
+                let chan = message.guild.channels.cache.get(disabledChannels[i])
+                if (chan === undefined) {
+                    guildInfo = await client.DBGuild.findByIdAndUpdate(message.guild.id, { $pull: { disabledChannels: disabledChannels[i] } }, { new: true, upsert: true, setDefaultsOnInsert: true })
+                    client.guildInfoCache.set(message.guild.id, guildInfo)
+                }
+            }
             channelEmbed
                 .setColor(message.guild.me.displayColor)
                 .setTitle('Disabled Channels')

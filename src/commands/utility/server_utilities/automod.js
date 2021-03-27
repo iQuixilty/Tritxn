@@ -18,7 +18,7 @@ module.exports = {
     description: "Set up automod for your server so that after the amount of specified warns or modlogs, they will get the specified punishment",
     // someServers: ['769013789412032572', '796125520961994764'],
     usage: "- \`PREFIXautomod\` to display the current automoderation settings\n- \`PREFIXautomod [] []\` .",
-    clientPerms: ['MANAGE_GUILD'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
         const embed = new Discord.MessageEmbed()

@@ -1,6 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
+const {setCooldown} = require('../../../utils/utils')
 
 const urban = require('urban');
 
@@ -14,6 +14,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const urbane = new Discord.MessageEmbed()
 
         

@@ -11,7 +11,7 @@ module.exports = {
     aliases: ["auditlog", 'logging', 'audit'],
     description: "Allows you to set an audit log channel",
     usage: "- \`PREFIXlog\` to display the server audit log channel\n- \`PREFIXlog [#channel] [set/remove]\` to set/remove the audit log channel",
-    perms: ['ADMINISTRATOR'],
+    perms: ['MANAGE_GUILD'],
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
     canNotDisable: true,
     ignoreDisabledChannels: true,

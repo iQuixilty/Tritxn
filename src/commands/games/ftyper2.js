@@ -1,8 +1,7 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
 const txtgen = require('txtgen')
+const {setCooldown} = require('../../utils/utils')
 const ms = require('ms')
 const inGame = new Set()
 
@@ -16,8 +15,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-   
-
+        setCooldown(client, this, message)
         const filter = m => m.author.id === message.author.id
         if (inGame.has(message.author.id)) return
         inGame.add(message.author.id)

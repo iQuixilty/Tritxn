@@ -10,7 +10,7 @@ module.exports = {
     cooldown: 5,
     description: "Stops the music player",
     usage: "\`PREFIXstop\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT'],
 
     execute: async function (client, message, args) {
         const stop = new Discord.MessageEmbed()
@@ -19,11 +19,11 @@ module.exports = {
         
         const queue = message.client.queue.get(message.guild.id);
 
-        if (!queue) return message.reply(stop.setColor(message.guild.me.displayColor).setDescription(`**${message.author} there is nothing playing.**`)).catch(console.error);
+        if (!queue) return message.reply(stop.setColor(message.guild.me.displayColor).setDescription(`**${message.author} there is nothing playing.**`)).catch((e) => console.log(e));
         if (!canModifyQueue(message.member)) return;
 
         queue.songs = [];
         queue.connection.dispatcher.end();
-        queue.textChannel.send(stop.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ⏹ stopped the music!**`)).catch(console.error);
+        queue.textChannel.send(stop.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ⏹ stopped the music!**`)).catch((e) => console.log(e));
     }
 };

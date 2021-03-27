@@ -69,11 +69,11 @@ const gameLoop = () => {
 
         const string = stages[game.stage](game.points)
         message.channel.send(string)
-        .then((newMessage) => {
-          newMessage.delete({
-            timeout: 1000 * 10,
+          .then((newMessage) => {
+            newMessage.delete({
+              timeout: 1000 * 10,
+            })
           })
-        })
 
         // Delete the game
         delete games[key]
@@ -131,11 +131,11 @@ class FastTypeGame {
 
               const string = stages[game.stage](game.currentWord)
               game.message.channel.send(string)
-              .then((NewMessage) => {
-                NewMessage.delete({
-                  timeout: 1000 * seconds,
+                .then((NewMessage) => {
+                  NewMessage.delete({
+                    timeout: 1000 * seconds,
+                  })
                 })
-              })
             }
           }, 1000 * seconds)
         }
@@ -165,19 +165,20 @@ class FastTypeGame {
 module.exports = FastTypeGame;
 
 const PREFIX = require('../../../config/config.json').PREFIX;
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
+const {setCooldown} = require('../../utils/utils')
 
 module.exports = {
-    name: "ftyper",
-    category: "Games",
-    aliases: ["fasttyper", 'ft'],
-    description: "Starts a game to see who types the fastest",
-    usage: "\`PREFIXftyper\`",
-    perms: ['MANAGE_GUILD'],
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+  name: "ftyper",
+  category: "Games",
+  aliases: ["fasttyper", 'ft'],
+  description: "Starts a game to see who types the fastest",
+  usage: "\`PREFIXftyper\`",
+  perms: ['MANAGE_GUILD'],
+  clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
-    execute: async function (client, message, args) {
-        const ft = new FastTypeGame(client)
-        ft.run(message)
-    }
+  execute: async function (client, message, args) {
+    setCooldown(client, this, message)
+    const ft = new FastTypeGame(client)
+    ft.run(message)
+  }
 }

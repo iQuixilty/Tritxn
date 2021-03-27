@@ -1,6 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
+const {setCooldown} = require('../../../utils/utils')
 
 module.exports = {
     name: "calculate",
@@ -14,6 +14,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         let num1 = Number(args[0])
         let num2 = Number(args[2])
 

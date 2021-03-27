@@ -1,5 +1,6 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
+const {setCooldown} = require('../../utils/utils')
 let x = '```'
 
 /**
@@ -17,6 +18,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const embed = new Discord.MessageEmbed()
         let guildLevels = client.guildLevelsCache.get(message.guild.id)
         let guildInfo = client.guildInfoCache.get(message.guild.id)

@@ -1,8 +1,7 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../../schemas/economy')
-
+const emoji = require('../../../../config/emoji.json')
 const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
@@ -31,7 +30,7 @@ module.exports = {
 
             let workpay = Math.floor(Math.random() * 5) + 1
 
-            const responses = [`You fished up ${workpay} fishes \`🐟\``, `You fished up ${workpay} fish \`🐟\``, `You fished up ${workpay} fish \`🐟\``]
+            const responses = [`You fished up ${workpay} fishes ${emoji.fish}`]
 
             const respond = responses[Math.floor(Math.random() * responses.length)]
 

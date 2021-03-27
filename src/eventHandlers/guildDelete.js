@@ -2,7 +2,6 @@ const { Guild, Client, MessageEmbed } = require('discord.js')
 const PREFIX = require('../../config/config.json').PREFIX;
 
 module.exports = async (client, guild) => {
-
     logLeave(client, guild)
 }
 

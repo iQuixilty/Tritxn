@@ -122,7 +122,7 @@ class HangmanGame {
 module.exports = HangmanGame;
 
 const PREFIX = require('../../../config/config.json').PREFIX;
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
+const {setCooldown} = require('../../utils/utils')
 
 module.exports = {
     name: "hangman",
@@ -133,6 +133,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const HANGMAN = new HangmanGame(client)
         HANGMAN.newGame(message)
     }

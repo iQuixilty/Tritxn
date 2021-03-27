@@ -12,7 +12,7 @@ module.exports = {
     aliases: ["auditlogsettings", 'alsettings', 'als'],
     description: "Allows you to customize audit log settings",
     usage: "- \`PREFIXlogsettings\` to display the server audit log settings\n- \`PREFIXlogsettings [setting] [disable/enable]\` to disable/enable audit log settings.",
-    perms: ['ADMINISTRATOR'],
+    perms: ['MANAGE_GUILD'],
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
     canNotDisable: true,
     ignoreDisabledChannels: true,
@@ -55,7 +55,7 @@ module.exports = {
             .addField(`Bulk Deleted Messages \`3\``, `${messageDeleteBulk}`)
             .addField(`Members That Join \`4\``, `${guildMemberAdd}`)
             .addField(`Members That Leave \`5\``, `${guildMemberRemove}`)
-            .addField(`Guild Member Updatesz \`6\``, `${guildMemberUpdate}`)
+            .addField(`Guild Member Updates \`6\``, `${guildMemberUpdate}`)
             .addField(`Created Channels \`7\``, `${channelCreate}`)
 
         let loge2 = new Discord.MessageEmbed()

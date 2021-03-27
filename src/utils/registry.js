@@ -33,12 +33,16 @@ async function registerCommands(client, ...dirs) {
                         }
 
                         client.commands.set(name, cmdModule);
-                
+                        client.rawCommands.set(name, cmdModule)
+
                         if (aliases && aliases.length !== 0) {
                             aliases.forEach(alias => {
                                 if (client.commands.has(alias)) {
                                     log("WARNING", "src/registry.js", `The command alias '${alias}' has already been added.`);
-                                } else client.commands.set(alias, cmdModule);
+                                } else {
+                                    client.commands.set(alias, cmdModule);
+                                    client.aliases.set(alias, file.name)
+                                }
                             });
                         }
 
@@ -57,9 +61,9 @@ async function registerCommands(client, ...dirs) {
                             client.categories.set('no category', commands);
                         }
 
-                        
+
                     } catch (e) {
-                        log("ERROR", "src/registry.js", `Error loading commands: ${e.message}`);
+                        log("ERROR", "src/registry.js", `Error loading commands: ${e}`);
                     }
                 }
             }

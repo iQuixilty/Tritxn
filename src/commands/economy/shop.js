@@ -1,9 +1,8 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../schemas/economy')
-const emoji = require('../../../config/emoji.json')
-
+const shop = require("../../../config/shop.json")
+const emoji = require("../../../config/emoji.json")
 
 const { setCooldown, paginate } = require('../../utils/utils')
 
@@ -17,15 +16,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-        let guildInfo = client.guildInfoCache.get(message.guild.id)
-        let guildPrefix = guildInfo.prefix
-
-        const ITEM = new Discord.MessageEmbed()
-
-        let items = args[0]
-
         let userId = message.author.id
-
 
         const Fish = await economy.getInv(userId, 'fish')
         const Rod = await economy.getInv(userId, 'fishingRod')
@@ -53,239 +44,104 @@ module.exports = {
 
         setCooldown(client, this, message)
 
-        if (items === 'pole' || items === 'rod' || items === 'fishingpole' || items === 'fishingrod') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/791840038794952704.png')
-                .setTitle(`${emoji.rod} ─ Fishing Rod \`(${Rod} owned)\``)
-                .setDescription(`This item can be used to catch fish\nCosts ${emoji.bronzeCoin} **\`20000 coins\`** to buy`)
-                .addField('Usage', `\`${guildPrefix}fish\``)
-                .addField('Aliases', '`pole`, `rod`, `fishingpole`, `fishingrod`')
-                .addField('Buying Price', `${emoji.bronzeCoin} \`20000 coins\``, true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`10000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'fish' || items === 'f') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setTitle(`🐟 ─ Fish \`(${Fish} owned)\``)
-                .setDescription('This item is only a cheap collectable, nothing else')
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`f`')
-                .addField('Buying Price', '\`Cant Be Bought\`', true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`200 coins\``, true)
-                .setTimestamp())
+        let embed = new Discord.MessageEmbed()
+
+        const itemName = args.join(' ').toLowerCase();
+
+        if (!itemName) return defaultHelp(client, message, guildPrefix)
+
+        let item = shop.find((val) => val.name === itemName.toLowerCase())
+        if (item === undefined) {
+            shop.find((val) => {
+                for (let i = 0; i < val.aliases.length; i++) {
+                    item = shop.find((value) => value.aliases[i] === itemName.toLowerCase())
+                    if (item && item.name) break;
+                }
+            })
         }
-        else if (items === 'trident' || items === 'trid') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792869156164075571.png')
-                .setTitle(`${emoji.tri} ─ Trident \`(${Trident} owned)\``)
-                .setDescription(`This item is the rarest of collectables\nCosts ${emoji.goldCoin} **\`1000000 coins\`** to buy`)
-                .addField('Usage', `\`${guildPrefix}use trident\``)
-                .addField('Aliases', '`trid`')
-                .addField('Buying Price', `${emoji.goldCoin} \`1000000 coins\``, true)
-                .addField('Resale Price', `${emoji.goldCoin} \`500000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'rifle' || items === 'gun' || items === 'huntingrifle') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/791772909466812516.png')
-                .setTitle(`${emoji.rifle} ─ Rifle \`(${Rifle} owned)\``)
-                .setDescription(`This item can be used to catch animals\nCosts ${emoji.bronzeCoin} **\`20000 coins\`** to buy`)
-                .addField('Usage', `\`${guildPrefix}hunt\``)
-                .addField('Aliases', '`gun`, `rifle`, `huntingrifle`')
-                .addField('Buying Price', `${emoji.bronzeCoin} \`20000 coins\``, true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`10000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'coins') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setTitle(":coin: ─ Coins")
-                .setDescription('Type of currency in the game, there are three different types that you unlock as you progress. \nTypes: \`bronzeCoins\`, \`silverCoins\`, \`goldCoins\`')
-                .addField('Usage', `\`${guildPrefix}buy [item]\``)
-                .addField('Aliases', '`none`')
-                .setTimestamp())
-        } else if (items === 'bronzeCoins' || items === 'bcoins') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/791740874312122379.png')
-                .setTitle(`${emoji.bronzeCoin} ─ Bronze Coins \`(${bCoin} owned)\``)
-                .setDescription('Lowest type of currency unlockable')
-                .addField('Usage', `\`${guildPrefix}buy [item]\``)
-                .addField('Aliases', '`bronzeCoins`, `bCoins`')
-                .setTimestamp())
-        } else if (items === 'silverCoins' || items === 'scoins') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setThumbnail('https://cdn.discordapp.com/emojis/791740874311598100.png')
-                .setAuthor('Tritxn Shop')
-                .setTitle(`${emoji.silverCoin} ─ Silver Coins \`(${sCoin} owned)\``)
-                .setDescription('Mid-tier type of currency unlockable')
-                .addField('Usage', `\`${guildPrefix}buy [item]\``)
-                .addField('Aliases', '`silverCoins`, `sCoins`')
-                .setTimestamp())
-        } else if (items === 'goldCoins' || items === 'gcoins') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/791740874430087249.png')
-                .setTitle(`${emoji.goldCoin} ─ Gold Coins \`(${gCoin} owned)\``)
-                .setDescription('Highest type of currency unlockable')
-                .addField('Usage', `\`${guildPrefix}buy [item]\``)
-                .addField('Aliases', '`goldCoins`, `gCoins`')
-                .setTimestamp())
-        } else if (items === 'pickaxe' || items === 'axe' || items === 'pick') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/791866249419423744.png')
-                .setTitle(`${emoji.pick} ─ Pickaxe \`(${Pick} owned)\``)
-                .setDescription(`This item can be used to mine ores\nCosts ${emoji.bronzeCoin} **\`30000 coins\`** to buy`)
-                .addField('Usage', `\`${guildPrefix}mine\``)
-                .addField('Aliases', '`pickaxe`, `axe`, `pick`')
-                .addField('Buying Price', `${emoji.bronzeCoin} \`30000 coins\``, true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`15000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'raccoon' || items === 'rac') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setTitle(`🦝 ─ Raccoon \`(${Raccoon} owned)\``)
-                .setDescription(`This item is only a cheap collectable, nothing else`)
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`rac`, `raccoon`')
-                .addField('Buying Price', '\`Cant Be Bought\`', true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`1000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'rabbit' || items === 'rab') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setTitle(`🐇 ─ Rabbit \`(${Rabbit} owned)\``)
-                .setDescription(`This item is only a cheap collectable, nothing else`)
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`rab`, `rabbit`')
-                .addField('Buying Price', '\`Cant Be Bought\`', true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`500 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'goldingot' || items === 'goldi' || items === 'gi') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792149728883900466.png')
-                .setTitle(`${emoji.gold} ─ Gold Ingot \`(${GoldIngot} owned)\``)
-                .setDescription('This item can be used to craft objects')
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`goldi`, `gi`, `goldingot`')
-                .addField('Buying Price', '\`Cant Be Bought\`', true)
-                .addField('Resale Price', `${emoji.silverCoin} \`2000 coins\``, true)
-                .setTimestamp())
+
+        if (!item || item === undefined) {
+            return message.channel.send(embed.setColor(message.guild.me.displayColor).setDescription(`**That item does not exist**`))
         }
-        else if (items === 'silveringot' || items === 'silveri' || items === 'si') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792149728199573545.png')
-                .setTitle(`${emoji.silver} ─ Silver Ingot \`(${SilverIngot} owned)\``)
-                .setDescription(`This item can be used to craft objects`)
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`silveri`, `si`, `silveringot`')
-                .addField('Buying Price', `\`Cant Be Bought\``, true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`2000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'bronzekey' || items === 'bkey') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792513887622266931.png')
-                .setTitle(`${emoji.bKey} ─ Bronze Key \`(${bronzeKey} owned)\``)
-                .setDescription(`This item can be used on a lock to prestige to level 1`)
-                .addField('Usage', `\`${guildPrefix}use bronzekey\``)
-                .addField('Aliases', '`bronzekey`, `bkey`')
-                .addField('Buying Price', `\`Craftable Item \n(Cant Be Bought)\``, true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`125000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'silverkey' || items === 'skey') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792513887520948224.png')
-                .setTitle(`${emoji.sKey} ─ Silver Key \`(${silverKey} owned)\``)
-                .setDescription(`This item can be used on a lock to prestige to level 2`)
-                .addField('Usage', `\`${guildPrefix}use silverkey\``)
-                .addField('Aliases', '`silverkey`, `skey`')
-                .addField('Buying Price', `\`Craftable Item \n(Cant Be Bought)\``, true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`225000 coins\`\n${emoji.silverCoin} \`40000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'goldkey' || items === 'gkey') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792513887412682762.png')
-                .setTitle(`${emoji.gKey} ─ Gold Key \`(${goldKey} owned)\``)
-                .setDescription(`This item can be used on a lock to prestige to level 3`)
-                .addField('Usage', `\`${guildPrefix}use goldkey\``)
-                .addField('Aliases', '`goldkey`, `gkey`')
-                .addField('Buying Price', `\`Craftable Item \n(Cant Be Bought)\``, true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`425000 coins\`\n${emoji.silverCoin} \`115000 coins\`\n${emoji.goldCoin} \`40000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'bronzelock' || items === 'block') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792513887824117810.png')
-                .setTitle(`${emoji.bLock} ─ Bronze Lock \`(${bronzeLock} owned)\``)
-                .setDescription(`This item requires a key to be used.`)
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`bronzelock`, `block`')
-                .addField('Buying Price', `${emoji.bronzeCoin} \`100000 coins\``, true)
-                .addField('Resale Price', `${emoji.bronzeCoin} \`50000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'silverlock' || items === 'slock') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792513887630000139.png')
-                .setTitle(`${emoji.sLock} ─ Silver Lock \`(${silverLock} owned)\``)
-                .setDescription(`This item requires a key to be used.`)
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`silverlock`, `slock`')
-                .addField('Buying Price', `${emoji.silverCoin} \`100000 coins\``, true)
-                .addField('Resale Price', `${emoji.silverCoin} \`50000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'goldlock' || items === 'glock') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792513887588974613.png')
-                .setTitle(`${emoji.gLock} ─ Gold Lock \`(${goldLock} owned)\``)
-                .setDescription(`This item requires a key to be used.`)
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`goldlock`, `glock`')
-                .addField('Buying Price', `${emoji.goldCoin} \`100000 coins\``, true)
-                .addField('Resale Price', `${emoji.goldCoin} \`50000 coins\``, true)
-                .setTimestamp())
-        } else if (items === 'trishard' || items === 'tridentshard' || items === 'tris') {
-            message.channel.send(ITEM
-                .setColor(message.guild.me.displayColor)
-                .setAuthor('Tritxn Shop')
-                .setThumbnail('https://cdn.discordapp.com/emojis/792869612831899668.png')
-                .setTitle(`${emoji.trishard} ─ Trident Shard\`(${TriShard} owned)\``)
-                .setDescription(`Can craft a trident with 3 of these (obtainable through prestiging)`)
-                .addField('Usage', `\`none\``)
-                .addField('Aliases', '`trishard`, `tridentshard`, `tris`')
-                .addField('Buying Price', `\`Cant Be Bought\``, true)
-                .addField('Resale Price', `${emoji.goldCoin} \`250000 coins\``, true)
-                .setTimestamp())
-        } else defaultHelp(client, message, guildPrefix)
+
+        const replacers = {
+            'emoji.rod': emoji.rod,
+            'emoji.pick': emoji.pick,
+            'emoji.rifle': emoji.rifle,
+            'emoji.rabbit': emoji.rabbit,
+            'emoji.fish': emoji.fish,
+            'emoji.raccoon': emoji.raccoon,
+            'emoji.bLock': emoji.bLock,
+            'emoji.bKey': emoji.bKey,
+            'emoji.sLock': emoji.sLock,
+            'emoji.sKey': emoji.sKey,
+            'emoji.gLock': emoji.gLock,
+            'emoji.gKey': emoji.gKey,
+            'emoji.bronzeCoin': emoji.bronzeCoin,
+            'emoji.silverCoin': emoji.silverCoin,
+            'emoji.goldCoin': emoji.goldCoin,
+            'emoji.tri': emoji.tri,
+            'emoji.trishard': emoji.trishard,
+            'emoji.silver': emoji.silver,
+            'emoji.gold': emoji.gold,
+            '$Rod': Rod,
+            '$Pickaxe': Pick,
+            '$Rifle': Rifle,
+            '$Rabbit': Rabbit,
+            '$Fish': Fish,
+            '$Raccoon': Raccoon,
+            '$bronzeLock': bronzeLock,
+            '$bronzeKey': bronzeKey,
+            '$silverLock': silverLock,
+            '$silverKey': silverKey,
+            '$goldLock': goldLock,
+            '$goldKey': goldKey,
+            '$bCoin': bCoin,
+            '$sCoin': sCoin,
+            '$gCoin': gCoin,
+            '$Trident': Trident,
+            '$TriShard': TriShard,
+            '$SilverIngot': SilverIngot,
+            '$GoldIngot': GoldIngot,
+        }
+
+        let title = replace(item, replacers)
+
+        let guildInfo = client.guildInfoCache.get(message.guild.id)
+        let prefix = guildInfo.prefix
+        let itemEmbed = new Discord.MessageEmbed()
+            .setAuthor(`Tritxn Shop`)
+            .setColor(message.guild.me.displayColor)
+            .setTitle(title)
+            .setDescription(item.description
+                .replace(`emoji.bronzeCoin`, emoji.bronzeCoin)
+                .replace(`emoji.silverCoin`, emoji.silverCoin)
+                .replace(`emoji.goldCoin`, emoji.goldCoin))
+            .addField('Usage', item.usage.replace(`guildPrefix`, prefix))
+            .setTimestamp()
 
 
+        let itemAliases = []
+        if (item.aliases && item.aliases.length !== 0) itemAliases = itemAliases.concat(item.aliases)
+        if (itemAliases.length > 0) itemEmbed.addField('Aliases', '`' + itemAliases.join('`, `') + '`')
+
+        if (item.buyingPrice) itemEmbed.addField(
+            'Buying Price',
+            item.buyingPrice
+                .replace(`emoji.bronzeCoin`, emoji.bronzeCoin)
+                .replace(`emoji.silverCoin`, emoji.silverCoin)
+                .replace(`emoji.goldCoin`, emoji.goldCoin), true)
+
+        if (item.resalePrice) itemEmbed.addField(
+            'Resale Price',
+            item.resalePrice
+                .replace(`emoji.bronzeCoin`, emoji.bronzeCoin)
+                .replace(`emoji.silverCoin`, emoji.silverCoin)
+                .replace(`emoji.goldCoin`, emoji.goldCoin), true)
+
+        if (item.emojiId) itemEmbed.setThumbnail(`https://cdn.discordapp.com/emojis/${item.emojiId}.png`)
+
+        message.channel.send(itemEmbed)
     }
 }
 
@@ -312,4 +168,18 @@ function defaultHelp(client, message, guildPrefix) {
         .setThumbnail(client.user.displayAvatarURL())
 
     paginate(message, [hEmbed1, hEmbed2, hEmbed3], { time: 1000 * 7 })
+}
+
+/**
+ * 
+ * @param {object} item - Object - of strings you want to filter
+ * @param {object} replacers - Object - of replacers you want to replace with
+ * @returns {String} string - Returns string with replaced chars
+ */
+function replace(item, replacers) {
+    let text = item.title.text
+    for (const r of item.title.replace) {
+        text = text.replace(r, replacers[r]);
+    }
+    return text;
 }

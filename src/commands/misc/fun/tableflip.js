@@ -1,7 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
+const {setCooldown} = require('../../../utils/utils')
 const frames = [
     "(-°□°)-  ┬─┬",
     "(╯°□°)╯    ]",
@@ -20,6 +19,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const frame = frames[Math.floor(Math.random() * frames.length)];
         message.channel.send(new Discord.MessageEmbed().setColor(message.guild.me.displayColor).setTitle(frame));
     }

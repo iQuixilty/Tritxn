@@ -1,8 +1,7 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../../schemas/economy')
-
+const emoji = require('../../../../config/emoji.json')
 const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
@@ -35,7 +34,7 @@ module.exports = {
             switch (randomNumber) {
                 case 1:
                     let workpay = Math.floor(Math.random() * 4) + 1
-                    const responses = [`You hunted \`${workpay} raccoon(s)\` 🦝`]
+                    const responses = [`You hunted \`${workpay} raccoon(s)\` ${emoji.raccoon}`]
 
                     message.channel.send(`${message.author} **⇒**`, {
                         embed: {
@@ -49,7 +48,7 @@ module.exports = {
                     break;
                 case 2:
                     let Workpay = Math.floor(Math.random() * 5) + 1
-                    const Responses = [`You somehow caught \`${Workpay} rabbit(s)\` 🐇`]
+                    const Responses = [`You somehow caught \`${Workpay} rabbit(s)\` ${emoji.rabbit}`]
 
                     message.channel.send(`${message.author} **⇒**`, {
                         embed: {

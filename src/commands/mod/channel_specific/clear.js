@@ -4,6 +4,10 @@ const Discord = require('discord.js')
 const emoji = require('../../../../config/emoji.json')
 const { setCooldown } = require('../../../utils/utils')
 
+/** 
+ * @type {import('../../../typings.d').Command}
+*/
+
 module.exports = {
     name: "clear",
     category: "Moderation",
@@ -21,23 +25,23 @@ module.exports = {
         let deleteAmount;
 
         try {
-
             if (isNaN(args[0]) || parseInt(args[0]) <= 0) {
                 return await message.channel.send(clearCommand
                     .setColor('RED')
                     .setDescription(`**${emoji.downvote} ${message.author} please only put a number!**`))
             }
 
-            if (parseInt(args[0]) >= 99) {
+            if (parseInt(args[0]) >= 100) {
                 await message.channel.send(clearCommand
                     .setColor('RED')
-                    .setDescription(`**${emoji.downvote} ${message.author} you can only delete 98 messages with one command!**`))
+                    .setDescription(`**${emoji.downvote} ${message.author} you can only delete 99 messages with one command!**`))
                 return;
             } else {
-                deleteAmount = await parseInt(args[0]) + 1
+                deleteAmount = await parseInt(args[0])
             }
 
             setCooldown(client, this, message);
+            message.delete()
 
             let rounded = Math.floor(deleteAmount / 100) * 100;
             const diff = deleteAmount - rounded
@@ -83,7 +87,7 @@ module.exports = {
                 const msg = await notify.edit(clearCommand
                     .setColor('GREEN')
                     .setDescription(`**${emoji.upvote} Successfully Deleted ${deleteAmount} Messages**`))
-                await msg.delete({ timeout: 3000 })
+                await msg.delete({ timeout: 2000 })
 
             } catch (e) {
                 return;

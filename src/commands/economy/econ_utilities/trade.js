@@ -1,6 +1,5 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../../schemas/economy')
 const emoji = require('../../../../config/emoji.json')
 
@@ -85,7 +84,7 @@ module.exports = {
             tradeItem('fishingRod', 'fishing rod', emoji.rod)
 
         } else if (items === 'fish' || items === 'f') {
-            tradeItem('fish', 'fish', '🐟')
+            tradeItem('fish', 'fish', emoji.fish)
 
         } else if (items === 'trident' || items === 'trid') {
             tradeItem('trident', 'trident', emoji.tri)
@@ -97,10 +96,10 @@ module.exports = {
             tradeItem('pickaxe', 'pickaxe', emoji.pick)
 
         } else if (items === 'raccoon' || items === 'rac') {
-            tradeItem('raccoon', 'raccoon', '🦝')
+            tradeItem('raccoon', 'raccoon', emoji.raccoon)
 
         } else if (items === 'rabbit' || items === 'rab') {
-            tradeItem('rabbit', 'rabbit', '🐰')
+            tradeItem('rabbit', 'rabbit', emoji.rabbit)
 
         } else if (items === 'goldingot' || items === 'goldi' || items === 'gi') {
             tradeItem('goldIngot', 'gold ingot', emoji.gold)

@@ -11,7 +11,7 @@ module.exports = {
     cooldown: 5,
     description: "Skips the current song",
     usage: "\`PREFIXskip\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS'],
 
     execute: async function (client, message, args) {
         const skippe = new Discord.MessageEmbed()
@@ -19,11 +19,11 @@ module.exports = {
 
         const queue = message.client.queue.get(message.guild.id);
         if (!queue)
-            return message.reply(skippe.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is nothing playing that I could skip for you.**`)).catch(console.error);
+            return message.reply(skippe.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is nothing playing that I could skip for you.**`)).catch((e) => console.log(e));
         if (!canModifyQueue(message.member)) return;
 
         queue.playing = true;
         queue.connection.dispatcher.end();
-        queue.textChannel.send(skippe.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ⏭ skipped the song**`)).catch(console.error);
+        queue.textChannel.send(skippe.setColor(message.guild.me.displayColor).setDescription(`**${message.author} ⏭ skipped the song**`)).catch((e) => console.log(e));
     }
 };

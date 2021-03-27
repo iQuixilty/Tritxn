@@ -101,7 +101,7 @@ class Connect4 {
                 reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbed.author.id).first().id).then(() => {
                     if (placedY == 0)
                         this.gameEmbed.reactions.cache.get(reaction.emoji.name).remove();
-                        
+
                     if (this.hasWon(placedX, placedY)) {
                         this.gameOver(this.getChipFromTurn());
                     }
@@ -190,7 +190,7 @@ class Connect4 {
 module.exports = Connect4;
 
 const PREFIX = require('../../../config/config.json').PREFIX;
-
+const { setCooldown } = require('../../utils/utils')
 
 module.exports = {
     name: "connect4",
@@ -201,6 +201,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const con4 = new Connect4(client)
         con4.newGame(message)
     }

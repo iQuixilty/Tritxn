@@ -1,27 +1,23 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
+const { setSavedCooldown } = require('../../../utils/utils')
 const economy = require('../../../../schemas/economy')
 const emoji = require('../../../../config/emoji.json')
-
-const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
     name: "work",
     category: "Economy",
     description: "Work to gain some money",
-    cooldown: 3600,
+    savedCooldown: 3600,
     canNotSetCooldown: true,
     usage: "\`PREFIXwork\`",
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
         const Coins = new Discord.MessageEmbed()
-
+        setSavedCooldown(client, this, message)
         const userId = message.author.id
         const level = await economy.getInv(userId, 'level')
-
-        setCooldown(client, this, message);
 
         let work = async (amount, typeOfCoin, emojiCoin, lowNum, highNum) => {
             let coins = Math.floor((Math.random() * amount) + 1);
@@ -42,7 +38,7 @@ module.exports = {
                         }]
                     }
                 })
-               
+
             } else if (coins > lowNum && coins <= highNum) {
                 message.channel.send(`${message.author} **⇒**`, {
                     embed: {

@@ -1,8 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
-
+const {setCooldown} = require('../../../utils/utils')
 
 module.exports = {
     name: "whoasked",
@@ -12,11 +10,12 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         message.delete()
         if (message.author.id !== '751606134938402866') {
             return message.channel.send(
                 new Discord.MessageEmbed()
-                    .setTitle("Leave the who asking too Qzxy")
+                    .setDescription("**Leave the who asking too Qzxy**")
             )
         }
 

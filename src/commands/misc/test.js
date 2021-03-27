@@ -1,10 +1,11 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 const config = require('../../../config/config.json')
-const fs = require('fs')
-const  { inlineReply }  = require('../../utils/extendedMessage')
-
-require('../../utils/extendedMessage')
+const { filterOutWords, getReply } = require('../../utils/utils')
+const fetch = require('node-fetch').default
+const shop = require("../../../config/shop.json")
+const emoji = require("../../../config/emoji.json")
+require("../../utils/extendedMessage");
 
 /** 
  * @type {import('../../typings.d').Command}
@@ -15,15 +16,10 @@ module.exports = {
     category: "Misc",
     description: "Testing Command",
     usage: "\`PREFIXtest\`",
+    hideCommand: true,
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-        // let userId = args[0]
-
-        // let results = await client.users.fetch('742609798997999677')
-        // console.log(results)
-
-
         // let reply = ''
 
         // for (let i = 0; i < client.com.size; i++) {
@@ -42,5 +38,17 @@ module.exports = {
         // })
         // }
 
+        if (message.channel.id !== '799332538623066142') return;
+        let query = args.join(" ")
+        if (!query) return message.channel.send(`No.`)
+
+        fetch(`https://api.monkedev.com/fun/chat?msg=${query}&uid=${message.author.id}`)
+            .then(response => response.json())
+            .then(data => {
+                message.inlineReply(data.response)
+            })
+            .catch(() => {
+                message.channel.send("Sorry, I don't know what that means")
+            })
     }
 }

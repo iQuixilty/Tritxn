@@ -1,7 +1,7 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 const Levels = require('discord-xp')
-
+const {setCooldown} = require('../../utils/utils')
 
 /**
  * @type {import('../../typings.d').Command}
@@ -17,6 +17,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         const embed = new Discord.MessageEmbed()
 
         const target = message.mentions.users.first() || message.guild.members.cache.get(args[0])

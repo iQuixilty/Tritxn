@@ -1,6 +1,6 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-const Levels = require('discord-xp')
+const {setCooldown} = require('../../utils/utils')
 const { paginate } = require('../../utils/utils')
 let x = '```'
 
@@ -17,7 +17,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-
+        setCooldown(client, this, message)
         let guildLevels = client.guildLevelsCache.get(message.guild.id)
         let guildInfo = client.guildInfoCache.get(message.guild.id)
         let prefix = guildInfo.prefix
@@ -61,11 +61,18 @@ module.exports = {
         }
 
         let embeds = []
+        let options = ['Main Settings', 'Level Up', 'Guild Multiplier', 'Role Multiplier', 'Channel Multiplier', 'Blacklist Roles', 'Blacklist Channels', 'Role Levels']
+        let settingdesc = ``
+        for (let i = 0; i < options.length; i++) {
+            settingdesc += `\`#${i + 1}\` \`${options[i]}\`\n\n`
+        }
+
+
         const firstSetting = new Discord.MessageEmbed()
             .setColor(message.guild.me.displayColor)
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setAuthor(`Level Settings Overview For ${message.guild.name}`)
-            .setDescription(`Here is a guide to all the settings you can customize for your server \n\n\`#1️\` \`Main Settings (this page)\`\n\n\`#2️\` \`Level Up\`\n\n\`#3️\` \`Guild Mutliplier\` \n\n\`#4️\` \`Role Multiplier\` \n\n\`#5️\` \`Channel Multiplier\` \n\n\`#6️\` \`Blacklist Roles\`\n\n\`#7️\` \`Blacklist Channels\`\n\n\`#8️\` \`Role Levels\``)
+            .setDescription(`Here is a guide to all the settings you can customize for your server \n\n${settingdesc}`)
             .setFooter(`React with 🔢 and then type the number in front of the setting you wish to see!`)
         embeds.push(firstSetting)
 

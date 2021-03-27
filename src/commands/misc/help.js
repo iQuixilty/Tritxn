@@ -30,7 +30,6 @@ module.exports = {
         const category = client.categories.get(queryName)
 
         if (command && !command.hideCommand) {
-
             let hEmbed = new MessageEmbed()
                 .setTitle(`${command.name}`)
                 .setAuthor(command.category ? command.category : 'No category')
@@ -51,6 +50,8 @@ module.exports = {
             if (command.examples) hEmbed.addField("Examples", replacePrefix(command.examples, guildPrefix))
 
             let cd;
+            let savedCD;
+            if (command.savedCooldown) savedCD = command.savedCooldown
             if (command.cooldown) cd = command.cooldown
             if (guildInfo.commandCooldowns && guildInfo.commandCooldowns[command.name]) {
                 let roles = Object.keys(guildInfo.commandCooldowns[command.name])
@@ -58,6 +59,7 @@ module.exports = {
                 if (highestRole) cd = guildInfo.commandCooldowns[command.name][highestRole.id]
             }
             if (cd) hEmbed.addField("Cooldown", `${msToTime(cd * 1000)}`)
+            if (savedCD) hEmbed.addField("Cooldown", `${msToTime(savedCD * 1000)}`)
 
             if (client.guildInfoCache.get(message.guild.id).disabledCommands.includes(command.name)) hEmbed.setAuthor('This command is currently disabled in this server.')
 
@@ -102,4 +104,4 @@ function getCommandAliases(client, guildId, commandName) {
         commands.set(command, aliases)
     }
     return commands.get(commandName)
-} 
+}

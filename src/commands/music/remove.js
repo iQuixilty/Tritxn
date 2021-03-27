@@ -11,7 +11,7 @@ module.exports = {
     cooldown: 5,
     description: "Remove a song from the queue",
     usage: "\`PREFIXremove [Queue Number]\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS'],
 
     execute: async function (client, message, args) {
         
@@ -20,7 +20,7 @@ module.exports = {
         const guildInfo = client.guildInfoCache.get(message.guild.id)
 
         const queue = message.client.queue.get(message.guild.id);
-        if (!queue) return message.channel.send(reme.setColor(message.guild.me.displayColor).setTitle("There is no queue.")).catch(console.error);
+        if (!queue) return message.channel.send(reme.setColor(message.guild.me.displayColor).setTitle("There is no queue.")).catch((e) => console.log(e));
         if (!canModifyQueue(message.member)) return;
 
         if (!args.length || isNaN(args[0])) return message.reply(reme.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}remove [Queue Number]**`));

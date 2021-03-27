@@ -1,7 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
+const { setCooldown } = require('../../../utils/utils')
 
 const moment = require('moment');
 const { MessageEmbed } = require('discord.js');
@@ -15,7 +14,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-
+        setCooldown(client, this, message)
         const region = {
             'us-central': ':flag_us:  `US Central`',
             'us-east': ':flag_us:  `US East`',

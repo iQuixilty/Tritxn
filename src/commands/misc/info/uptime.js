@@ -1,5 +1,6 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
+const { setCooldown } = require('../../../utils/utils')
 
 module.exports = {
     name: "uptime",
@@ -9,6 +10,7 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
+        setCooldown(client, this, message)
         let seconds = Math.floor(message.client.uptime / 1000);
         let minutes = Math.floor(seconds / 60);
         let hours = Math.floor(minutes / 60);

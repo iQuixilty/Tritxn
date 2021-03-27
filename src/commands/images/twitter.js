@@ -1,7 +1,6 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
-
+const { setCooldown } = require('../../utils/utils')
 const canvacord = require("canvacord");
 const { MessageAttachment } = require("discord.js");
 
@@ -14,7 +13,8 @@ module.exports = {
     clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 
     execute: async function (client, message, args) {
-        let user =message.author;
+        setCooldown(client, this, message)
+        let user = message.author;
 
         let text = args.join(" ");
 

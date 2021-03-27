@@ -15,18 +15,18 @@ module.exports = {
     cooldown: 5,
     description: "Displays the current song that is playing",
     usage: "\`PREFIXnowplaying\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT'],
 
     execute: async function (client, message, args) {
         const nowp = new Discord.MessageEmbed()    
         setCooldown(client, this, message);
 
         const queue = message.client.queue.get(message.guild.id);
-        if (!queue) return message.reply(nowp.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is nothing playing.**`)).catch(console.error);
+        if (!queue) return message.reply(nowp.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, there is nothing playing.**`)).catch((e) => console.log(e));
 
         const song = queue.songs[0];
-        const seek = (queue.connection.dispatcher.streamTime - queue.connection.dispatcher.pausedTime) / 1000;
-        const left = song.duration - seek;
+        const seek = (queue.connection.dispatcher.streamTime - queue.connection.dispatcher.pausedTime) / 1000 + queue.seekedTime
+        const left = song.duration - seek + queue.seekedTime
 
         let nowPlaying = new Discord.MessageEmbed()
             .setTitle("Now playing")

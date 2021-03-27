@@ -1,11 +1,9 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../../schemas/economy')
 const Emoji = require('../../../../config/emoji.json')
-
+const { setSavedCooldown } = require('../../../utils/utils')
 const profileSchema = require('../../../../schemas/economy-schema')
-const { setCooldown } = require('../../../utils/utils')
 
 /**
  * @type {import('../../../typings.d').Command}
@@ -15,7 +13,7 @@ module.exports = {
     name: "prestige",
     category: "Economy",
     aliases: ["pres"],
-    cooldown: 1000 * 60 * 60 * 24 * 3,
+    savedCooldown: 1000 * 60 * 60 * 24 * 3,
     canNotSetCooldown: true,
     description: "Allows you to prestige to the next level",
     usage: "\`PREFIXprestige [level]\`",
@@ -93,9 +91,7 @@ module.exports = {
                 await profileSchema.findOneAndDelete({
                     userId
                 })
-
-                setCooldown(client, this, message);
-
+                setSavedCooldown(client, this, message)
                 const newLevel = await economy.buyItem(userId, 'level', 1)
                 const newBCoins = await economy.buyItem(userId, 'bronzeCoins', 60000)
                 const newSCoins = await economy.buyItem(userId, 'silverCoins', 30000)
@@ -147,8 +143,7 @@ module.exports = {
                 await profileSchema.findOneAndDelete({
                     userId
                 })
-
-                setCooldown(client, this, message);
+                setSavedCooldown(client, this, message)
 
                 const newLevel = await economy.buyItem(userId, 'level', 2)
                 const newBCoins = await economy.buyItem(userId, 'bronzeCoins', 120000)
@@ -201,9 +196,7 @@ module.exports = {
                 await profileSchema.findOneAndDelete({
                     userId
                 })
-
-
-                setCooldown(client, this, message);
+                setSavedCooldown(client, this, message)
 
                 const newLevel = await economy.buyItem(userId, 'level', 3)
                 const newBCoins = await economy.buyItem(userId, 'bronzeCoins', 240000)

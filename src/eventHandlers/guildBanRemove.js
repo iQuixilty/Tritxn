@@ -1,23 +1,20 @@
 const Discord = require('discord.js')
 const PREFIX = require('../../config/config.json').PREFIX;
-
+const { getGuildInfo, getGuildAudit, getGuildLevels, getGuildSettings } = require("../utils/utils")
 
 module.exports = async (client, guild, user) => {
     unbannedMember(client, guild, user)
 }
 
 let unbannedMember = async (client, guild, user) => {
-    const result = await client.DBSettings.findOne({ _id: guild.id })
-    if (!result) return;
+    const result = await getGuildSettings(client, guild.id)
 
-    let guildAudit = await client.DBAudit.findOne({ _id: guild.id })
-    if (!guildAudit) return
+    let guildAudit = await getGuildAudit(client, guild.id)
 
     let auditLogChannel = result.auditLogChannelId
 
     if (auditLogChannel === undefined) return;
     if (guildAudit.guildBanRemove === undefined || guildAudit.guildBanRemove === 'Disabled') return;
-
 
     const channel = client.channels.cache.get(auditLogChannel)
 

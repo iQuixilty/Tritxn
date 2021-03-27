@@ -1,0 +1,373 @@
+[
+    {
+        "name": "fishingpole",
+        "emojiId": "824508844361252864",
+        "title": {
+            "text": "emoji.rod ─ Fishing Rod `($Rod owned)`",
+            "replace": [
+                "emoji.rod",
+                "$Rod"
+            ]
+        },
+        "description": "This item can be used to catch fish\nCosts emoji.bronzeCoin **`20000 coins`** to buy",
+        "usage": "`guildPrefixfish`",
+        "aliases": [
+            "pole",
+            "rod",
+            "fishingpole",
+            "fishingrod"
+        ],
+        "buyingPrice": "emoji.bronzeCoin 20000 coins",
+        "resalePrice": "emoji.bronzeCoin 10000 coins"
+    },
+    {
+        "name": "fish",
+        "emojiId": "824675415100620800",
+        "title": {
+            "text": "emoji.fish ─ Fish `($Fish owned)`",
+            "replace": [
+                "emoji.fish",
+                "$Fish"
+            ]
+        },
+        "description": "This item is only a cheap collectable, nothing else",
+        "usage": "`none`",
+        "aliases": [
+            "f",
+            "fish"
+        ],
+        "buyingPrice": "`Cant Be Bought`",
+        "resalePrice": "emoji.bronzeCoin `200 coins`"
+    },
+    {
+        "name": "trident",
+        "emojiId": "824463494194659329",
+        "title": {
+            "text": "emoji.tri ─ Trident `($Trident owned)`",
+            "replace": [
+                "emoji.tri",
+                "$Trident"
+            ]
+        },
+        "description": "This item is the rarest of collectables\nCosts emoji.goldCoin **`1000000 coins`** to buy",
+        "usage": "`guildPrefixuse trident`",
+        "aliases": [
+            "trid",
+            "trident"
+        ],
+        "buyingPrice": "emoji.goldCoin `1000000 coins`",
+        "resalePrice": "emoji.goldCoin `500000 coins`"
+    },
+    {
+        "name": "rifle",
+        "emojiId": "824509861555208193",
+        "title": {
+            "text": "emoji.rifle ─ Rifle `($Rifle owned)`",
+            "replace": [
+                "emoji.rifle",
+                "$Rifle"
+            ]
+        },
+        "description": "This item can be used to catch animals\nCosts emoji.bronzeCoin **`20000 coins`** to buy",
+        "usage": "`guildPrefixhunt`",
+        "aliases": [
+            "gun",
+            "huntingrifle",
+            "rifle"
+        ],
+        "buyingPrice": "emoji.bronzeCoin `20000 coins`",
+        "resalePrice": "emoji.bronzeCoin `10000 coins`"
+    },
+    {
+        "name": "coins",
+        "title": ":coin: ─ Coins",
+        "description": "Type of currency in the game, there are three different types that you unlock as you progress. \nTypes: `bronzeCoins`, `silverCoins`, `goldCoins`",
+        "usage": "`guildPrefixbuy [item]`",
+        "aliases": [
+            "none"
+        ]
+    },
+    {
+        "name": "bronzecoins",
+        "emojiId": "824477248945913857",
+        "title": {
+            "text": "emoji.bronzeCoin ─ Bronze Coins `($bCoin owned)`",
+            "replace": [
+                "emoji.bronzeCoin",
+                "$bCoin"
+            ]
+        },
+        "description": "Lowest type of currency unlockable",
+        "usage": "`guildPrefixbuy [item]`",
+        "aliases": [
+            "bcoins",
+            "bronzecoins"
+        ]
+    },
+    {
+        "name": "silvercoins",
+        "emojiId": "824477249273069588",
+        "title": {
+            "text": "emoji.silverCoin ─ Silver Coins `($sCoin owned)`",
+            "replace": [
+                "emoji.silverCoin",
+                "$sCoin"
+            ]
+        },
+        "description": "Mid-tier type of currency unlockable",
+        "usage": "`guildPrefixbuy [item]`",
+        "aliases": [
+            "scoins",
+            "silvercoins"
+        ]
+    },
+    {
+        "name": "goldcoins",
+        "emojiId": "824475702023290881",
+        "title": {
+            "text": "emoji.goldCoin ─ Gold Coins `($gCoin owned)`",
+            "replace": [
+                "emoji.goldCoin",
+                "$gCoin"
+            ]
+        },
+        "description": "Highest type of currency unlockable",
+        "usage": "`guildPrefixbuy [item]`",
+        "aliases": [
+            "gcoins",
+            "goldcoins"
+        ]
+    },
+    {
+        "name": "pickaxe",
+        "emojiId": "824508911955738654",
+        "title": {
+            "text": "emoji.pick ─ Pickaxe `($Pickaxe owned)`",
+            "replace": [
+                "emoji.pick",
+                "$Pickaxe"
+            ]
+        },
+        "description": "This item can be used to mine ores\nCosts emoji.bronzeCoin **`30000 coins`** to buy",
+        "usage": "`guildPrefixmine`",
+        "aliases": [
+            "pick",
+            "axe",
+            "pickaxe"
+        ],
+        "buyingPrice": "emoji.bronzeCoin `30000 coins`",
+        "resalePrice": "emoji.bronzeCoin `15000 coins`"
+    },
+    {
+        "name": "raccoon",
+        "emojiId": "824675414697574411",
+        "title": {
+            "text": "emoji.raccoon ─ Raccoon `($Raccoon owned)`",
+            "replace": [
+                "emoji.raccoon",
+                "$Raccoon"
+            ]
+        },
+        "description": "This item is only a cheap collectable, nothing else",
+        "usage": "`none`",
+        "aliases": [
+            "rac",
+            "raccoon"
+        ],
+        "buyingPrice": "`Cant Be Bought`",
+        "resalePrice": "emoji.bronzeCoin `1000 coins`"
+    },
+    {
+        "name": "rabbit",
+        "emojiId": "824675415071129641",
+        "title": {
+            "text": "emoji.rabbit ─ Rabbit `($Rabbit owned)`",
+            "replace": [
+                "emoji.rabbit",
+                "$Rabbit"
+            ]
+        },
+        "description": "This item is only a cheap collectable, nothing else",
+        "usage": "`none`",
+        "aliases": [
+            "rab",
+            "rabbit"
+        ],
+        "buyingPrice": "`Cant Be Bought`",
+        "resalePrice": "emoji.bronzeCoin `500 coins`"
+    },
+    {
+        "name": "goldingot",
+        "emojiId": "824683251419054121",
+        "title": {
+            "text": "emoji.gold ─ Gold Ingot `($GoldIngot owned)`",
+            "replace": [
+                "emoji.gold",
+                "$GoldIngot"
+            ]
+        },
+        "description": "This item can be used to craft objects",
+        "usage": "`none`",
+        "aliases": [
+            "goldi",
+            "gi",
+            "goldingot"
+        ],
+        "buyingPrice": "`Cant Be Bought`",
+        "resalePrice": "emoji.silverCoin `2000 coins`"
+    },
+    {
+        "name": "silveringot",
+        "emojiId": "824683250592514059",
+        "title": {
+            "text": "emoji.silver ─ Silver Ingot `($SilverIngot owned)`",
+            "replace": [
+                "emoji.silver",
+                "$SilverIngot"
+            ]
+        },
+        "description": "This item can be used to craft objects",
+        "usage": "`none`",
+        "aliases": [
+            "silveri",
+            "si",
+            "silveringot"
+        ],
+        "buyingPrice": "`Cant Be Bought`",
+        "resalePrice": "emoji.bronzeCoin `2000 coins`"
+    },
+    {
+        "name": "bronzekey",
+        "emojiId": "824685107482853445",
+        "title": {
+            "text": "emoji.bKey ─ Bronze Key `($bronzeKey owned)`",
+            "replace": [
+                "emoji.bKey",
+                "$bronzeKey"
+            ]
+        },
+        "description": "This item can be used on a lock to prestige to level 1",
+        "usage": "`none`",
+        "aliases": [
+            "bkey",
+            "bronzekey"
+        ],
+        "buyingPrice": "`Craftable Item \n(Cant Be Bought)`",
+        "resalePrice": "emoji.bronzeCoin `125000 coins`"
+    },
+    {
+        "name": "silverkey",
+        "emojiId": "824447196845047809",
+        "title": {
+            "text": "emoji.sKey ─ Silver Key `($silverKey owned)`",
+            "replace": [
+                "emoji.sKey",
+                "$silverKey"
+            ]
+        },
+        "description": "This item can be used on a lock to prestige to level 2",
+        "usage": "`none`",
+        "aliases": [
+            "skey",
+            "silverkey"
+        ],
+        "buyingPrice": "`Craftable Item \n(Cant Be Bought)`",
+        "resalePrice": "emoji.bronzeCoin `225000 coins`\nemoji.silverCoin `40000 coins`"
+    },
+    {
+        "name": "goldkey",
+        "emojiId": "824447197386506270",
+        "title": {
+            "text": "emoji.gKey ─ Gold Key `($goldKey owned)`",
+            "replace": [
+                "emoji.gKey",
+                "$goldKey"
+            ]
+        },
+        "description": "This item can be used on a lock to prestige to level 3",
+        "usage": "`none`",
+        "aliases": [
+            "gkey",
+            "goldkey"
+        ],
+        "buyingPrice": "`Craftable Item \n(Cant Be Bought)`",
+        "resalePrice": "emoji.bronzeCoin `425000 coins`\nemoji.silverCoin `115000 coins`\nemoji.goldCoin `40000 coins`"
+    },
+    {
+        "name": "bronzelock",
+        "emojiId": "824454709758132234",
+        "title": {
+            "text": "emoji.bLock ─ Bronze Lock `($bronzeLock owned)`",
+            "replace": [
+                "emoji.bLock",
+                "$bronzeLock"
+            ]
+        },
+        "description": "This item requires a key to be used.",
+        "usage": "`none`",
+        "aliases": [
+            "bronzelock",
+            "block"
+        ],
+        "buyingPrice": "emoji.bronzeCoin `100000 coins`",
+        "resalePrice": "emoji.bronzeCoin `50000 coins`"
+    },
+    {
+        "name": "silverlock",
+        "emojiId": "824454709812133908",
+        "title": {
+            "text": "emoji.sLock ─ Silver Lock `($silverLock owned)`",
+            "replace": [
+                "emoji.sLock",
+                "$silverLock"
+            ]
+        },
+        "description": "This item requires a key to be used.",
+        "usage": "`none`",
+        "aliases": [
+            "silverlock",
+            "slock"
+        ],
+        "buyingPrice": "emoji.silverCoin `100000 coins`",
+        "resalePrice": "emoji.silverCoin `50000 coins`"
+    },
+    {
+        "name": "goldlock",
+        "emojiId": "824454709846212608",
+        "title": {
+            "text": "emoji.gLock ─ Gold Lock `($goldLock owned)`",
+            "replace": [
+                "emoji.gLock",
+                "$goldLock"
+            ]
+        },
+        "description": "This item requires a key to be used.",
+        "usage": "`none`",
+        "aliases": [
+            "goldlock",
+            "glock"
+        ],
+        "buyingPrice": "emoji.goldCoin `100000 coins`",
+        "resalePrice": "emoji.goldCoin `50000 coins`"
+    },
+    {
+        "name": "trishard",
+        "emojiId": "824678340802642010",
+        "title": {
+            "text": "emoji.trishard ─ Trident Shard `($TriShard owned)`",
+            "replace": [
+                "emoji.trishard",
+                "$TriShard"
+            ]
+        },
+        "description": "Can craft a trident with 3 of these (obtainable through prestiging)",
+        "usage": "`none`",
+        "aliases": [
+            "tridentshart",
+            "trishard",
+            "tris"
+        ],
+        "buyingPrice": "`Cant Be Bought`",
+        "resalePrice": "emoji.goldCoin `250000 coins`"
+    }
+]

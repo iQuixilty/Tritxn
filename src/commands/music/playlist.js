@@ -2,7 +2,7 @@ const { canModifyQueue } = require("../../utils/vcUtil");
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
 
-const { play } = require("../includes/play");
+const { play } = require("../../utils/playutil");
 const YouTubeAPI = require("simple-youtube-api");
 
 let config;
@@ -26,7 +26,7 @@ module.exports = {
     cooldown: 5,
     description: "Plays a playlist from youtube",
     usage: "\`PREFIXplaylist [Youtube Playlist URL | Playlist Name]\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS'],
 
     execute: async function (client, message, args) {
         setCooldown(client, this, message);
@@ -39,12 +39,12 @@ module.exports = {
         if (!args.length)
             return message
                 .reply(playl.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}playlist [YouTube Playlist URL | Playlist Name]**`))
-                .catch(console.error);
-        if (!channel) return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, you need to join a voice channel first!**`)).catch(console.error);
+                .catch((e) => console.log(e));
+        if (!channel) return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, you need to join a voice channel first!**`)).catch((e) => console.log(e));
 
 
         if (serverQueue && channel !== message.guild.me.voice.channel)
-            return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, you must be in the same channel as ${message.client.user}**`)).catch(console.error);
+            return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, you must be in the same channel as ${message.client.user}**`)).catch((e) => console.log(e));
 
         const search = args.join(" ");
         const pattern = /^.*(youtu.be\/|list=)([^#\&\?]*).*/gi;
@@ -70,8 +70,8 @@ module.exports = {
                 playlist = await youtube.getPlaylist(url, { part: "snippet" });
                 videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
             } catch (error) {
-                console.error(error);
-                return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, playlist not found**`)).catch(console.error);
+                console.log(error);
+                return message.reply(playl.setColor(message.guild.me.displayColor).setDescription(`**${message.author}, playlist not found**`)).catch((e) => console.log(e));
             }
         } else {
             try {
@@ -79,8 +79,8 @@ module.exports = {
                 playlist = results[0];
                 videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
             } catch (error) {
-                console.error(error);
-                return message.reply(error.message).catch(console.error);
+                console.log(error);
+                return message.reply(error.message).catch((e) => console.log(e));
             }
         }
 
@@ -117,10 +117,10 @@ module.exports = {
                 await queueConstruct.connection.voice.setSelfDeaf(true);
                 play(queueConstruct.songs[0], message);
             } catch (error) {
-                console.error(error);
+                console.log(error);
                 message.client.queue.delete(message.guild.id);
                 await channel.leave();
-                return message.channel.send(playl.setColor(message.guild.me.displayColor).setDescription(`**Could not join the channel: ${error.message}**`)).catch(console.error);
+                return message.channel.send(playl.setColor(message.guild.me.displayColor).setDescription(`**Could not join the channel: ${error.message}**`)).catch((e) => console.log(e));
             }
         }
     }

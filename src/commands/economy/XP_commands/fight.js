@@ -1,6 +1,5 @@
 const PREFIX = require('../../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const economy = require('../../../../schemas/economy')
 const Emoji = require('../../../../config/emoji.json')
 

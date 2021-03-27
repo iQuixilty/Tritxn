@@ -1,9 +1,8 @@
 const { canModifyQueue } = require("../../utils/vcUtil");
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-////const message.guild.me.displayColor = require('../../../../config/config.json').message.guild.me.displayColor
 
-const { play } = require("../includes/play");
+const { play } = require("../../utils/playutil");
 const ytdl = require("ytdl-core");
 const YouTubeAPI = require("simple-youtube-api");
 
@@ -19,26 +18,26 @@ module.exports = {
     cooldown: 5,
     description: "Plays audio from youtube",
     usage: "\`PREFIXplay [Youtube Link URL | Video Name]\`",
-    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'SPEAK', 'CONNECT', 'ADD_REACTIONS'],
 
     execute: async function (client, message, args) {
         const PLA = new Discord.MessageEmbed()
-        
+
         setCooldown(client, this, message);
 
         const { channel } = message.member.voice;
 
-        const serverQueue = message.client.queue.get(message.guild.id);
-        if (!channel) return message.reply(PLA.setColor(message.guild.me.displayColor).setDescription(`**${message.author} you need to join a voice channel first!**`)).catch(console.error);
+        const serverQueue = client.queue.get(message.guild.id);
+        if (!channel) return message.reply(PLA.setColor(message.guild.me.displayColor).setDescription(`**${message.author} you need to join a voice channel first!**`)).catch((e) => console.log(e));
         if (serverQueue && channel !== message.guild.me.voice.channel)
-            return message.reply(PLA.setColor(message.guild.me.displayColor).setDescription(`**${message.author} you must be in the same channel as ${message.client.user}**`)).catch(console.error);
+            return message.reply(PLA.setColor(message.guild.me.displayColor).setDescription(`**${message.author} you must be in the same channel as ${message.client.user}**`)).catch((e) => console.log(e));
 
         const guildInfo = client.guildInfoCache.get(message.guild.id)
 
         if (!args.length)
             return message
                 .reply(PLA.setColor(message.guild.me.displayColor).setDescription(`**Usage: ${guildInfo.prefix}play [YouTube URL | Video Name ]**`))
-                .catch(console.error);
+                .catch((e) => console.log(e));
 
         const search = args.join(" ");
         const videoPattern = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
@@ -61,6 +60,7 @@ module.exports = {
             volume: 95,
             playing: true,
             requester: message.author.id,
+            seekedTime: 0,
         };
 
         let songInfo = null;
@@ -74,9 +74,9 @@ module.exports = {
                     url: songInfo.videoDetails.video_url,
                     duration: songInfo.videoDetails.lengthSeconds
                 };
-            } catch (error) {
-                console.error(error);
-                return message.reply(error.message).catch(console.error);
+            } catch (e) {
+                console.log(e);
+                return message.reply(error.message).catch((e) => console.log(e));
             }
         } else {
             try {
@@ -88,16 +88,23 @@ module.exports = {
                     duration: songInfo.videoDetails.lengthSeconds
                 };
             } catch (error) {
-                console.error(error);
-                return message.reply(error.message).catch(console.error);
+                console.log(error)
+                return message.reply(error.message).catch((e) => console.log(e));
             }
         }
 
         if (serverQueue) {
+            if (serverQueue.songs === []) {
+                serverQueue.songs.push(song);
+                return serverQueue.textChannel
+                    .send(PLA.setColor(message.guild.me.displayColor).setDescription(`✅ **${song.title}** has been added to the queue by ${message.author}`))
+                    .catch((e) => console.log(e));
+            }
+
             serverQueue.songs.push(song);
             return serverQueue.textChannel
                 .send(PLA.setColor(message.guild.me.displayColor).setDescription(`✅ **${song.title}** has been added to the queue by ${message.author}`))
-                .catch(console.error);
+                .catch((e) => console.log(e));
         }
 
         queueConstruct.songs.push(song);
@@ -108,10 +115,10 @@ module.exports = {
             await queueConstruct.connection.voice.setSelfDeaf(true);
             play(queueConstruct.songs[0], message);
         } catch (error) {
-            console.error(error);
+            console.log(error);
             message.client.queue.delete(message.guild.id);
             await channel.leave();
-            return message.channel.send(PLA.setColor(message.guild.me.displayColor).setDescription(`**Could not join the channel: ${error}**`)).catch(console.error);
+            return message.channel.send(PLA.setColor(message.guild.me.displayColor).setDescription(`**Could not join the channel: ${error}**`)).catch((e) => console.log(e));
         }
     }
 }

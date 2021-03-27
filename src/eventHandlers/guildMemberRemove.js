@@ -1,10 +1,14 @@
 const { Guild, Client, MessageEmbed } = require('discord.js')
-const PREFIX = require('../../config/config.json').PREFIX;
-
+const { getGuildInfo, getGuildAudit, getGuildLevels, getGuildSettings } = require("../utils/utils")
 const moment = require('moment')
 
+/**
+ * @param {import('../typings.d').myClient} client 
+ * @param {import('discord.js').GuildMember} member 
+ */
+
 module.exports = async (client, member) => {
-    const result = await client.DBSettings.findOne({ _id: member.guild.id })
+    const result = await getGuildSettings(client, member.guild.id)
 
     onLeave(client, member, result).catch((e) => { return; })
 
@@ -42,7 +46,7 @@ const auditMembers = async (client, member, result) => {
     if (!result) return;
     let auditLogChannel = result.auditLogChannelId
 
-    const guildAudit = await client.DBAudit.findOne({ _id: member.guild.id })
+    const guildAudit = await getGuildAudit(client, member.guild.id)
     if (!guildAudit) return;
 
     if (auditLogChannel === undefined) return;

@@ -1,8 +1,6 @@
 const PREFIX = require('../../../config/config.json').PREFIX;
 const Discord = require('discord.js')
-
 const ms = require('ms')
-
 
 /** 
  * @type {import('../../typings.d').Command}
