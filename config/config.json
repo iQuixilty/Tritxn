@@ -1,11 +1,11 @@
 {
-    "TOKEN": "NzkwMDE2Nzk2NTc2MzE3NDcz.X96eeg.lSnQ2_w7epSwiuBybCNmWt2PWo8",
+    "TOKEN": "",
     "PREFIX": ";;",
     "message.guild.me.displayColor": "message.guild.me.displayColor",
     "MONGODB_URI": "mongodb://localhost:27017/discordbot",
     "devs": ["751606134938402866", "713897845412855828"],
     "someServers": [],
-    "YOUTUBE_API_KEY": "AIzaSyBB0VmRORHM5WEsWft8RgbGtHR9",
+    "YOUTUBE_API_KEY": "",
     "MAX_PLAYLIST_SIZE": 50,
     "PRUNING": true
 }
