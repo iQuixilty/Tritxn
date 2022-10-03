@@ -1,5 +1,5 @@
 {
-  "TOKEN": "NzkwMDE2Nzk2NTc2MzE3NDcz.X96eeg.lSnQ2_w7epSwiuBybCNmWt2PWo8",
+  "TOKEN": "",
   "PREFIX": ";;",
   "message.guild.me.displayColor": "0xFFD700",
   "MONGODB_URI": "mongodb://localhost:27017/discordbot",
