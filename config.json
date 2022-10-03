@@ -5,7 +5,7 @@
   "MONGODB_URI": "mongodb://localhost:27017/discordbot",
   "devs": [],
   "someServers": [],
-  "YOUTUBE_API_KEY": "AIzaSyBB0VmRORHM5WEsWft8RgbGtHR9",
+  "YOUTUBE_API_KEY": "",
   "MAX_PLAYLIST_SIZE": 50,
   "PRUNING": false
 }
